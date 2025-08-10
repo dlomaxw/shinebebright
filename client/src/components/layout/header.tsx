@@ -63,15 +63,21 @@ const Header = () => {
 
             {/* Services Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-bright-yellow transition-colors font-medium">
-                Services <ChevronDown className="w-4 h-4 ml-1" />
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center text-gray-700 hover:text-bright-yellow transition-colors font-medium focus:outline-none focus:text-bright-yellow">
+                  Services <ChevronDown className="w-4 h-4 ml-1" />
+                </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-64">
+              <DropdownMenuContent 
+                className="w-64 z-[9999] bg-white border border-gray-200 shadow-lg mt-2" 
+                align="start"
+                sideOffset={5}
+              >
                 {services.map((service) => (
                   <DropdownMenuItem key={service.name} asChild>
                     <Link
                       href={service.href}
-                      className="text-gray-700 hover:bg-gray-50 hover:text-bright-yellow transition-colors"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-bright-yellow transition-colors cursor-pointer"
                     >
                       {service.name}
                     </Link>
