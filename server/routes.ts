@@ -366,6 +366,99 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Client Projects routes
+  app.get("/api/client-projects", async (req, res) => {
+    try {
+      const { clientId } = req.query;
+      const projects = await storage.getClientProjects(clientId ? String(clientId) : undefined);
+      res.json(projects);
+    } catch (error) {
+      console.error("Error fetching client projects:", error);
+      res.status(500).json({ message: "Failed to fetch client projects" });
+    }
+  });
+
+  app.get("/api/client-projects/:id", async (req, res) => {
+    try {
+      const project = await storage.getClientProject(req.params.id);
+      if (!project) {
+        return res.status(404).json({ message: "Client project not found" });
+      }
+      res.json(project);
+    } catch (error) {
+      console.error("Error fetching client project:", error);
+      res.status(500).json({ message: "Failed to fetch client project" });
+    }
+  });
+
+  app.get("/api/client-projects/:id/messages", async (req, res) => {
+    try {
+      const messages = await storage.getProjectMessages(req.params.id);
+      res.json(messages);
+    } catch (error) {
+      console.error("Error fetching project messages:", error);
+      res.status(500).json({ message: "Failed to fetch project messages" });
+    }
+  });
+
+  // Virtual Tours routes
+  app.get("/api/virtual-tours", async (req, res) => {
+    try {
+      const { status } = req.query;
+      const tours = await storage.getVirtualTours(status ? String(status) : undefined);
+      res.json(tours);
+    } catch (error) {
+      console.error("Error fetching virtual tours:", error);
+      res.status(500).json({ message: "Failed to fetch virtual tours" });
+    }
+  });
+
+  app.get("/api/virtual-tours/:id", async (req, res) => {
+    try {
+      const tour = await storage.getVirtualTour(req.params.id);
+      if (!tour) {
+        return res.status(404).json({ message: "Virtual tour not found" });
+      }
+      res.json(tour);
+    } catch (error) {
+      console.error("Error fetching virtual tour:", error);
+      res.status(500).json({ message: "Failed to fetch virtual tour" });
+    }
+  });
+
+  app.get("/api/virtual-tours/:id/sessions", async (req, res) => {
+    try {
+      const sessions = await storage.getTourSessions(req.params.id);
+      res.json(sessions);
+    } catch (error) {
+      console.error("Error fetching tour sessions:", error);
+      res.status(500).json({ message: "Failed to fetch tour sessions" });
+    }
+  });
+
+  // Analytics routes
+  app.get("/api/analytics/events", async (req, res) => {
+    try {
+      const { timeRange } = req.query;
+      const events = await storage.getAnalyticsEvents(timeRange ? String(timeRange) : undefined);
+      res.json(events);
+    } catch (error) {
+      console.error("Error fetching analytics events:", error);
+      res.status(500).json({ message: "Failed to fetch analytics events" });
+    }
+  });
+
+  app.get("/api/analytics/metrics", async (req, res) => {
+    try {
+      const { timeRange } = req.query;
+      const metrics = await storage.getBusinessMetrics(timeRange ? String(timeRange) : undefined);
+      res.json(metrics);
+    } catch (error) {
+      console.error("Error fetching business metrics:", error);
+      res.status(500).json({ message: "Failed to fetch business metrics" });
+    }
+  });
+
   // Admin routes
   app.get("/api/admin/stats", async (req, res) => {
     try {

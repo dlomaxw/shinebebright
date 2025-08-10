@@ -8,6 +8,12 @@ import {
   demoBookings,
   serviceBookings,
   properties,
+  clientProjects,
+  projectMessages,
+  virtualTours,
+  tourSessions,
+  analyticsEvents,
+  businessMetrics,
   type User,
   type InsertUser,
   type Project,
@@ -26,6 +32,18 @@ import {
   type InsertServiceBooking,
   type Property,
   type InsertProperty,
+  type ClientProject,
+  type InsertClientProject,
+  type ProjectMessage,
+  type InsertProjectMessage,
+  type VirtualTour,
+  type InsertVirtualTour,
+  type TourSession,
+  type InsertTourSession,
+  type AnalyticsEvent,
+  type InsertAnalyticsEvent,
+  type BusinessMetric,
+  type InsertBusinessMetric,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, ilike, or } from "drizzle-orm";
@@ -90,6 +108,35 @@ export interface IStorage {
   updateProperty(id: string, property: Partial<InsertProperty>): Promise<Property>;
   deleteProperty(id: string): Promise<void>;
   searchProperties(query: string): Promise<Property[]>;
+
+  // Client Project operations
+  getClientProjects(clientId?: string): Promise<ClientProject[]>;
+  getClientProject(id: string): Promise<ClientProject | undefined>;
+  createClientProject(project: InsertClientProject): Promise<ClientProject>;
+  updateClientProject(id: string, project: Partial<InsertClientProject>): Promise<ClientProject>;
+  deleteClientProject(id: string): Promise<void>;
+
+  // Project Message operations
+  getProjectMessages(projectId: string): Promise<ProjectMessage[]>;
+  createProjectMessage(message: InsertProjectMessage): Promise<ProjectMessage>;
+
+  // Virtual Tour operations
+  getVirtualTours(status?: string): Promise<VirtualTour[]>;
+  getVirtualTour(id: string): Promise<VirtualTour | undefined>;
+  createVirtualTour(tour: InsertVirtualTour): Promise<VirtualTour>;
+  updateVirtualTour(id: string, tour: Partial<InsertVirtualTour>): Promise<VirtualTour>;
+  deleteVirtualTour(id: string): Promise<void>;
+
+  // Tour Session operations
+  getTourSessions(tourId: string): Promise<TourSession[]>;
+  createTourSession(session: InsertTourSession): Promise<TourSession>;
+  updateTourSession(id: string, session: Partial<InsertTourSession>): Promise<TourSession>;
+
+  // Analytics operations
+  getAnalyticsEvents(timeRange?: string): Promise<AnalyticsEvent[]>;
+  createAnalyticsEvent(event: InsertAnalyticsEvent): Promise<AnalyticsEvent>;
+  getBusinessMetrics(timeRange?: string): Promise<BusinessMetric[]>;
+  createBusinessMetric(metric: InsertBusinessMetric): Promise<BusinessMetric>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -373,6 +420,144 @@ export class DatabaseStorage implements IStorage {
         )
       )
       .orderBy(desc(properties.createdAt));
+  }
+
+  // Client Project operations
+  async getClientProjects(clientId?: string): Promise<ClientProject[]> {
+    let query = db.select().from(clientProjects);
+    if (clientId) {
+      query = query.where(eq(clientProjects.clientId, clientId));
+    }
+    return query.orderBy(desc(clientProjects.createdAt));
+  }
+
+  async getClientProject(id: string): Promise<ClientProject | undefined> {
+    const [project] = await db.select().from(clientProjects).where(eq(clientProjects.id, id));
+    return project;
+  }
+
+  async createClientProject(insertProject: InsertClientProject): Promise<ClientProject> {
+    const [project] = await db.insert(clientProjects).values(insertProject).returning();
+    return project;
+  }
+
+  async updateClientProject(id: string, updateProject: Partial<InsertClientProject>): Promise<ClientProject> {
+    const [project] = await db
+      .update(clientProjects)
+      .set({ ...updateProject, updatedAt: new Date() })
+      .where(eq(clientProjects.id, id))
+      .returning();
+    return project;
+  }
+
+  async deleteClientProject(id: string): Promise<void> {
+    await db.delete(clientProjects).where(eq(clientProjects.id, id));
+  }
+
+  // Project Message operations
+  async getProjectMessages(projectId: string): Promise<ProjectMessage[]> {
+    return db
+      .select()
+      .from(projectMessages)
+      .where(eq(projectMessages.projectId, projectId))
+      .orderBy(desc(projectMessages.createdAt));
+  }
+
+  async createProjectMessage(insertMessage: InsertProjectMessage): Promise<ProjectMessage> {
+    const [message] = await db.insert(projectMessages).values(insertMessage).returning();
+    return message;
+  }
+
+  // Virtual Tour operations
+  async getVirtualTours(status?: string): Promise<VirtualTour[]> {
+    let query = db.select().from(virtualTours);
+    if (status) {
+      query = query.where(eq(virtualTours.status, status));
+    }
+    return query.orderBy(desc(virtualTours.createdAt));
+  }
+
+  async getVirtualTour(id: string): Promise<VirtualTour | undefined> {
+    const [tour] = await db.select().from(virtualTours).where(eq(virtualTours.id, id));
+    return tour;
+  }
+
+  async createVirtualTour(insertTour: InsertVirtualTour): Promise<VirtualTour> {
+    const [tour] = await db.insert(virtualTours).values(insertTour).returning();
+    return tour;
+  }
+
+  async updateVirtualTour(id: string, updateTour: Partial<InsertVirtualTour>): Promise<VirtualTour> {
+    const [tour] = await db
+      .update(virtualTours)
+      .set({ ...updateTour, updatedAt: new Date() })
+      .where(eq(virtualTours.id, id))
+      .returning();
+    return tour;
+  }
+
+  async deleteVirtualTour(id: string): Promise<void> {
+    await db.delete(virtualTours).where(eq(virtualTours.id, id));
+  }
+
+  // Tour Session operations
+  async getTourSessions(tourId: string): Promise<TourSession[]> {
+    return db
+      .select()
+      .from(tourSessions)
+      .where(eq(tourSessions.tourId, tourId))
+      .orderBy(desc(tourSessions.createdAt));
+  }
+
+  async createTourSession(insertSession: InsertTourSession): Promise<TourSession> {
+    const [session] = await db.insert(tourSessions).values(insertSession).returning();
+    return session;
+  }
+
+  async updateTourSession(id: string, updateSession: Partial<InsertTourSession>): Promise<TourSession> {
+    const [session] = await db
+      .update(tourSessions)
+      .set({ ...updateSession, updatedAt: new Date() })
+      .where(eq(tourSessions.id, id))
+      .returning();
+    return session;
+  }
+
+  // Analytics operations
+  async getAnalyticsEvents(timeRange?: string): Promise<AnalyticsEvent[]> {
+    let query = db.select().from(analyticsEvents);
+    
+    if (timeRange) {
+      const days = timeRange === '7d' ? 7 : timeRange === '30d' ? 30 : timeRange === '90d' ? 90 : 365;
+      const cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() - days);
+      query = query.where(and(eq(analyticsEvents.timestamp, cutoffDate)));
+    }
+    
+    return query.orderBy(desc(analyticsEvents.timestamp));
+  }
+
+  async createAnalyticsEvent(insertEvent: InsertAnalyticsEvent): Promise<AnalyticsEvent> {
+    const [event] = await db.insert(analyticsEvents).values(insertEvent).returning();
+    return event;
+  }
+
+  async getBusinessMetrics(timeRange?: string): Promise<BusinessMetric[]> {
+    let query = db.select().from(businessMetrics);
+    
+    if (timeRange) {
+      const days = timeRange === '7d' ? 7 : timeRange === '30d' ? 30 : timeRange === '90d' ? 90 : 365;
+      const cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() - days);
+      query = query.where(and(eq(businessMetrics.date, cutoffDate)));
+    }
+    
+    return query.orderBy(desc(businessMetrics.date));
+  }
+
+  async createBusinessMetric(insertMetric: InsertBusinessMetric): Promise<BusinessMetric> {
+    const [metric] = await db.insert(businessMetrics).values(insertMetric).returning();
+    return metric;
   }
 }
 
