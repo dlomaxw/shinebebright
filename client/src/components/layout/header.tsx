@@ -100,8 +100,10 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
-            <Button className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
-              Book Demo
+            <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
+              <Link href="/book-service">
+                Book Service
+              </Link>
             </Button>
           </div>
 

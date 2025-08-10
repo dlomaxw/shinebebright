@@ -23,6 +23,7 @@ import Contact from "@/pages/contact";
 import Admin from "@/pages/admin";
 import News from "@/pages/news";
 import Comparison from "@/pages/comparison";
+import BookService from "@/pages/book-service";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -45,6 +46,7 @@ function Router() {
           <Route path="/admin" component={Admin} />
           <Route path="/news" component={News} />
           <Route path="/comparison" component={Comparison} />
+          <Route path="/book-service" component={BookService} />
           <Route component={NotFound} />
         </Switch>
       </main>

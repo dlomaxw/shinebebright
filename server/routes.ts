@@ -5,6 +5,7 @@ import {
   insertContactInquirySchema,
   insertNewsletterSubscriberSchema,
   insertDemoBookingSchema,
+  insertServiceBookingSchema,
   insertProjectSchema,
   insertBlogPostSchema,
   insertTeamMemberSchema,
@@ -303,14 +304,77 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Service booking routes
+  app.get("/api/service-bookings", async (req, res) => {
+    try {
+      const bookings = await storage.getServiceBookings();
+      res.json(bookings);
+    } catch (error) {
+      console.error("Error fetching service bookings:", error);
+      res.status(500).json({ message: "Failed to fetch service bookings" });
+    }
+  });
+
+  app.get("/api/service-bookings/:id", async (req, res) => {
+    try {
+      const booking = await storage.getServiceBooking(req.params.id);
+      if (!booking) {
+        return res.status(404).json({ message: "Service booking not found" });
+      }
+      res.json(booking);
+    } catch (error) {
+      console.error("Error fetching service booking:", error);
+      res.status(500).json({ message: "Failed to fetch service booking" });
+    }
+  });
+
+  app.post("/api/service-bookings", async (req, res) => {
+    try {
+      const validatedData = insertServiceBookingSchema.parse(req.body);
+      const booking = await storage.createServiceBooking(validatedData);
+      res.status(201).json(booking);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      console.error("Error creating service booking:", error);
+      res.status(500).json({ message: "Failed to create service booking" });
+    }
+  });
+
+  app.put("/api/service-bookings/:id", async (req, res) => {
+    try {
+      const validatedData = insertServiceBookingSchema.partial().parse(req.body);
+      const booking = await storage.updateServiceBooking(req.params.id, validatedData);
+      res.json(booking);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      console.error("Error updating service booking:", error);
+      res.status(500).json({ message: "Failed to update service booking" });
+    }
+  });
+
+  app.delete("/api/service-bookings/:id", async (req, res) => {
+    try {
+      await storage.deleteServiceBooking(req.params.id);
+      res.status(204).send();
+    } catch (error) {
+      console.error("Error deleting service booking:", error);
+      res.status(500).json({ message: "Failed to delete service booking" });
+    }
+  });
+
   // Admin routes
   app.get("/api/admin/stats", async (req, res) => {
     try {
-      const [projects, inquiries, subscribers, bookings] = await Promise.all([
+      const [projects, inquiries, subscribers, bookings, serviceBookings] = await Promise.all([
         storage.getProjects(),
         storage.getContactInquiries(),
         storage.getNewsletterSubscribers(),
         storage.getDemoBookings(),
+        storage.getServiceBookings(),
       ]);
 
       const stats = {
@@ -318,8 +382,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         totalInquiries: inquiries.length,
         totalSubscribers: subscribers.length,
         totalBookings: bookings.length,
+        totalServiceBookings: serviceBookings.length,
         recentInquiries: inquiries.slice(0, 5),
         recentBookings: bookings.slice(0, 5),
+        recentServiceBookings: serviceBookings.slice(0, 5),
       };
 
       res.json(stats);

@@ -14,10 +14,12 @@ import {
   ArrowDown, 
   Calendar,
   Mail,
-  RefreshCw
+  RefreshCw,
+  Briefcase
 } from "lucide-react";
 import { INQUIRY_STATUSES, BOOKING_STATUSES } from "@/lib/constants";
-import type { ContactInquiry, DemoBooking, Project, TeamMember, BlogPost, NewsletterSubscriber } from "@shared/schema";
+import type { ContactInquiry, DemoBooking, Project, TeamMember, BlogPost, NewsletterSubscriber, ServiceBooking } from "@shared/schema";
+import { ServiceBookingsTable } from "@/components/admin/service-bookings-table";
 
 interface AdminDashboardProps {
   activeSection: string;
@@ -46,6 +48,10 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
 
   const { data: bookings = [] } = useQuery<DemoBooking[]>({
     queryKey: ["/api/admin/bookings"],
+  });
+
+  const { data: serviceBookings = [] } = useQuery<ServiceBooking[]>({
+    queryKey: ["/api/service-bookings"],
   });
 
   const formatDate = (date: string | Date | null) => {
@@ -79,7 +85,7 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {[
           {
             title: "Total Projects",
@@ -108,6 +114,13 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
             change: "+9.1%",
             trend: "up",
             icon: <Calendar className="h-5 w-5" />,
+          },
+          {
+            title: "Service Bookings",
+            value: serviceBookings.length,
+            change: "+25.6%",
+            trend: "up",
+            icon: <Briefcase className="h-5 w-5" />,
           },
         ].map((stat, index) => (
           <Card key={index} className="border-bright-yellow/10 bg-bright-black/50 backdrop-blur-sm">
@@ -347,6 +360,15 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
     </div>
   );
 
+  const renderServiceBookings = () => (
+    <div className="space-y-6">
+      <h1 className="text-2xl font-bold text-bright-white">Service Bookings</h1>
+      <div className="bg-bright-black/50 rounded-lg p-6">
+        <ServiceBookingsTable />
+      </div>
+    </div>
+  );
+
   const renderSection = () => {
     switch (activeSection) {
       case "dashboard":
@@ -361,6 +383,8 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
         return renderInquiries();
       case "bookings":
         return renderBookings();
+      case "service-bookings":
+        return renderServiceBookings();
       case "newsletter":
         return (
           <div className="space-y-6">
