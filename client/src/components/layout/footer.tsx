@@ -1,6 +1,7 @@
 import { Link } from "wouter";
-import { Zap, Facebook, Twitter, Linkedin, Instagram, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram, MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import brightLogo from "@/assets/bright-logo.svg";
 
 const Footer = () => {
   const services = [
@@ -32,10 +33,11 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center mb-6">
-              <div className="w-10 h-10 bg-bright-yellow rounded-lg flex items-center justify-center">
-                <Zap className="w-6 h-6 text-bright-black" />
-              </div>
-              <span className="ml-3 text-xl font-bold">Bright</span>
+              <img 
+                src={brightLogo} 
+                alt="Bright Properties" 
+                className="h-8 w-auto filter brightness-0 invert"
+              />
             </div>
             <p className="text-gray-300 mb-6">
               Immersive technology solutions across industries. Virtual reality, 3D visualization, and interactive experiences.

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Zap, Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
+import brightLogo from "@/assets/bright-logo.svg";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,10 +40,11 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="w-10 h-10 bg-bright-yellow rounded-lg flex items-center justify-center">
-              <Zap className="w-6 h-6 text-bright-black" />
-            </div>
-            <span className="ml-3 text-xl font-bold text-bright-black">Bright</span>
+            <img 
+              src={brightLogo} 
+              alt="Bright Properties" 
+              className="h-8 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
