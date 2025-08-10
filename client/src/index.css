@@ -108,3 +108,15 @@
 .animate-bounce-slow {
   animation: bounce-slow 2s infinite;
 }
+
+/* Dropdown menu visibility fixes */
+[data-radix-popper-content-wrapper] {
+  z-index: 9999 !important;
+}
+
+[data-state="open"] [data-radix-dropdown-menu-content] {
+  z-index: 9999 !important;
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
