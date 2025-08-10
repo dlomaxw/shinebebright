@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { 
   MapPin, 
   Bed, 
@@ -16,7 +17,12 @@ import {
   Mail,
   ExternalLink,
   Star,
-  ArrowRight
+  ArrowRight,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Home,
+  Building
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import type { Property } from "@shared/schema";
@@ -203,11 +209,7 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
     ? property.images[0] 
     : '/api/placeholder/400/300';
 
-  const handleViewDetails = () => {
-    if (property.originalUrl) {
-      window.open(property.originalUrl, '_blank');
-    }
-  };
+
 
   return (
     <Card className={`overflow-hidden hover:shadow-xl transition-all duration-300 group ${
@@ -242,7 +244,7 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
             size="sm"
             variant="secondary"
             className="bg-white/90 text-bright-black hover:bg-white"
-            onClick={handleViewDetails}
+            onClick={() => property.originalUrl && window.open(property.originalUrl, '_blank')}
           >
             <ExternalLink className="w-4 h-4" />
           </Button>
@@ -324,15 +326,279 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
           </div>
         )}
 
-        <Button 
-          className="w-full bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold"
-          onClick={handleViewDetails}
-        >
-          View Details
-          <ArrowRight className="w-4 h-4 ml-2" />
-        </Button>
+        <PropertyDetailsDialog property={property}>
+          <Button className="w-full bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
+            View Details
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
+        </PropertyDetailsDialog>
       </CardContent>
     </Card>
+  );
+};
+
+// Property Details Dialog Component
+interface PropertyDetailsDialogProps {
+  property: Property;
+  children: React.ReactNode;
+}
+
+const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProps) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = Array.isArray(property.images) && property.images.length > 0 
+    ? property.images 
+    : ['/api/placeholder/400/300'];
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleExternalLink = () => {
+    if (property.originalUrl) {
+      window.open(property.originalUrl, '_blank');
+    }
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        {children}
+      </DialogTrigger>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold text-bright-black flex items-center justify-between">
+            {property.title}
+            {property.originalUrl && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleExternalLink}
+                className="ml-4"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Original Listing
+              </Button>
+            )}
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="space-y-6">
+          {/* Image Gallery */}
+          <div className="relative">
+            <div className="aspect-video overflow-hidden rounded-lg">
+              <img 
+                src={images[currentImageIndex]}
+                alt={`${property.title} - Image ${currentImageIndex + 1}`}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = '/api/placeholder/400/300';
+                }}
+              />
+            </div>
+            
+            {images.length > 1 && (
+              <>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white"
+                  onClick={prevImage}
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white"
+                  onClick={nextImage}
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </Button>
+                
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
+                  {currentImageIndex + 1} / {images.length}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Image Thumbnails */}
+          {images.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto pb-2">
+              {images.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`flex-shrink-0 w-20 h-16 rounded-md overflow-hidden border-2 transition-all ${
+                    currentImageIndex === index 
+                      ? 'border-bright-yellow ring-2 ring-bright-yellow/30' 
+                      : 'border-gray-300 hover:border-gray-400'
+                  }`}
+                >
+                  <img 
+                    src={image}
+                    alt={`Thumbnail ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = '/api/placeholder/400/300';
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Left Column - Basic Info */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Badge className="bg-bright-yellow text-bright-black font-semibold">
+                  {property.status}
+                </Badge>
+                {property.featured && (
+                  <Badge className="bg-bright-black text-white">
+                    <Star className="w-3 h-3 mr-1" />
+                    Featured
+                  </Badge>
+                )}
+              </div>
+
+              <div className="text-3xl font-bold text-bright-yellow">
+                {property.price}
+              </div>
+
+              <div className="flex items-center text-bright-gray">
+                <MapPin className="w-5 h-5 mr-2" />
+                <div>
+                  <p className="font-medium">{property.location}</p>
+                  <p className="text-sm">{property.address}, {property.city}, {property.country}</p>
+                </div>
+              </div>
+
+              {/* Property Specifications */}
+              <div className="bg-bright-light/30 rounded-lg p-4">
+                <h3 className="font-semibold text-bright-black mb-3 flex items-center">
+                  <Home className="w-5 h-5 mr-2" />
+                  Property Details
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {property.bedrooms && (
+                    <div className="flex items-center">
+                      <Bed className="w-4 h-4 mr-2 text-bright-gray" />
+                      <span className="text-sm">
+                        <strong>{property.bedrooms}</strong> Bedrooms
+                      </span>
+                    </div>
+                  )}
+                  {property.bathrooms && (
+                    <div className="flex items-center">
+                      <Bath className="w-4 h-4 mr-2 text-bright-gray" />
+                      <span className="text-sm">
+                        <strong>{property.bathrooms}</strong> Bathrooms
+                      </span>
+                    </div>
+                  )}
+                  {property.garage && (
+                    <div className="flex items-center">
+                      <Car className="w-4 h-4 mr-2 text-bright-gray" />
+                      <span className="text-sm">
+                        <strong>{property.garage}</strong> Garage Space
+                      </span>
+                    </div>
+                  )}
+                  {property.propertySize && (
+                    <div className="flex items-center">
+                      <Ruler className="w-4 h-4 mr-2 text-bright-gray" />
+                      <span className="text-sm">
+                        <strong>{property.propertySize}</strong>
+                      </span>
+                    </div>
+                  )}
+                  {property.yearBuilt && (
+                    <div className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-2 text-bright-gray" />
+                      <span className="text-sm">
+                        Built in <strong>{property.yearBuilt}</strong>
+                      </span>
+                    </div>
+                  )}
+                  {property.propertyType && (
+                    <div className="flex items-center">
+                      <Building className="w-4 h-4 mr-2 text-bright-gray" />
+                      <span className="text-sm">
+                        <strong>{property.propertyType}</strong>
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Description & Features */}
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-semibold text-bright-black mb-2">Description</h3>
+                <p className="text-bright-gray leading-relaxed">
+                  {property.description}
+                </p>
+              </div>
+
+              {/* Features & Amenities */}
+              {Array.isArray(property.features) && property.features.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-bright-black mb-3">Features & Amenities</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {property.features.map((feature, index) => (
+                      <div key={index} className="flex items-center text-sm">
+                        <div className="w-2 h-2 bg-bright-yellow rounded-full mr-3"></div>
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Location Details */}
+              <div className="bg-bright-light/30 rounded-lg p-4">
+                <h3 className="font-semibold text-bright-black mb-3">Location Information</h3>
+                <div className="space-y-2">
+                  <p><strong>Area:</strong> {property.area}</p>
+                  <p><strong>City:</strong> {property.city}</p>
+                  <p><strong>Country:</strong> {property.country}</p>
+                  {property.address && (
+                    <p><strong>Address:</strong> {property.address}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact CTA */}
+          <div className="bg-bright-black text-white rounded-lg p-6 text-center">
+            <h3 className="text-xl font-bold mb-2">Interested in this property?</h3>
+            <p className="text-gray-300 mb-4">Contact our expert team for more information and to schedule a viewing.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
+                <a href="tel:0750421224">
+                  <Phone className="w-4 h-4 mr-2" />
+                  Call Now
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-bright-black">
+                <a href="mailto:info@brightplatform.com">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Email Us
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
