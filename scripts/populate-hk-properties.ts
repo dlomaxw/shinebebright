@@ -11,6 +11,7 @@ const hkProperties: InsertProperty[] = [
     bedrooms: "2",
     bathrooms: "2",
     squareMeters: 112,
+    featured: true,
     description: "Our latest project, Sapphire Residency is located in Mutungo Hill, one of the most upscale suburbs in Kampala. It has both two and three-bedroomed apartments with a total area of 112 and 150 square meters respectively. The two-bedroomed apartments are being sold for UGX 242 M while the three-bedroomed apartments have been priced at UGX 353M and have a flexible payment plan spanning over 24 months.",
     amenities: [
       "Gym Area",
@@ -54,6 +55,7 @@ const hkProperties: InsertProperty[] = [
     bedrooms: "3",
     bathrooms: "3",
     squareMeters: 150,
+    featured: true,
     description: "Premium three-bedroom apartment at Sapphire Residency, located in Mutungo Hill, one of the most upscale suburbs in Kampala. This spacious 150 square meter apartment features modern amenities and flexible payment options spanning over 24 months.",
     amenities: [
       "Gym Area",
@@ -94,6 +96,7 @@ const hkProperties: InsertProperty[] = [
     bedrooms: "2",
     bathrooms: "2",
     squareMeters: 138,
+    featured: true,
     description: "Lulu Residency is a seven-storey iconic luxurious structure rising with fabulous panoramic views of Lake Victoria. The structural design captures the outdoor connections that occur naturally when living closer to the ground. Each apartment offers comfortable outdoor terraces with gorgeous views of the calm Victoria Lake.",
     amenities: [
       "Serene 360° Lake view",
@@ -134,6 +137,7 @@ const hkProperties: InsertProperty[] = [
     bedrooms: "3",
     bathrooms: "3",
     squareMeters: 158,
+    featured: true,
     description: "Premium three-bedroom apartment at Lulu Residency with fabulous panoramic views of Lake Victoria. Features curved design with comfortable outdoor terraces, natural light, ventilation, and gorgeous lake views. Includes 2 car parking spaces.",
     amenities: [
       "Serene 360° Lake view",
@@ -174,6 +178,7 @@ const hkProperties: InsertProperty[] = [
     bedrooms: "3",
     bathrooms: "3",
     squareMeters: 130,
+    featured: true,
     description: "Located in Bukasa, Muyenga, the Amber Residency comprises of three bedroomed apartments with a total area of 130 square meters each. This project perfectly fuses beauty, class and quality and boasts of a beautiful view overlooking the Muyenga hill. The apartments have appreciated 15% upon completion showing guaranteed returns for your investment.",
     amenities: [
       "Individual Yaka Meters",
