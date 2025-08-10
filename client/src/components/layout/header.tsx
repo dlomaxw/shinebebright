@@ -1,0 +1,163 @@
+import { useState } from "react";
+import { Link, useLocation } from "wouter";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Zap, Menu, ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const Header = () => {
+  const [location] = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navigation = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "News", href: "/news" },
+    { name: "Contact", href: "/contact" },
+  ];
+
+  const services = [
+    { name: "Real Estate", href: "/services/real-estate" },
+    { name: "Architecture", href: "/services/architecture" },
+    { name: "Interior Design", href: "/services/interior-design" },
+    { name: "Media & Entertainment", href: "/services/media" },
+    { name: "Training", href: "/services/training" },
+  ];
+
+  const isActive = (href: string) => location === href;
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <div className="w-10 h-10 bg-bright-yellow rounded-lg flex items-center justify-center">
+              <Zap className="w-6 h-6 text-bright-black" />
+            </div>
+            <span className="ml-3 text-xl font-bold text-bright-black">Bright</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`font-medium transition-colors ${
+                  isActive(item.href)
+                    ? "text-bright-yellow"
+                    : "text-gray-700 hover:text-bright-yellow"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+
+            {/* Services Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-bright-yellow transition-colors font-medium">
+                Services <ChevronDown className="w-4 h-4 ml-1" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-64">
+                {services.map((service) => (
+                  <DropdownMenuItem key={service.name} asChild>
+                    <Link
+                      href={service.href}
+                      className="text-gray-700 hover:bg-gray-50 hover:text-bright-yellow transition-colors"
+                    >
+                      {service.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Link
+              href="/admin"
+              className={`font-medium transition-colors ${
+                isActive("/admin")
+                  ? "text-bright-yellow"
+                  : "text-gray-700 hover:text-bright-yellow"
+              }`}
+            >
+              Admin
+            </Link>
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden md:flex items-center">
+            <Button className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
+              Book Demo
+            </Button>
+          </div>
+
+          {/* Mobile Menu */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-80">
+              <div className="flex flex-col space-y-4 mt-8">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`text-lg font-medium transition-colors ${
+                      isActive(item.href)
+                        ? "text-bright-yellow"
+                        : "text-gray-700 hover:text-bright-yellow"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+
+                <div className="border-t pt-4">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Services</h3>
+                  {services.map((service) => (
+                    <Link
+                      key={service.name}
+                      href={service.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block text-gray-700 hover:text-bright-yellow transition-colors py-1"
+                    >
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
+
+                <Link
+                  href="/admin"
+                  onClick={() => setIsOpen(false)}
+                  className={`text-lg font-medium transition-colors ${
+                    isActive("/admin")
+                      ? "text-bright-yellow"
+                      : "text-gray-700 hover:text-bright-yellow"
+                  }`}
+                >
+                  Admin
+                </Link>
+
+                <Button className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold w-full mt-4">
+                  Book Demo
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Header;

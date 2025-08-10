@@ -1,0 +1,65 @@
+import { Switch, Route } from "wouter";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/queryClient";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+
+// Layout components
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
+
+// Pages
+import Home from "@/pages/home";
+import About from "@/pages/about";
+import Services from "@/pages/services";
+import RealEstate from "@/pages/real-estate";
+import Architecture from "@/pages/architecture";
+import InteriorDesign from "@/pages/interior-design";
+import Media from "@/pages/media";
+import Training from "@/pages/training";
+import Portfolio from "@/pages/portfolio";
+import Contact from "@/pages/contact";
+import Admin from "@/pages/admin";
+import News from "@/pages/news";
+import Comparison from "@/pages/comparison";
+import NotFound from "@/pages/not-found";
+
+function Router() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1">
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/services" component={Services} />
+          <Route path="/services/real-estate" component={RealEstate} />
+          <Route path="/services/architecture" component={Architecture} />
+          <Route path="/services/interior-design" component={InteriorDesign} />
+          <Route path="/services/media" component={Media} />
+          <Route path="/services/training" component={Training} />
+          <Route path="/portfolio" component={Portfolio} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/news" component={News} />
+          <Route path="/comparison" component={Comparison} />
+          <Route component={NotFound} />
+        </Switch>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Router />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
+
+export default App;
