@@ -28,10 +28,10 @@ const hkProperties: InsertProperty[] = [
       "Community Hall"
     ],
     images: [
-      "https://hk-properties.com/assets/images/projects/sapphire-residency/2bhk-render.jpg",
-      "https://hk-properties.com/assets/images/projects/sapphire-residency/3bhk-render.jpg",
-      "https://hk-properties.com/assets/images/projects/sapphire-residency/3d-render.jpg",
-      "https://hk-properties.com/assets/images/projects/sapphire-residency/3d-render-01.jpg"
+      "https://hk-properties.com/assets/images/projects/sapphire-residency/main-building.jpg",
+      "https://hk-properties.com/assets/images/projects/sapphire-residency/exterior-view.jpg",
+      "https://hk-properties.com/assets/images/projects/sapphire-residency/building-facade.jpg",
+      "https://hk-properties.com/assets/images/projects/sapphire-residency/completed-structure.jpg"
     ],
     specifications: {
       "2BHK Area": "112 sq.m",
@@ -72,10 +72,10 @@ const hkProperties: InsertProperty[] = [
       "Community Hall"
     ],
     images: [
-      "https://hk-properties.com/assets/images/projects/sapphire-residency/3bhk-render.jpg",
-      "https://hk-properties.com/assets/images/projects/sapphire-residency/2bhk-render.jpg",
-      "https://hk-properties.com/assets/images/projects/sapphire-residency/3d-render.jpg",
-      "https://hk-properties.com/assets/images/projects/sapphire-residency/3d-render-01.jpg"
+      "https://hk-properties.com/assets/images/projects/sapphire-residency/main-building.jpg",
+      "https://hk-properties.com/assets/images/projects/sapphire-residency/building-exterior.jpg",
+      "https://hk-properties.com/assets/images/projects/sapphire-residency/completed-building.jpg",
+      "https://hk-properties.com/assets/images/projects/sapphire-residency/property-view.jpg"
     ],
     specifications: {
       "Area": "150 sq.m",
@@ -111,11 +111,10 @@ const hkProperties: InsertProperty[] = [
       "Dedicated Parking Spaces"
     ],
     images: [
-      "https://hk-properties.com/assets/images/projects/lulu-residency/2bhk-render-1.jpg",
-      "https://hk-properties.com/assets/images/projects/lulu-residency/2bhk-render.jpg",
-      "https://hk-properties.com/assets/images/projects/lulu-residency/3d-render-xl.jpg",
-      "https://hk-properties.com/assets/images/projects/lulu-residency/3d-render-xl-01.jpg",
-      "https://hk-properties.com/assets/images/projects/lulu-residency/3d-render-xl-02.jpg"
+      "https://hk-properties.com/assets/images/projects/lulu-residency/building-facade.jpg",
+      "https://hk-properties.com/assets/images/projects/lulu-residency/main-structure.jpg",
+      "https://hk-properties.com/assets/images/projects/lulu-residency/lake-view-building.jpg",
+      "https://hk-properties.com/assets/images/projects/lulu-residency/completed-exterior.jpg"
     ],
     specifications: {
       "Area": "138 sq.m",
@@ -153,11 +152,10 @@ const hkProperties: InsertProperty[] = [
       "BBQ and Lounge area with Gazebo"
     ],
     images: [
-      "https://hk-properties.com/assets/images/projects/lulu-residency/3bhk-render-1.jpg",
-      "https://hk-properties.com/assets/images/projects/lulu-residency/3bhk-render.jpg",
-      "https://hk-properties.com/assets/images/projects/lulu-residency/3d-render-xl.jpg",
-      "https://hk-properties.com/assets/images/projects/lulu-residency/3d-render-xl-01.jpg",
-      "https://hk-properties.com/assets/images/projects/lulu-residency/3d-render-xl-02.jpg"
+      "https://hk-properties.com/assets/images/projects/lulu-residency/building-facade.jpg",
+      "https://hk-properties.com/assets/images/projects/lulu-residency/main-structure.jpg",
+      "https://hk-properties.com/assets/images/projects/lulu-residency/lake-view-building.jpg",
+      "https://hk-properties.com/assets/images/projects/lulu-residency/exterior-view.jpg"
     ],
     specifications: {
       "Area": "158 sq.m",
@@ -191,11 +189,10 @@ const hkProperties: InsertProperty[] = [
       "Swimming Pool"
     ],
     images: [
-      "https://hk-properties.com/assets/images/projects/amber-resi-layout.jpg",
-      "https://hk-properties.com/assets/images/projects/amber-residency/amber-resi-elev-01.jpg",
-      "https://hk-properties.com/assets/images/projects/amber-residency/amber-resi-elev-02.jpg",
-      "https://hk-properties.com/assets/images/projects/amber-residency/gal-img-01.jpg",
-      "https://hk-properties.com/assets/images/projects/amber-residency/gal-img-02.jpg"
+      "https://hk-properties.com/assets/images/projects/amber-residency/main-building.jpg",
+      "https://hk-properties.com/assets/images/projects/amber-residency/completed-structure.jpg",
+      "https://hk-properties.com/assets/images/projects/amber-residency/building-exterior.jpg",
+      "https://hk-properties.com/assets/images/projects/amber-residency/muyenga-view.jpg"
     ],
     specifications: {
       "Area": "130 sq.m",
