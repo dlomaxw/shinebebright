@@ -117,9 +117,12 @@ const Footer = () => {
                   <p className="text-gray-300 text-sm">Plot 10 Third St, Kampala</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-bright-yellow" />
-                <p className="text-gray-300">+1 (123) 456-7890</p>
+              <div className="flex items-start space-x-3">
+                <Phone className="w-5 h-5 text-bright-yellow mt-1" />
+                <div>
+                  <p className="text-gray-300 text-sm">+250 750 421 224</p>
+                  <p className="text-gray-300 text-sm">+250 785 189 100</p>
+                </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-bright-yellow" />
