@@ -6,6 +6,7 @@ import {
   contactInquiries,
   newsletterSubscribers,
   demoBookings,
+  properties,
   type User,
   type InsertUser,
   type Project,
@@ -20,6 +21,8 @@ import {
   type InsertNewsletterSubscriber,
   type DemoBooking,
   type InsertDemoBooking,
+  type Property,
+  type InsertProperty,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, ilike, or } from "drizzle-orm";
@@ -69,6 +72,14 @@ export interface IStorage {
   getDemoBooking(id: string): Promise<DemoBooking | undefined>;
   createDemoBooking(booking: InsertDemoBooking): Promise<DemoBooking>;
   updateDemoBooking(id: string, booking: Partial<InsertDemoBooking>): Promise<DemoBooking>;
+  
+  // Property operations
+  getProperties(featured?: boolean): Promise<Property[]>;
+  getProperty(id: string): Promise<Property | undefined>;
+  createProperty(property: InsertProperty): Promise<Property>;
+  updateProperty(id: string, property: Partial<InsertProperty>): Promise<Property>;
+  deleteProperty(id: string): Promise<void>;
+  searchProperties(query: string): Promise<Property[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -277,6 +288,53 @@ export class DatabaseStorage implements IStorage {
       .where(eq(demoBookings.id, id))
       .returning();
     return booking;
+  }
+
+  // Property operations
+  async getProperties(featured?: boolean): Promise<Property[]> {
+    let query = db.select().from(properties);
+    if (featured !== undefined) {
+      query = query.where(eq(properties.featured, featured));
+    }
+    return query.orderBy(desc(properties.createdAt));
+  }
+
+  async getProperty(id: string): Promise<Property | undefined> {
+    const [property] = await db.select().from(properties).where(eq(properties.id, id));
+    return property;
+  }
+
+  async createProperty(insertProperty: InsertProperty): Promise<Property> {
+    const [property] = await db.insert(properties).values(insertProperty).returning();
+    return property;
+  }
+
+  async updateProperty(id: string, updateProperty: Partial<InsertProperty>): Promise<Property> {
+    const [property] = await db
+      .update(properties)
+      .set({ ...updateProperty, updatedAt: new Date() })
+      .where(eq(properties.id, id))
+      .returning();
+    return property;
+  }
+
+  async deleteProperty(id: string): Promise<void> {
+    await db.delete(properties).where(eq(properties.id, id));
+  }
+
+  async searchProperties(query: string): Promise<Property[]> {
+    return db
+      .select()
+      .from(properties)
+      .where(
+        or(
+          ilike(properties.title, `%${query}%`),
+          ilike(properties.description, `%${query}%`),
+          ilike(properties.location, `%${query}%`),
+          ilike(properties.city, `%${query}%`)
+        )
+      )
+      .orderBy(desc(properties.createdAt));
   }
 }
 

@@ -18,6 +18,7 @@ import InteriorDesign from "@/pages/interior-design";
 import Media from "@/pages/media";
 import Training from "@/pages/training";
 import Portfolio from "@/pages/portfolio";
+import Properties from "@/pages/properties";
 import Contact from "@/pages/contact";
 import Admin from "@/pages/admin";
 import News from "@/pages/news";
@@ -39,6 +40,7 @@ function Router() {
           <Route path="/services/media" component={Media} />
           <Route path="/services/training" component={Training} />
           <Route path="/portfolio" component={Portfolio} />
+          <Route path="/properties" component={Properties} />
           <Route path="/contact" component={Contact} />
           <Route path="/admin" component={Admin} />
           <Route path="/news" component={News} />

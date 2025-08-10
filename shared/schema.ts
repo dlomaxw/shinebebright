@@ -99,6 +99,32 @@ export const demoBookings = pgTable("demo_bookings", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Properties table for real estate listings
+export const properties = pgTable("properties", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: varchar("title").notNull(),
+  description: text("description"),
+  price: varchar("price").notNull(), // Keep as varchar for complex pricing like "PRICES INSIDE"
+  bedrooms: varchar("bedrooms"), // Can be complex like "1,2&3" or "2&3"
+  bathrooms: varchar("bathrooms"), // Can be complex like "3,2&1"
+  propertySize: varchar("property_size"), // Like "154 Sqm", "115 Sqm"
+  garage: integer("garage"),
+  yearBuilt: integer("year_built"),
+  propertyType: varchar("property_type"), // "Apartment, Residential", "Villa"
+  status: varchar("status").default("For Sale"), // "For Sale", "Sold"
+  location: varchar("location").notNull(),
+  address: text("address"),
+  city: varchar("city"),
+  area: varchar("area"),
+  country: varchar("country").default("Uganda"),
+  images: jsonb("images"), // Array of image URLs
+  features: jsonb("features"), // Array of features/amenities
+  featured: boolean("featured").default(false),
+  originalUrl: varchar("original_url"), // URL from shinebebright.com
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).omit({
   id: true,
@@ -138,6 +164,12 @@ export const insertDemoBookingSchema = createInsertSchema(demoBookings).omit({
   createdAt: true,
 });
 
+export const insertPropertySchema = createInsertSchema(properties).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 // Types
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -159,3 +191,6 @@ export type InsertNewsletterSubscriber = z.infer<typeof insertNewsletterSubscrib
 
 export type DemoBooking = typeof demoBookings.$inferSelect;
 export type InsertDemoBooking = z.infer<typeof insertDemoBookingSchema>;
+
+export type Property = typeof properties.$inferSelect;
+export type InsertProperty = z.infer<typeof insertPropertySchema>;
