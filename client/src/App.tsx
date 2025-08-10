@@ -25,6 +25,9 @@ import News from "@/pages/news";
 import Comparison from "@/pages/comparison";
 import BookService from "@/pages/book-service";
 import NotFound from "@/pages/not-found";
+import ClientPortal from "@/pages/client-portal";
+import VirtualTours from "@/pages/virtual-tours";
+import Analytics from "@/pages/analytics";
 
 function Router() {
   return (
@@ -47,6 +50,9 @@ function Router() {
           <Route path="/news" component={News} />
           <Route path="/comparison" component={Comparison} />
           <Route path="/book-service" component={BookService} />
+          <Route path="/client-portal" component={ClientPortal} />
+          <Route path="/virtual-tours" component={VirtualTours} />
+          <Route path="/analytics" component={Analytics} />
           <Route component={NotFound} />
         </Switch>
       </main>
