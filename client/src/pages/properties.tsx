@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { 
   MapPin, 
   Bed, 
@@ -230,6 +230,7 @@ const Properties = () => {
                   <div>
                     <p className="font-semibold">Phone</p>
                     <p className="text-gray-300">+250 750 421 224</p>
+                    <p className="text-gray-300">+250 785 189 100</p>
                     <p className="text-sm text-gray-400">Available 24/7 for consultations</p>
                   </div>
                 </div>
@@ -269,11 +270,17 @@ const Properties = () => {
           {/* Contact Buttons */}
           <div className="text-center">
             <p className="text-gray-300 mb-6">Ready to experience the future of real estate? Get in touch today!</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
                 <a href="tel:+250750421224">
                   <Phone className="w-5 h-5 mr-2" />
-                  Call Now
+                  Call +250 750 421 224
+                </a>
+              </Button>
+              <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
+                <a href="tel:+250785189100">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Call +250 785 189 100
                 </a>
               </Button>
               <Button asChild className="bg-green-600 hover:bg-green-700 text-white font-semibold">
@@ -474,7 +481,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto bg-white">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-bright-black flex items-center justify-between">
             {property.title}
@@ -490,6 +497,9 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               </Button>
             )}
           </DialogTitle>
+          <DialogDescription className="text-bright-gray">
+            Detailed property information with virtual tour capabilities
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
@@ -717,7 +727,10 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                 <div className="space-y-2">
                   <div className="flex items-center text-gray-300">
                     <Phone className="w-4 h-4 mr-2" />
-                    <span>+250 750 421 224</span>
+                    <div>
+                      <div>+250 750 421 224</div>
+                      <div>+250 785 189 100</div>
+                    </div>
                   </div>
                   <div className="flex items-center text-gray-300">
                     <Mail className="w-4 h-4 mr-2" />
@@ -739,11 +752,17 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
             {/* Action Buttons */}
             <div className="text-center">
               <p className="text-gray-300 mb-4">Interested in this property? Contact our expert team for more information and to schedule a virtual or physical viewing.</p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
                   <a href="tel:+250750421224">
                     <Phone className="w-4 h-4 mr-2" />
-                    Call Now
+                    Call +250 750 421 224
+                  </a>
+                </Button>
+                <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
+                  <a href="tel:+250785189100">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call +250 785 189 100
                   </a>
                 </Button>
                 <Button asChild className="bg-green-600 hover:bg-green-700 text-white font-semibold">
