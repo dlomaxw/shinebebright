@@ -6,6 +6,7 @@ import {
   contactInquiries,
   newsletterSubscribers,
   demoBookings,
+  serviceBookings,
   properties,
   type User,
   type InsertUser,
@@ -21,6 +22,8 @@ import {
   type InsertNewsletterSubscriber,
   type DemoBooking,
   type InsertDemoBooking,
+  type ServiceBooking,
+  type InsertServiceBooking,
   type Property,
   type InsertProperty,
 } from "@shared/schema";
@@ -67,7 +70,14 @@ export interface IStorage {
   createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
   unsubscribeNewsletter(email: string): Promise<void>;
   
-  // Demo booking operations
+  // Service booking operations
+  getServiceBookings(): Promise<ServiceBooking[]>;
+  getServiceBooking(id: string): Promise<ServiceBooking | undefined>;
+  createServiceBooking(booking: InsertServiceBooking): Promise<ServiceBooking>;
+  updateServiceBooking(id: string, booking: Partial<InsertServiceBooking>): Promise<ServiceBooking>;
+  deleteServiceBooking(id: string): Promise<void>;
+  
+  // Demo booking operations (legacy)
   getDemoBookings(): Promise<DemoBooking[]>;
   getDemoBooking(id: string): Promise<DemoBooking | undefined>;
   createDemoBooking(booking: InsertDemoBooking): Promise<DemoBooking>;
@@ -266,7 +276,35 @@ export class DatabaseStorage implements IStorage {
       .where(eq(newsletterSubscribers.email, email));
   }
 
-  // Demo booking operations
+  // Service booking operations
+  async getServiceBookings(): Promise<ServiceBooking[]> {
+    return await db.select().from(serviceBookings).orderBy(desc(serviceBookings.createdAt));
+  }
+
+  async getServiceBooking(id: string): Promise<ServiceBooking | undefined> {
+    const [booking] = await db.select().from(serviceBookings).where(eq(serviceBookings.id, id));
+    return booking;
+  }
+
+  async createServiceBooking(insertBooking: InsertServiceBooking): Promise<ServiceBooking> {
+    const [booking] = await db.insert(serviceBookings).values(insertBooking).returning();
+    return booking;
+  }
+
+  async updateServiceBooking(id: string, updateData: Partial<InsertServiceBooking>): Promise<ServiceBooking> {
+    const [booking] = await db
+      .update(serviceBookings)
+      .set({ ...updateData, updatedAt: new Date() })
+      .where(eq(serviceBookings.id, id))
+      .returning();
+    return booking;
+  }
+
+  async deleteServiceBooking(id: string): Promise<void> {
+    await db.delete(serviceBookings).where(eq(serviceBookings.id, id));
+  }
+
+  // Demo booking operations (legacy)
   async getDemoBookings(): Promise<DemoBooking[]> {
     return db.select().from(demoBookings).orderBy(desc(demoBookings.createdAt));
   }

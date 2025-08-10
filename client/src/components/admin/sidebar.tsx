@@ -8,6 +8,7 @@ import {
   MessageSquare, 
   Mail, 
   Calendar,
+  Briefcase,
   Settings,
   LogOut,
   Zap
@@ -27,6 +28,7 @@ const AdminSidebar = ({ activeSection, onSectionChange }: AdminSidebarProps) => 
     { id: "inquiries", label: "Inquiries", icon: MessageSquare },
     { id: "newsletter", label: "Newsletter", icon: Mail },
     { id: "bookings", label: "Demo Bookings", icon: Calendar },
+    { id: "service-bookings", label: "Service Bookings", icon: Briefcase },
     { id: "settings", label: "Settings", icon: Settings },
   ];
 

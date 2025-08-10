@@ -85,7 +85,34 @@ export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-// Demo bookings table
+// Service bookings table (enhanced demo bookings)
+export const serviceBookings = pgTable("service_bookings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  firstName: varchar("first_name").notNull(),
+  lastName: varchar("last_name").notNull(),
+  email: varchar("email").notNull(),
+  company: varchar("company"),
+  phone: varchar("phone").notNull(),
+  serviceType: varchar("service_type").notNull(), // real-estate, architecture, interior-design, media, training
+  servicePackage: varchar("service_package"), // basic, standard, premium
+  projectTitle: varchar("project_title"),
+  projectDescription: text("project_description"),
+  budget: varchar("budget"), // Under $10k, $10k-$50k, $50k-$100k, Over $100k
+  timeline: varchar("timeline"), // 1-2 weeks, 1 month, 3 months, 6+ months
+  preferredDate: timestamp("preferred_date"),
+  alternateDate: timestamp("alternate_date"),
+  requirements: jsonb("requirements"), // Specific requirements array
+  attachments: jsonb("attachments"), // File attachments URLs
+  status: varchar("status").notNull().default("pending"), // pending, confirmed, in-progress, completed, cancelled
+  assignedTo: varchar("assigned_to"), // Team member ID
+  notes: text("notes"), // Internal notes
+  estimatedCost: integer("estimated_cost"), // In cents
+  actualCost: integer("actual_cost"), // In cents
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Backward compatibility - keep the demo bookings table for existing data
 export const demoBookings = pgTable("demo_bookings", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: varchar("name").notNull(),
@@ -159,6 +186,12 @@ export const insertNewsletterSubscriberSchema = createInsertSchema(newsletterSub
   createdAt: true,
 });
 
+export const insertServiceBookingSchema = createInsertSchema(serviceBookings).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export const insertDemoBookingSchema = createInsertSchema(demoBookings).omit({
   id: true,
   createdAt: true,
@@ -188,6 +221,9 @@ export type InsertContactInquiry = z.infer<typeof insertContactInquirySchema>;
 
 export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
 export type InsertNewsletterSubscriber = z.infer<typeof insertNewsletterSubscriberSchema>;
+
+export type ServiceBooking = typeof serviceBookings.$inferSelect;
+export type InsertServiceBooking = z.infer<typeof insertServiceBookingSchema>;
 
 export type DemoBooking = typeof demoBookings.$inferSelect;
 export type InsertDemoBooking = z.infer<typeof insertDemoBookingSchema>;

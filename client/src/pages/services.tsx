@@ -39,12 +39,20 @@ const Services = () => {
             ))}
           </div>
 
-          <div className="text-center">
-            <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold text-lg px-8 py-4">
-              <Link href="/contact">
-                Get Started Today <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </Button>
+          <div className="text-center space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold text-lg px-8 py-4">
+                <Link href="/book-service">
+                  Book Your Service <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="text-lg px-8 py-4 border-bright-yellow text-bright-black hover:bg-bright-yellow hover:text-bright-black">
+                <Link href="/contact">
+                  Get Free Consultation
+                </Link>
+              </Button>
+            </div>
+            <p className="text-sm text-gray-600">No payment required to get started • Free project consultation</p>
           </div>
         </div>
       </section>
