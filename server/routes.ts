@@ -8,6 +8,7 @@ import {
   insertProjectSchema,
   insertBlogPostSchema,
   insertTeamMemberSchema,
+  insertPropertySchema,
 } from "@shared/schema";
 import { z } from "zod";
 
@@ -220,6 +221,85 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching bookings:", error);
       res.status(500).json({ message: "Failed to fetch bookings" });
+    }
+  });
+
+  // Properties routes
+  app.get("/api/properties", async (req, res) => {
+    try {
+      const { featured } = req.query;
+      const properties = await storage.getProperties(
+        featured === "true" ? true : featured === "false" ? false : undefined
+      );
+      res.json(properties);
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+      res.status(500).json({ message: "Failed to fetch properties" });
+    }
+  });
+
+  app.get("/api/properties/search", async (req, res) => {
+    try {
+      const { q } = req.query;
+      if (!q || typeof q !== "string") {
+        return res.status(400).json({ message: "Query parameter 'q' is required" });
+      }
+      const properties = await storage.searchProperties(q);
+      res.json(properties);
+    } catch (error) {
+      console.error("Error searching properties:", error);
+      res.status(500).json({ message: "Failed to search properties" });
+    }
+  });
+
+  app.get("/api/properties/:id", async (req, res) => {
+    try {
+      const property = await storage.getProperty(req.params.id);
+      if (!property) {
+        return res.status(404).json({ message: "Property not found" });
+      }
+      res.json(property);
+    } catch (error) {
+      console.error("Error fetching property:", error);
+      res.status(500).json({ message: "Failed to fetch property" });
+    }
+  });
+
+  app.post("/api/properties", async (req, res) => {
+    try {
+      const validatedData = insertPropertySchema.parse(req.body);
+      const property = await storage.createProperty(validatedData);
+      res.status(201).json(property);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      console.error("Error creating property:", error);
+      res.status(500).json({ message: "Failed to create property" });
+    }
+  });
+
+  app.put("/api/properties/:id", async (req, res) => {
+    try {
+      const validatedData = insertPropertySchema.partial().parse(req.body);
+      const property = await storage.updateProperty(req.params.id, validatedData);
+      res.json(property);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      console.error("Error updating property:", error);
+      res.status(500).json({ message: "Failed to update property" });
+    }
+  });
+
+  app.delete("/api/properties/:id", async (req, res) => {
+    try {
+      await storage.deleteProperty(req.params.id);
+      res.status(204).send();
+    } catch (error) {
+      console.error("Error deleting property:", error);
+      res.status(500).json({ message: "Failed to delete property" });
     }
   });
 
