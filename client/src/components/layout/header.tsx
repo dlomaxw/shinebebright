@@ -3,6 +3,8 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ChevronDown } from "lucide-react";
+import { AnimatedLogo } from "@/components/animations/animated-logo";
+import { motion } from "framer-motion";
 import brightLogo from "@/assets/bright-logo-correct.png";
 import {
   DropdownMenu,
@@ -40,11 +42,13 @@ const Header = () => {
         <div className="flex justify-between items-center h-18">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <img 
-              src={brightLogo} 
-              alt="Bright Properties" 
-              className="h-12 w-auto"
-            />
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <AnimatedLogo size="md" autoPlay={false} />
+            </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
