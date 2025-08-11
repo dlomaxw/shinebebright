@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import ConversioBot from "@/components/ConversioBot";
+import ConversioBotFallback from "@/components/ConversioBotFallback";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/components/animations/page-transition";
 import { LogoRevealSequence } from "@/components/animations/animated-logo";
@@ -100,6 +101,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <ConversioBot />
+        <ConversioBotFallback />
         <Router />
       </TooltipProvider>
     </QueryClientProvider>

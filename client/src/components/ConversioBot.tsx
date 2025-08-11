@@ -2,48 +2,89 @@ import { useEffect } from 'react';
 
 const ConversioBot = () => {
   useEffect(() => {
-    // Wait for DOM to be fully ready
-    const initializeConversioBot = () => {
-      // Check if already loaded
-      if (document.getElementById('bot-widget-script') || (window as any).botId) {
-        return;
-      }
+    // Check if ConversioBot is already initialized
+    if ((window as any).ConversioBot || (window as any).botId) {
+      return;
+    }
 
-      try {
-        // Set the bot ID globally
-        (window as any).botId = "tduSLX";
+    // Force visibility by adding CSS to ensure the widget shows up
+    const addConversioBotStyles = () => {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        #bot-widget-script,
+        .conversiobot-widget,
+        .conversio-widget,
+        .cb-widget,
+        [id*="conversio"],
+        [class*="conversio"] {
+          z-index: 999999 !important;
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          pointer-events: auto !important;
+        }
         
-        // Create and inject the ConversioBot script
+        /* Force show chat bubble */
+        .cb-chat-bubble {
+          position: fixed !important;
+          bottom: 20px !important;
+          right: 20px !important;
+          z-index: 999999 !important;
+          display: block !important;
+          visibility: visible !important;
+        }
+      `;
+      document.head.appendChild(style);
+    };
+
+    // Initialize ConversioBot with multiple approaches
+    const initializeConversioBot = () => {
+      // Set global properties
+      (window as any).botId = "tduSLX";
+      
+      // Add forced styles
+      addConversioBotStyles();
+      
+      // Load the script if not already loaded
+      if (!document.querySelector('script[src*="conversiobot.com"]')) {
         const script = document.createElement('script');
         script.type = 'text/javascript';
-        script.id = 'bot-widget-script';
+        script.async = true;
         script.src = 'https://app.conversiobot.com/lib/js/gadget.js';
         script.setAttribute('bid', 'tduSLX');
-        script.async = true;
+        script.id = 'conversiobot-widget-script';
         
         script.onload = () => {
-          console.log('ConversioBot loaded successfully');
+          console.log('ConversioBot widget loaded');
+          // Force initialize after load
+          setTimeout(() => {
+            if ((window as any).ConversioBot && (window as any).ConversioBot.init) {
+              (window as any).ConversioBot.init();
+            }
+          }, 1000);
         };
         
         script.onerror = () => {
-          console.error('Failed to load ConversioBot script');
+          console.error('ConversioBot script failed to load');
         };
         
-        document.head.appendChild(script);
-      } catch (error) {
-        console.error('Error initializing ConversioBot:', error);
+        document.body.appendChild(script);
       }
     };
 
-    // Initialize after a short delay to ensure React app is ready
-    const timer = setTimeout(initializeConversioBot, 2000);
-
+    // Initialize immediately and also after DOM is fully ready
+    initializeConversioBot();
+    
+    // Also try after page fully loads
+    window.addEventListener('load', initializeConversioBot);
+    
+    // Cleanup
     return () => {
-      clearTimeout(timer);
+      window.removeEventListener('load', initializeConversioBot);
     };
   }, []);
 
-  return null; // This component doesn't render anything visible
+  return null;
 };
 
 export default ConversioBot;
