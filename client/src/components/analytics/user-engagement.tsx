@@ -1,261 +1,193 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { 
-  Users, 
-  MousePointer, 
-  Clock, 
-  Eye,
-  Heart,
-  MessageSquare,
-  Share,
-  Download,
-  Play,
-  Star
-} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Users, Eye, Clock, MousePointer, TrendingUp, TrendingDown, Activity, Target } from "lucide-react";
 import AnalyticsChart from "./analytics-chart";
 import type { AnalyticsEvent } from "@shared/schema";
+import { format, subDays } from "date-fns";
 
 interface UserEngagementProps {
   events: AnalyticsEvent[];
 }
 
 const UserEngagement = ({ events }: UserEngagementProps) => {
-  const engagementMetrics = [
-    {
-      title: "Page Views",
-      value: "45,678",
-      change: "+12.3%",
-      icon: <Eye className="h-5 w-5" />,
-      color: "blue"
-    },
-    {
-      title: "Session Duration",
-      value: "4m 32s",
-      change: "+8.7%", 
-      icon: <Clock className="h-5 w-5" />,
-      color: "green"
-    },
-    {
-      title: "Bounce Rate",
-      value: "32.1%",
-      change: "-5.2%",
-      icon: <MousePointer className="h-5 w-5" />,
-      color: "red"
-    },
-    {
-      title: "Return Visitors",
-      value: "68.4%",
-      change: "+3.9%",
-      icon: <Users className="h-5 w-5" />,
-      color: "purple"
+  // Generate sample engagement data
+  const generateEngagementData = () => {
+    const data = [];
+    for (let i = 29; i >= 0; i--) {
+      const date = subDays(new Date(), i);
+      data.push({
+        timestamp: date.toISOString(),
+        properties: Math.floor(Math.random() * 200) + 100,
+      });
     }
-  ];
-
-  const contentEngagement = [
-    { 
-      title: "VR Property Tour - Modern Villa", 
-      views: 2456, 
-      duration: "6m 45s", 
-      engagement: 94,
-      shares: 45,
-      likes: 123
-    },
-    { 
-      title: "3D Architecture Showcase", 
-      views: 1890, 
-      duration: "5m 12s", 
-      engagement: 87,
-      shares: 32,
-      likes: 89
-    },
-    { 
-      title: "Interior Design Gallery", 
-      views: 1567, 
-      duration: "4m 38s", 
-      engagement: 82,
-      shares: 28,
-      likes: 76
-    },
-    { 
-      title: "VR Training Demo", 
-      views: 1234, 
-      duration: "7m 23s", 
-      engagement: 91,
-      shares: 38,
-      likes: 98
-    }
-  ];
-
-  const userBehavior = [
-    { action: "Page Views", count: 45678 },
-    { action: "Video Plays", count: 8934 },
-    { action: "Form Submissions", count: 1234 },
-    { action: "Downloads", count: 567 },
-    { action: "Social Shares", count: 234 },
-    { action: "Comments", count: 89 }
-  ];
-
-  const deviceEngagement = [
-    { device: "Desktop", sessions: 12456, avgDuration: "5m 45s", bounceRate: 28.3 },
-    { device: "Mobile", sessions: 8734, avgDuration: "3m 12s", bounceRate: 38.7 },
-    { device: "Tablet", sessions: 2345, avgDuration: "4m 23s", bounceRate: 31.2 }
-  ];
-
-  const getColorClasses = (color: string) => {
-    switch (color) {
-      case "blue": return "bg-blue-100 text-blue-600";
-      case "green": return "bg-green-100 text-green-600";
-      case "red": return "bg-red-100 text-red-600";
-      case "purple": return "bg-purple-100 text-purple-600";
-      default: return "bg-gray-100 text-gray-600";
-    }
+    return data;
   };
+
+  const engagementData = generateEngagementData();
+  
+  // User behavior metrics
+  const userBehavior = [
+    { metric: "Average Session Duration", value: "4m 32s", change: "+15%", trend: "up" },
+    { metric: "Pages Per Session", value: "3.8", change: "+8%", trend: "up" },
+    { metric: "Bounce Rate", value: "28.5%", change: "-12%", trend: "up" },
+    { metric: "Return Visitor Rate", value: "42.3%", change: "+5%", trend: "up" },
+  ];
+
+  // Top content engagement
+  const topContent = [
+    { page: "Virtual Tour Gallery", views: 2456, engagement: 89, duration: "5:23" },
+    { page: "Service Booking", views: 1890, engagement: 76, duration: "3:45" },
+    { page: "Property Listings", views: 1634, engagement: 82, duration: "4:12" },
+    { page: "About Our Technology", views: 1234, engagement: 71, duration: "2:58" },
+    { page: "Client Testimonials", views: 987, engagement: 68, duration: "2:34" },
+  ];
+
+  // User journey stages
+  const userJourney = [
+    { stage: "Awareness", users: 1250, conversion: 68 },
+    { stage: "Interest", users: 850, conversion: 45 },
+    { stage: "Consideration", users: 380, conversion: 32 },
+    { stage: "Intent", users: 120, conversion: 28 },
+    { stage: "Purchase", users: 34, conversion: 0 },
+  ];
+
+  // Device and source breakdown
+  const trafficSources = [
+    { source: "Organic Search", users: 2340, percentage: 45, change: "+12%" },
+    { source: "Direct", users: 1560, percentage: 30, change: "+8%" },
+    { source: "Social Media", users: 780, percentage: 15, change: "+25%" },
+    { source: "Referrals", users: 520, percentage: 10, change: "+15%" },
+  ];
 
   return (
     <div className="space-y-6">
-      {/* Engagement Metrics */}
+      {/* Engagement Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {engagementMetrics.map((metric, index) => (
+        {userBehavior.map((item, index) => (
           <Card key={index}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-bright-gray">{metric.title}</p>
-                  <p className="text-2xl font-bold text-bright-black">{metric.value}</p>
+                  <p className="text-sm font-medium text-bright-gray">{item.metric}</p>
+                  <p className="text-2xl font-bold text-bright-black">{item.value}</p>
                 </div>
-                <div className={`p-2 rounded-lg ${getColorClasses(metric.color)}`}>
-                  {metric.icon}
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <Activity className="h-6 w-6 text-blue-600" />
                 </div>
               </div>
-              <div className="mt-3 text-sm">
-                <Badge className={metric.change.startsWith('+') && metric.color !== 'red' || metric.change.startsWith('-') && metric.color === 'red' 
-                  ? "bg-green-100 text-green-800" 
-                  : "bg-red-100 text-red-800"
-                }>
-                  {metric.change} vs last month
-                </Badge>
+              <div className="flex items-center mt-2 text-sm">
+                {item.trend === "up" ? (
+                  <TrendingUp className="h-4 w-4 text-green-600 mr-1" />
+                ) : (
+                  <TrendingDown className="h-4 w-4 text-red-600 mr-1" />
+                )}
+                <span className={item.trend === "up" ? "text-green-600" : "text-red-600"}>
+                  {item.change}
+                </span>
+                <span className="text-bright-gray ml-1">vs last month</span>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {/* Engagement Charts */}
+      {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* User Engagement Trend */}
         <Card>
           <CardHeader>
-            <CardTitle>User Engagement Trend</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="h-5 w-5 text-blue-600" />
+              Daily Active Users
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <AnalyticsChart 
-              data={[]}
-              dataKey="date"
-              valueKey="engagement"
-              title=""
+            <AnalyticsChart
+              data={engagementData}
+              dataKey="timestamp"
+              valueKey="properties"
+              title="Daily Active Users"
               type="line"
-              color="#8B5CF6"
+              color="#3B82F6"
+              height={300}
             />
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Session Duration by Hour</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <AnalyticsChart 
-              data={[]}
-              dataKey="hour"
-              valueKey="duration"
-              title=""
-              type="bar"
-              color="#10B981"
-            />
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Content Performance */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Star className="h-5 w-5" />
-            Top Performing Content
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {contentEngagement.map((content, index) => (
-              <div key={index} className="p-4 border rounded-lg hover:bg-gray-50">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-medium text-bright-black">{content.title}</h3>
-                  <Badge className="bg-bright-yellow text-bright-black">
-                    {content.engagement}% engagement
-                  </Badge>
-                </div>
-                
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Eye className="h-4 w-4 text-bright-gray" />
-                    <span className="text-bright-gray">Views:</span>
-                    <span className="font-medium text-bright-black">{content.views.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-bright-gray" />
-                    <span className="text-bright-gray">Duration:</span>
-                    <span className="font-medium text-bright-black">{content.duration}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Share className="h-4 w-4 text-bright-gray" />
-                    <span className="text-bright-gray">Shares:</span>
-                    <span className="font-medium text-bright-black">{content.shares}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Heart className="h-4 w-4 text-bright-gray" />
-                    <span className="text-bright-gray">Likes:</span>
-                    <span className="font-medium text-bright-black">{content.likes}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Play className="h-4 w-4 text-bright-gray" />
-                    <span className="text-bright-gray">Completion:</span>
-                    <span className="font-medium text-bright-black">{content.engagement}%</span>
-                  </div>
-                </div>
-                
-                <div className="mt-3">
-                  <Progress value={content.engagement} className="h-2" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* User Behavior & Device Analytics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* User Journey Funnel */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <MousePointer className="h-5 w-5" />
-              User Actions
+              <Target className="h-5 w-5 text-purple-600" />
+              User Journey Funnel
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {userBehavior.map((behavior, index) => (
-                <div key={index} className="flex items-center justify-between">
-                  <span className="text-bright-gray">{behavior.action}</span>
-                  <div className="flex items-center gap-3">
-                    <div className="w-24 bg-gray-200 rounded-full h-2">
+              {userJourney.map((stage, index) => {
+                const width = (stage.users / userJourney[0].users) * 100;
+                return (
+                  <div key={index} className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium text-bright-black">{stage.stage}</span>
+                      <div className="text-right">
+                        <div className="text-sm font-medium">{stage.users.toLocaleString()} users</div>
+                        {index < userJourney.length - 1 && (
+                          <Badge className="bg-blue-100 text-blue-800">
+                            {stage.conversion}% convert
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-6 flex items-center">
                       <div 
-                        className="bg-bright-yellow h-2 rounded-full" 
-                        style={{ width: `${(behavior.count / Math.max(...userBehavior.map(b => b.count))) * 100}%` }}
-                      />
+                        className="h-6 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center"
+                        style={{ width: `${width}%` }}
+                      >
+                        <span className="text-white text-xs font-medium px-2">
+                          {Math.round(width)}%
+                        </span>
+                      </div>
                     </div>
-                    <span className="font-medium text-bright-black w-16 text-right">
-                      {behavior.count.toLocaleString()}
-                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Content Performance and Traffic Sources */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Top Content Performance */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Eye className="h-5 w-5 text-green-600" />
+              Top Content Performance
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {topContent.map((item, index) => (
+                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div className="flex-1">
+                    <div className="font-medium text-bright-black">{item.page}</div>
+                    <div className="text-sm text-bright-gray flex items-center gap-4">
+                      <span className="flex items-center gap-1">
+                        <Eye className="h-3 w-3" />
+                        {item.views.toLocaleString()} views
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        {item.duration}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-medium text-bright-black">{item.engagement}%</div>
+                    <div className="text-xs text-bright-gray">engagement</div>
                   </div>
                 </div>
               ))}
@@ -263,31 +195,34 @@ const UserEngagement = ({ events }: UserEngagementProps) => {
           </CardContent>
         </Card>
 
+        {/* Traffic Sources */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Users className="h-5 w-5" />
-              Device Engagement
+              <MousePointer className="h-5 w-5 text-orange-600" />
+              Traffic Sources
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {deviceEngagement.map((device, index) => (
-                <div key={index} className="p-3 border rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-bright-black">{device.device}</h4>
-                    <Badge variant="outline">{device.sessions.toLocaleString()} sessions</Badge>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="text-bright-gray">Avg. Duration:</span>
-                      <div className="font-medium text-bright-black">{device.avgDuration}</div>
-                    </div>
-                    <div>
-                      <span className="text-bright-gray">Bounce Rate:</span>
-                      <div className="font-medium text-bright-black">{device.bounceRate}%</div>
+              {trafficSources.map((source, index) => (
+                <div key={index} className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-bright-black">{source.source}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-bright-gray">{source.users.toLocaleString()}</span>
+                      <Badge className="bg-green-100 text-green-800">
+                        {source.change}
+                      </Badge>
                     </div>
                   </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div 
+                      className="h-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500"
+                      style={{ width: `${source.percentage}%` }}
+                    />
+                  </div>
+                  <div className="text-xs text-bright-gray">{source.percentage}% of total traffic</div>
                 </div>
               ))}
             </div>
@@ -295,31 +230,34 @@ const UserEngagement = ({ events }: UserEngagementProps) => {
         </Card>
       </div>
 
-      {/* Real-time Engagement */}
+      {/* Real-time Engagement Actions */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Activity className="h-5 w-5" />
-            Real-time User Activity
-            <Badge className="bg-green-100 text-green-800 animate-pulse">LIVE</Badge>
+            <Activity className="h-5 w-5 text-bright-yellow" />
+            Real-time User Actions
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-bright-black mb-1">47</div>
-              <div className="text-sm text-bright-gray">Active Users</div>
-              <div className="text-xs text-green-600 mt-1">+3 in last 5 min</div>
+              <div className="text-3xl font-bold text-bright-black mb-2">23</div>
+              <div className="text-sm text-bright-gray">Users online now</div>
+              <Badge className="bg-green-100 text-green-800 animate-pulse mt-2">LIVE</Badge>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-bright-black mb-1">12</div>
-              <div className="text-sm text-bright-gray">Live Sessions</div>
-              <div className="text-xs text-blue-600 mt-1">Avg. 4m 23s</div>
+              <div className="text-3xl font-bold text-bright-black mb-2">7</div>
+              <div className="text-sm text-bright-gray">Active virtual tours</div>
+              <Button variant="outline" size="sm" className="mt-2">
+                View Live Tours
+              </Button>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-bright-black mb-1">3</div>
-              <div className="text-sm text-bright-gray">Virtual Tours</div>
-              <div className="text-xs text-purple-600 mt-1">2 scheduled</div>
+              <div className="text-3xl font-bold text-bright-black mb-2">3</div>
+              <div className="text-sm text-bright-gray">Forms being filled</div>
+              <Button variant="outline" size="sm" className="mt-2">
+                Monitor Activity
+              </Button>
             </div>
           </div>
         </CardContent>

@@ -331,6 +331,8 @@ export const insertBusinessMetricSchema = createInsertSchema(businessMetrics).om
   createdAt: true,
 });
 
+
+
 // Types
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;

@@ -436,28 +436,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Analytics routes
-  app.get("/api/analytics/events", async (req, res) => {
-    try {
-      const { timeRange } = req.query;
-      const events = await storage.getAnalyticsEvents(timeRange ? String(timeRange) : undefined);
-      res.json(events);
-    } catch (error) {
-      console.error("Error fetching analytics events:", error);
-      res.status(500).json({ message: "Failed to fetch analytics events" });
-    }
-  });
 
-  app.get("/api/analytics/metrics", async (req, res) => {
-    try {
-      const { timeRange } = req.query;
-      const metrics = await storage.getBusinessMetrics(timeRange ? String(timeRange) : undefined);
-      res.json(metrics);
-    } catch (error) {
-      console.error("Error fetching business metrics:", error);
-      res.status(500).json({ message: "Failed to fetch business metrics" });
-    }
-  });
 
   // Admin routes
   app.get("/api/admin/stats", async (req, res) => {
@@ -485,6 +464,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching admin stats:", error);
       res.status(500).json({ message: "Failed to fetch admin stats" });
+    }
+  });
+
+  // Analytics routes
+  app.get("/api/analytics/metrics", async (req, res) => {
+    try {
+      const timeRange = req.query.timeRange as string || "30d";
+      const metrics = await storage.getBusinessMetrics(timeRange);
+      res.json(metrics);
+    } catch (error) {
+      console.error("Error fetching business metrics:", error);
+      res.status(500).json({ message: "Failed to fetch business metrics" });
+    }
+  });
+
+  app.get("/api/analytics/events", async (req, res) => {
+    try {
+      const timeRange = req.query.timeRange as string || "30d";
+      const events = await storage.getAnalyticsEvents(timeRange);
+      res.json(events);
+    } catch (error) {
+      console.error("Error fetching analytics events:", error);
+      res.status(500).json({ message: "Failed to fetch analytics events" });
+    }
+  });
+
+  app.get("/api/analytics/realtime", async (req, res) => {
+    try {
+      const realtimeData = await storage.getRealTimeAnalytics();
+      res.json(realtimeData);
+    } catch (error) {
+      console.error("Error fetching real-time analytics:", error);
+      res.status(500).json({ message: "Failed to fetch real-time analytics" });
+    }
+  });
+
+  app.post("/api/analytics/events", async (req, res) => {
+    try {
+      const eventData = req.body;
+      const event = await storage.createAnalyticsEvent(eventData);
+      res.status(201).json(event);
+    } catch (error) {
+      console.error("Error creating analytics event:", error);
+      res.status(500).json({ message: "Failed to create analytics event" });
     }
   });
 
