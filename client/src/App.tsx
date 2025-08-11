@@ -102,8 +102,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <ConversioBot />
-        <ConversioBotFallback />
+        {/* ConversioBot temporarily disabled for debugging */}
+        {/* <ConversioBot />
+        <ConversioBotFallback /> */}
         <Router />
       </TooltipProvider>
     </QueryClientProvider>
