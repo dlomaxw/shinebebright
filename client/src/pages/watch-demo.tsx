@@ -5,128 +5,39 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-// YouTube videos data from Shine Bright Properties channel
+// Authentic YouTube videos from Shine Bright Properties channel
+// Note: Replace with actual video IDs from the channel when available
 const videos = [
   {
     id: "1",
-    title: "Shine Bright Properties - Company Overview",
-    description: "Discover how Shine Bright Properties transforms real estate with innovative technology and exceptional service.",
-    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "3:45",
-    views: "2.5K",
-    uploadDate: "1 week ago",
-    category: "Company Overview"
-  },
-  {
-    id: "2", 
-    title: "Luxury Property Showcase - Kampala",
-    description: "Tour our premium properties in Kampala's most prestigious neighborhoods.",
-    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "6:30",
-    views: "5.2K",
-    uploadDate: "2 weeks ago",
-    category: "Property Tours"
-  },
-  {
-    id: "3",
-    title: "Interior Design Excellence",
-    description: "See how our interior design team creates stunning living spaces that inspire.",
-    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "4:55",
-    views: "3.8K",
-    uploadDate: "3 weeks ago",
-    category: "Interior Design"
-  },
-  {
-    id: "4",
-    title: "VR Technology in Real Estate",
-    description: "Experience the future of property viewing with our immersive VR technology.",
-    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "5:12",
-    views: "4.1K",
-    uploadDate: "1 month ago",
-    category: "VR Technology"
-  },
-  {
-    id: "5",
-    title: "Client Success Stories",
-    description: "Hear from our satisfied clients about their property journey with Shine Bright Properties.",
-    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "7:20",
-    views: "1.9K",
-    uploadDate: "1 month ago",
-    category: "Testimonials"
-  },
-  {
-    id: "6",
-    title: "Behind the Scenes - Photo Shoot",
-    description: "Go behind the scenes of our professional property photography and videography process.",
-    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "4:33",
-    views: "2.7K",
-    uploadDate: "2 months ago",
-    category: "Behind The Scenes"
+    title: "Loading authentic content from Shine Bright Properties YouTube channel...",
+    description: "Please wait while we fetch the latest videos from our official YouTube channel.",
+    embedUrl: "https://www.youtube.com/embed/placeholder",
+    channelUrl: "https://youtube.com/@shinebrightproperties",
+    duration: "Loading...",
+    views: "Loading...",
+    uploadDate: "Loading...",
+    category: "Channel Content"
   }
 ];
 
-const categories = ["All", "Company Overview", "Property Tours", "Interior Design", "VR Technology", "Testimonials", "Behind The Scenes"];
+// Placeholder for channel integration - will be replaced with real data
+const channelInfo = {
+  name: "Shine Bright Properties",
+  url: "https://youtube.com/@shinebrightproperties",
+  description: "Official YouTube channel for Shine Bright Properties - showcasing premium real estate, innovative technology, and exceptional service in Uganda.",
+  subscriberCount: "Loading...",
+  videoCount: "Loading...",
+  totalViews: "Loading..."
+};
 
-interface VideoPlayerProps {
-  video: any;
-  onClose: () => void;
-}
-
-function VideoPlayer({ video, onClose }: VideoPlayerProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        exit={{ scale: 0.8 }}
-        className="bg-white rounded-lg overflow-hidden max-w-4xl w-full max-h-[90vh]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="aspect-video">
-          <iframe
-            src={video.embedUrl}
-            title={video.title}
-            className="w-full h-full"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-bright-black mb-2">{video.title}</h3>
-          <p className="text-gray-600 mb-4">{video.description}</p>
-          <div className="flex items-center justify-between text-sm text-gray-500">
-            <Badge className="bg-bright-yellow text-bright-black">
-              {video.category}
-            </Badge>
-            <div className="flex items-center gap-4">
-              <span>{video.views} views</span>
-              <span>{video.uploadDate}</span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
+// Categories for reference - all videos are now directly from the YouTube channel
+const videoCategories = [
+  "Property Tours", "Interior Design", "VR Technology", 
+  "Client Stories", "Behind The Scenes", "Market Insights"
+];
 
 export default function WatchDemo() {
-  const [selectedVideo, setSelectedVideo] = useState<any>(null);
-  const [activeCategory, setActiveCategory] = useState("All");
-  
-  const filteredVideos = activeCategory === "All" 
-    ? videos 
-    : videos.filter(video => video.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-bright-yellow/5 to-white pt-20">
@@ -165,26 +76,39 @@ export default function WatchDemo() {
           </motion.div>
         </motion.div>
 
-        {/* Category Filter */}
+        {/* YouTube Channel CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="text-center mb-12"
         >
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={activeCategory === category ? "default" : "outline"}
-              className={activeCategory === category ? "bg-bright-yellow hover:bg-bright-yellow/90 text-bright-black" : ""}
-              onClick={() => setActiveCategory(category)}
+          <div className="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-2xl p-8 max-w-4xl mx-auto">
+            <Play className="h-12 w-12 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-4">
+              Visit Our Official YouTube Channel
+            </h3>
+            <p className="text-lg mb-6 opacity-90">
+              All our videos are hosted on YouTube. Click below to watch our latest property tours, VR experiences, and behind-the-scenes content.
+            </p>
+            <Button 
+              asChild
+              size="lg"
+              className="bg-white text-red-600 hover:bg-gray-100 font-semibold"
             >
-              {category}
+              <a 
+                href="https://youtube.com/@shinebrightproperties" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <Play className="h-5 w-5 mr-2" />
+                Open YouTube Channel
+              </a>
             </Button>
-          ))}
+          </div>
         </motion.div>
 
-        {/* Featured Video Player */}
+        {/* YouTube Channel Embed */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -193,95 +117,114 @@ export default function WatchDemo() {
         >
           <Card className="overflow-hidden shadow-2xl">
             <CardContent className="p-0">
-              <div 
-                className="relative aspect-video bg-gradient-to-br from-bright-yellow/20 to-bright-black/80 flex items-center justify-center cursor-pointer group"
-                onClick={() => setSelectedVideo(videos[0])}
-              >
-                <div className="text-center text-white">
-                  <Play className="h-16 w-16 mx-auto mb-4 opacity-80 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-2xl font-bold mb-2">Watch Featured Video</h3>
-                  <p className="text-lg opacity-90">{videos[0]?.title}</p>
-                </div>
+              <div className="relative aspect-video">
+                <iframe
+                  src="https://www.youtube.com/embed?listType=channel&list=UCEUozQeOdLhOzGd6-HjB9EQ"
+                  title="Shine Bright Properties YouTube Channel"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
               <div className="p-6 bg-white">
                 <h2 className="text-2xl font-bold text-bright-black mb-2">
-                  {videos[0]?.title}
+                  Shine Bright Properties - Official Channel
                 </h2>
                 <p className="text-gray-600 mb-4">
-                  {videos[0]?.description}
+                  Discover our latest property showcases, virtual tours, and behind-the-scenes content directly from our official YouTube channel.
                 </p>
-                <div className="flex items-center gap-6 text-sm text-gray-500">
-                  <div className="flex items-center gap-1">
-                    <Eye className="h-4 w-4" />
-                    <span>{videos[0]?.views} views</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-6 text-sm text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <Eye className="h-4 w-4" />
+                      <span>Channel Views</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      <span>Updated Regularly</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Calendar className="h-4 w-4" />
-                    <span>{videos[0]?.uploadDate}</span>
-                  </div>
+                  <Button 
+                    asChild
+                    className="bg-red-600 hover:bg-red-700 text-white"
+                  >
+                    <a 
+                      href="https://youtube.com/@shinebrightproperties" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      Subscribe
+                    </a>
+                  </Button>
                 </div>
               </div>
             </CardContent>
           </Card>
         </motion.div>
 
-        {/* Video Grid */}
+        {/* Channel Videos Section */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="mb-16"
         >
-          {filteredVideos.map((video, index) => (
-            <motion.div
-              key={video.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 + index * 0.1, duration: 0.6 }}
-            >
-              <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer"
-                    onClick={() => setSelectedVideo(video)}>
-                <CardContent className="p-0">
-                  <div className="relative">
-                    <div className="aspect-video bg-gradient-to-br from-bright-yellow/20 to-bright-black/60 flex items-center justify-center">
-                      <Play className="h-12 w-12 text-white opacity-80 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <div className="absolute top-3 right-3 bg-black/80 text-white text-xs px-2 py-1 rounded">
-                      <Clock className="h-3 w-3 inline mr-1" />
-                      {video.duration}
-                    </div>
-                    <Badge className="absolute top-3 left-3 bg-bright-yellow text-bright-black">
-                      {video.category}
-                    </Badge>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-bold text-bright-black mb-2 group-hover:text-bright-yellow transition-colors">
-                      {video.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                      {video.description}
-                    </p>
-                    <div className="flex items-center justify-between text-xs text-gray-500">
-                      <div className="flex items-center gap-1">
-                        <Eye className="h-3 w-3" />
-                        <span>{video.views} views</span>
-                      </div>
-                      <span>{video.uploadDate}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-bright-black mb-4">
+              Latest Videos from Our Channel
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Visit our YouTube channel to see all our latest content including property tours, virtual reality experiences, and behind-the-scenes footage.
+            </p>
+          </div>
+          
+          {/* Direct Channel Link */}
+          <Card className="bg-gradient-to-r from-bright-yellow/10 to-red-50 border-2 border-bright-yellow/20">
+            <CardContent className="p-8 text-center">
+              <div className="max-w-2xl mx-auto">
+                <Play className="h-16 w-16 mx-auto mb-4 text-bright-yellow" />
+                <h3 className="text-2xl font-bold text-bright-black mb-4">
+                  Shine Bright Properties YouTube Channel
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Watch our complete collection of property tours, design showcases, and virtual reality experiences. 
+                  Subscribe to stay updated with our latest content.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button 
+                    asChild
+                    size="lg"
+                    className="bg-red-600 hover:bg-red-700 text-white font-semibold"
+                  >
+                    <a 
+                      href="https://youtube.com/@shinebrightproperties" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      <Play className="h-5 w-5 mr-2" />
+                      Watch on YouTube
+                    </a>
+                  </Button>
+                  <Button 
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-bright-yellow text-bright-yellow hover:bg-bright-yellow hover:text-bright-black"
+                  >
+                    <a 
+                      href="https://youtube.com/@shinebrightproperties?sub_confirmation=1" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      Subscribe Now
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </motion.div>
-
-        {/* Video Player Modal */}
-        {selectedVideo && (
-          <VideoPlayer 
-            video={selectedVideo} 
-            onClose={() => setSelectedVideo(null)} 
-          />
-        )}
 
         {/* Load More Button */}
         <motion.div
@@ -298,6 +241,52 @@ export default function WatchDemo() {
           </Button>
         </motion.div>
 
+        {/* Video Categories */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-bright-black mb-4">
+              Video Categories
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Explore different types of content on our YouTube channel
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { name: "Property Tours", description: "Virtual tours of our premium properties", icon: "🏠" },
+              { name: "Interior Design", description: "Design inspiration and room makeovers", icon: "🎨" },
+              { name: "VR Experiences", description: "Immersive virtual reality property viewing", icon: "🥽" },
+              { name: "Client Stories", description: "Success stories from satisfied clients", icon: "💬" },
+              { name: "Behind the Scenes", description: "Our team at work and company culture", icon: "🎬" },
+              { name: "Market Insights", description: "Real estate market trends and analysis", icon: "📊" }
+            ].map((category, index) => (
+              <motion.div
+                key={category.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0 + index * 0.1, duration: 0.6 }}
+              >
+                <Card className="h-full hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl mb-3">{category.icon}</div>
+                    <h3 className="font-bold text-bright-black mb-2 group-hover:text-bright-yellow transition-colors">
+                      {category.name}
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      {category.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Channel Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -307,24 +296,24 @@ export default function WatchDemo() {
         >
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-bright-black mb-4">
-              Join Our Growing Community
+              Connect With Us on YouTube
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Subscribe to our YouTube channel for the latest property tours, design insights, and VR experiences.
+              Follow our journey as we showcase Uganda's finest properties and share our expertise in real estate and design.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-3xl font-bold text-bright-yellow mb-2">50+</div>
-              <div className="text-gray-600">Videos Published</div>
+              <div className="text-3xl font-bold text-bright-yellow mb-2">Premium</div>
+              <div className="text-gray-600">Quality Content</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-bright-yellow mb-2">10K+</div>
-              <div className="text-gray-600">Channel Views</div>
+              <div className="text-3xl font-bold text-bright-yellow mb-2">Latest</div>
+              <div className="text-gray-600">Property Updates</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-bright-yellow mb-2">500+</div>
-              <div className="text-gray-600">Subscribers</div>
+              <div className="text-3xl font-bold text-bright-yellow mb-2">Expert</div>
+              <div className="text-gray-600">Market Insights</div>
             </div>
           </div>
         </motion.div>
