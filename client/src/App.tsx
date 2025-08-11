@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
+import ConversioBot from "@/components/ConversioBot";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/components/animations/page-transition";
 import { LogoRevealSequence } from "@/components/animations/animated-logo";
@@ -98,6 +99,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
+        <ConversioBot />
         <Router />
       </TooltipProvider>
     </QueryClientProvider>
