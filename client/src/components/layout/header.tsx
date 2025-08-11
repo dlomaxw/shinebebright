@@ -120,7 +120,7 @@ const Header = () => {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80">
+            <SheetContent side="right" className="w-80 bg-white">
               <div className="flex flex-col space-y-4 mt-8">
                 {navigation.map((item) => (
                   <Link
@@ -130,21 +130,21 @@ const Header = () => {
                     className={`text-lg font-medium transition-colors ${
                       isActive(item.href)
                         ? "text-bright-yellow"
-                        : "text-gray-700 hover:text-bright-yellow"
+                        : "text-bright-black hover:text-bright-yellow"
                     }`}
                   >
                     {item.name}
                   </Link>
                 ))}
 
-                <div className="border-t pt-4">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Services</h3>
+                <div className="border-t border-gray-200 pt-4">
+                  <h3 className="text-sm font-semibold text-bright-black mb-3">Services</h3>
                   {services.map((service) => (
                     <Link
                       key={service.name}
                       href={service.href}
                       onClick={() => setIsOpen(false)}
-                      className="block text-gray-700 hover:text-bright-yellow transition-colors py-1"
+                      className="block text-bright-black hover:text-bright-yellow transition-colors py-1 font-medium"
                     >
                       {service.name}
                     </Link>
@@ -157,7 +157,7 @@ const Header = () => {
                   className={`text-lg font-medium transition-colors ${
                     isActive("/admin")
                       ? "text-bright-yellow"
-                      : "text-gray-700 hover:text-bright-yellow"
+                      : "text-bright-black hover:text-bright-yellow"
                   }`}
                 >
                   Admin
