@@ -101,10 +101,9 @@ export function ServiceBookingForm({ initialServiceType, onSuccess }: ServiceBoo
     onSuccess: () => {
       toast({
         title: "Booking Submitted Successfully!",
-        description: "We'll review your request and contact you within 24 hours to discuss your project details and next steps.",
+        description: "We'll review your request and contact you within 24 hours to discuss your project.",
       });
       queryClient.invalidateQueries({ queryKey: ["/api/service-bookings"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/service-bookings/stats"] });
       form.reset();
       setPreferredDate(undefined);
       setAlternateDate(undefined);
