@@ -307,8 +307,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Service booking routes
   app.get("/api/service-bookings", async (req, res) => {
     try {
+      const { status, serviceType } = req.query;
       const bookings = await storage.getServiceBookings();
-      res.json(bookings);
+      
+      // Apply filters if provided
+      let filteredBookings = bookings;
+      if (status && typeof status === "string") {
+        filteredBookings = filteredBookings.filter(booking => booking.status === status);
+      }
+      if (serviceType && typeof serviceType === "string") {
+        filteredBookings = filteredBookings.filter(booking => booking.serviceType === serviceType);
+      }
+      
+      res.json(filteredBookings);
     } catch (error) {
       console.error("Error fetching service bookings:", error);
       res.status(500).json({ message: "Failed to fetch service bookings" });
@@ -332,6 +343,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertServiceBookingSchema.parse(req.body);
       const booking = await storage.createServiceBooking(validatedData);
+      
+      // Log successful booking creation for admin tracking
+      console.log(`🎯 New Service Booking: ${booking.firstName} ${booking.lastName} - ${booking.serviceType} - ${booking.email}`);
+      
       res.status(201).json(booking);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -346,6 +361,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertServiceBookingSchema.partial().parse(req.body);
       const booking = await storage.updateServiceBooking(req.params.id, validatedData);
+      
+      // Log status changes for tracking
+      if (validatedData.status) {
+        console.log(`📋 Booking Status Updated: ${booking.id} -> ${validatedData.status}`);
+      }
+      
       res.json(booking);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -359,10 +380,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.delete("/api/service-bookings/:id", async (req, res) => {
     try {
       await storage.deleteServiceBooking(req.params.id);
+      console.log(`🗑️ Service Booking Deleted: ${req.params.id}`);
       res.status(204).send();
     } catch (error) {
       console.error("Error deleting service booking:", error);
       res.status(500).json({ message: "Failed to delete service booking" });
+    }
+  });
+
+  // Booking statistics endpoint for admin dashboard
+  app.get("/api/service-bookings/stats", async (req, res) => {
+    try {
+      const bookings = await storage.getServiceBookings();
+      
+      const stats = {
+        total: bookings.length,
+        pending: bookings.filter(b => b.status === "pending").length,
+        confirmed: bookings.filter(b => b.status === "confirmed").length,
+        inProgress: bookings.filter(b => b.status === "in-progress").length,
+        completed: bookings.filter(b => b.status === "completed").length,
+        cancelled: bookings.filter(b => b.status === "cancelled").length,
+        byServiceType: {
+          realEstate: bookings.filter(b => b.serviceType === "real-estate").length,
+          architecture: bookings.filter(b => b.serviceType === "architecture").length,
+          interiorDesign: bookings.filter(b => b.serviceType === "interior-design").length,
+          media: bookings.filter(b => b.serviceType === "media").length,
+          training: bookings.filter(b => b.serviceType === "training").length,
+        },
+        recentBookings: bookings
+          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+          .slice(0, 5)
+      };
+      
+      res.json(stats);
+    } catch (error) {
+      console.error("Error fetching booking stats:", error);
+      res.status(500).json({ message: "Failed to fetch booking statistics" });
     }
   });
 

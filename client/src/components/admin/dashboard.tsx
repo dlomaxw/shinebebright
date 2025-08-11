@@ -21,6 +21,7 @@ import { INQUIRY_STATUSES, BOOKING_STATUSES } from "@/lib/constants";
 import type { ContactInquiry, DemoBooking, Project, TeamMember, BlogPost, NewsletterSubscriber, ServiceBooking } from "@shared/schema";
 import { ServiceBookingsTable } from "@/components/admin/service-bookings-table";
 import PropertiesTable from "@/components/admin/properties-table";
+import { BookingStatsDashboard } from "@/components/admin/booking-stats-dashboard";
 
 interface AdminDashboardProps {
   activeSection: string;
@@ -364,6 +365,13 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
   const renderServiceBookings = () => (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-bright-white">Service Bookings</h1>
+      
+      {/* Booking Statistics Dashboard */}
+      <div className="bg-bright-black/50 rounded-lg p-6">
+        <BookingStatsDashboard />
+      </div>
+      
+      {/* Service Bookings Table */}
       <div className="bg-bright-black/50 rounded-lg p-6">
         <ServiceBookingsTable />
       </div>
