@@ -27,38 +27,43 @@ export const propertyImages = {
 
 // Helper function to get local image or fallback to external
 export const getPropertyImage = (imageUrl: string): string => {
+  // Handle null or undefined image URLs
+  if (!imageUrl || imageUrl === 'null' || imageUrl === 'undefined') {
+    return property01; // Default fallback
+  }
+
   // Local asset mappings
-  if (imageUrl.includes('/src/assets/properties/cadenza-facade-01.webp')) {
+  if (imageUrl.includes('/src/assets/properties/cadenza-facade-01.webp') || imageUrl.includes('cadenza-facade-01')) {
     return cadenzaFacade01;
   }
-  if (imageUrl.includes('/src/assets/properties/cadenza-facade-02.webp')) {
+  if (imageUrl.includes('/src/assets/properties/cadenza-facade-02.webp') || imageUrl.includes('cadenza-facade-02')) {
     return cadenzaFacade02;
   }
-  if (imageUrl.includes('/src/assets/properties/cadenza-facade-03.webp')) {
+  if (imageUrl.includes('/src/assets/properties/cadenza-facade-03.webp') || imageUrl.includes('cadenza-facade-03')) {
     return cadenzaFacade03;
   }
-  if (imageUrl.includes('/src/assets/properties/property-01.jpeg')) {
+  if (imageUrl.includes('/src/assets/properties/property-01.jpeg') || imageUrl.includes('property-01')) {
     return property01;
   }
-  if (imageUrl.includes('/src/assets/properties/property-02.jpeg')) {
+  if (imageUrl.includes('/src/assets/properties/property-02.jpeg') || imageUrl.includes('property-02')) {
     return property02;
   }
-  if (imageUrl.includes('/src/assets/properties/property-03.jpg')) {
+  if (imageUrl.includes('/src/assets/properties/property-03.jpg') || imageUrl.includes('property-03')) {
     return property03;
   }
-  if (imageUrl.includes('/src/assets/properties/property-04.jpg')) {
+  if (imageUrl.includes('/src/assets/properties/property-04.jpg') || imageUrl.includes('property-04')) {
     return property04;
   }
-  if (imageUrl.includes('/src/assets/properties/property-05.jpg')) {
+  if (imageUrl.includes('/src/assets/properties/property-05.jpg') || imageUrl.includes('property-05')) {
     return property05;
   }
-  if (imageUrl.includes('/src/assets/properties/property-06.jpg')) {
+  if (imageUrl.includes('/src/assets/properties/property-06.jpg') || imageUrl.includes('property-06')) {
     return property06;
   }
-  if (imageUrl.includes('/src/assets/properties/property-07.jpg')) {
+  if (imageUrl.includes('/src/assets/properties/property-07.jpg') || imageUrl.includes('property-07')) {
     return property07;
   }
-  if (imageUrl.includes('/src/assets/properties/property-08.jpg')) {
+  if (imageUrl.includes('/src/assets/properties/property-08.jpg') || imageUrl.includes('property-08')) {
     return property08;
   }
   
@@ -81,6 +86,49 @@ export const getPropertyImage = (imageUrl: string): string => {
     return fallbackImages[index];
   }
   
+  // For any other broken or invalid images, provide fallback
+  if (imageUrl.includes('http') && !imageUrl.includes('localhost')) {
+    // Cycle through available images for variety
+    const fallbackImages = [property01, property02, property03, property04, property05, property06, property07, property08];
+    const index = Math.abs(imageUrl.split('').reduce((a, b) => a + b.charCodeAt(0), 0)) % fallbackImages.length;
+    return fallbackImages[index];
+  }
+  
   // Return original URL for working external images
   return imageUrl;
+};
+
+// Get multiple images for a property (minimum 4)
+export const getPropertyImages = (propertyTitle: string, existingImages: string[] = []): string[] => {
+  const baseImages = [
+    '/src/assets/properties/property-01.jpeg',
+    '/src/assets/properties/property-02.jpeg', 
+    '/src/assets/properties/property-03.jpg',
+    '/src/assets/properties/property-04.jpg',
+    '/src/assets/properties/property-05.jpg',
+    '/src/assets/properties/property-06.jpg',
+    '/src/assets/properties/property-07.jpg',
+    '/src/assets/properties/property-08.jpg'
+  ];
+
+  // Special handling for Cadenza properties
+  if (propertyTitle.toLowerCase().includes('cadenza')) {
+    return [
+      '/src/assets/properties/cadenza-facade-01.webp',
+      '/src/assets/properties/cadenza-facade-02.webp',
+      '/src/assets/properties/cadenza-facade-03.webp',
+      '/src/assets/properties/property-01.jpeg'
+    ];
+  }
+
+  // Use hash of property title to get consistent image selection
+  const hash = propertyTitle.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+  const startIndex = hash % (baseImages.length - 3); // Ensure we can get 4 consecutive images
+  
+  return [
+    baseImages[startIndex],
+    baseImages[(startIndex + 1) % baseImages.length],
+    baseImages[(startIndex + 2) % baseImages.length], 
+    baseImages[(startIndex + 3) % baseImages.length]
+  ];
 };
