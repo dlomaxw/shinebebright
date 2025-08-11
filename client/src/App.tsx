@@ -6,26 +6,8 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import ConversioBot from "@/components/ConversioBot";
 import ConversioBotFallback from "@/components/ConversioBotFallback";
-
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/components/animations/page-transition";
-
-// Conditional ConversioBot component that excludes admin pages
-function ConversionBotConditional() {
-  const [location] = useLocation();
-  
-  // Don't show ConversioBot on admin pages
-  if (location.startsWith('/admin')) {
-    return null;
-  }
-  
-  return (
-    <>
-      <ConversioBot />
-      <ConversioBotFallback />
-    </>
-  );
-}
 import { LogoRevealSequence } from "@/components/animations/animated-logo";
 
 // Layout components
@@ -53,7 +35,6 @@ import NotFound from "@/pages/not-found";
 import ClientPortal from "@/pages/client-portal";
 import VirtualTours from "@/pages/virtual-tours";
 import Analytics from "@/pages/analytics";
-import WatchDemo from "@/pages/watch-demo";
 
 function Router() {
   const [location] = useLocation();
@@ -84,7 +65,6 @@ function Router() {
               <Route path="/client-portal" component={ClientPortal} />
               <Route path="/virtual-tours" component={VirtualTours} />
               <Route path="/analytics" component={Analytics} />
-              <Route path="/watch-demo" component={WatchDemo} />
               <Route component={NotFound} />
             </Switch>
           </PageTransition>
@@ -122,7 +102,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <ConversionBotConditional />
+        <ConversioBot />
+        <ConversioBotFallback />
         <Router />
       </TooltipProvider>
     </QueryClientProvider>
