@@ -99,9 +99,10 @@ Basic role-based access control with user roles (user, admin). The system includ
 - **Call-to-action integration** throughout site with "Book Service" buttons in header and services pages
 
 ### Contact Information Updates
-- **Phone numbers corrected** to +256 750 421 224 and +256 785 189 100 (Uganda country code) across contact page and footer
+- **Phone numbers corrected** to +256 750 421 224 and +256 785 189 100 (Uganda country code) across contact page, footer, properties page, and WhatsApp links
 - **Interactive Google Maps integration** added to contact page for office location in Kampala
 - **Enhanced contact page layout** with proper service booking call-to-action
+- **ConversioBot chat widget** integrated for visitor engagement and customer support
 
 ### Property Management Features
 - **Multi-source property integration** from properties.shinebebright.com, hk-properties.com, and rfdevelopers.ug
