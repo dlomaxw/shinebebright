@@ -23,6 +23,7 @@ const AdminSidebar = ({ activeSection, onSectionChange }: AdminSidebarProps) => 
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
     { id: "projects", label: "Projects", icon: FolderOpen },
+    { id: "properties", label: "Properties", icon: Settings },
     { id: "team", label: "Team", icon: Users },
     { id: "blog", label: "Blog Posts", icon: FileText },
     { id: "inquiries", label: "Inquiries", icon: MessageSquare },
@@ -68,10 +69,21 @@ const AdminSidebar = ({ activeSection, onSectionChange }: AdminSidebarProps) => 
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-bright-yellow/20">
+        <div className="p-4 border-t border-bright-yellow/20 space-y-2">
           <Button
             variant="ghost"
             className="w-full justify-start text-bright-white/70 hover:text-bright-white hover:bg-red-500/20"
+            onClick={() => {
+              localStorage.removeItem("bright-admin");
+              window.location.href = "/admin/login";
+            }}
+          >
+            <LogOut className="w-4 h-4 mr-3" />
+            Logout
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-bright-white/70 hover:text-bright-white hover:bg-bright-yellow/10"
             asChild
           >
             <Link href="/">
