@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ChevronDown } from "lucide-react";
-import brightLogo from "@/assets/bright-logo.svg";
+import brightLogo from "@/assets/bright-logo-correct.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -43,7 +43,7 @@ const Header = () => {
             <img 
               src={brightLogo} 
               alt="Bright Properties" 
-              className="h-8 w-auto"
+              className="h-10 w-auto"
             />
           </Link>
 
