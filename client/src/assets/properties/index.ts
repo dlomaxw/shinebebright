@@ -2,6 +2,9 @@
 import cadenzaFacade01 from './cadenza-facade-01.webp';
 import cadenzaFacade02 from './cadenza-facade-02.webp';
 import cadenzaFacade03 from './cadenza-facade-03.webp';
+import building01 from './building-01.webp';
+import building02 from './building-02.webp';
+import building03 from './building-03.webp';
 import property01 from './property-01.jpeg';
 import property02 from './property-02.jpeg';
 import property03 from './property-03.jpg';
@@ -15,6 +18,9 @@ export const propertyImages = {
   cadenzaFacade01,
   cadenzaFacade02,
   cadenzaFacade03,
+  building01,
+  building02,
+  building03,
   property01,
   property02,
   property03,
@@ -65,6 +71,15 @@ export const getPropertyImage = (imageUrl: string): string => {
   }
   if (imageUrl.includes('/src/assets/properties/property-08.jpg') || imageUrl.includes('property-08')) {
     return property08;
+  }
+  if (imageUrl.includes('/src/assets/properties/building-01.webp') || imageUrl.includes('building-01')) {
+    return building01;
+  }
+  if (imageUrl.includes('/src/assets/properties/building-02.webp') || imageUrl.includes('building-02')) {
+    return building02;
+  }
+  if (imageUrl.includes('/src/assets/properties/building-03.webp') || imageUrl.includes('building-03')) {
+    return building03;
   }
   
   // Legacy mappings
