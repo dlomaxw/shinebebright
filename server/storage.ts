@@ -389,6 +389,11 @@ export class DatabaseStorage implements IStorage {
     return property;
   }
 
+  async getProperty(id: string): Promise<Property | undefined> {
+    const [property] = await db.select().from(properties).where(eq(properties.id, id));
+    return property;
+  }
+
   async createProperty(insertProperty: InsertProperty): Promise<Property> {
     const [property] = await db.insert(properties).values(insertProperty).returning();
     return property;
