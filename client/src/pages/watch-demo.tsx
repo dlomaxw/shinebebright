@@ -38,7 +38,6 @@ const videoCategories = [
 ];
 
 export default function WatchDemo() {
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-bright-yellow/5 to-white pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -119,7 +118,7 @@ export default function WatchDemo() {
             <CardContent className="p-0">
               <div className="relative aspect-video">
                 <iframe
-                  src="https://www.youtube.com/embed?listType=channel&list=UCEUozQeOdLhOzGd6-HjB9EQ"
+                  src="https://www.youtube.com/embed/videoseries?list=UUShinebrightproperties"
                   title="Shine Bright Properties YouTube Channel"
                   className="w-full h-full"
                   frameBorder="0"
