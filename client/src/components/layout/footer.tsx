@@ -36,7 +36,7 @@ const Footer = () => {
               <img 
                 src={brightLogo} 
                 alt="Bright Properties" 
-                className="h-10 w-auto"
+                className="h-12 w-auto"
               />
             </div>
             <p className="text-gray-300 mb-6">
