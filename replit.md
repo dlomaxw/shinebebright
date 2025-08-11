@@ -74,7 +74,7 @@ Basic role-based access control with user roles (user, admin). The system includ
 - **Uppy**: File upload library with multiple provider support
 - **AWS S3**: Alternative file storage option (via Uppy integration)
 
-## Recent Changes (August 2025)
+## Recent Changes (January 2025)
 
 ### Logo Integration and Branding
 - **Bright Properties logo integration** throughout website including header navigation and footer
@@ -123,23 +123,11 @@ Basic role-based access control with user roles (user, admin). The system includ
 - **Interactive logo hover effects** in the header with spring animations
 - **First-visit logo reveal sequence** with localStorage tracking for returning users
 
-### Admin Dashboard System (August 2025)
-- **Complete admin authentication system** with secure login credentials (username: admin, password: bright2024)
-- **Properties management interface** with comprehensive table view, search, filtering, and bulk operations
-- **Local property images management** with assets stored in `client/src/assets/properties/`
-- **Fixed broken property image display** by implementing local image fallbacks and helper functions
-- **Admin routes protection** with localStorage-based authentication and automatic redirects
-- **Enhanced admin sidebar** with Properties section, logout functionality, and proper navigation
-- **Real-time property data management** with ability to edit, delete, and update property listings
-- **Image optimization system** using local assets for reliable property image display
-
 ### Technical Improvements
-- **Enhanced admin dashboard** with service booking management table and new properties management
+- **Enhanced admin dashboard** with service booking management table
 - **Professional UI components** with shadcn/ui integration
 - **Yellow/black branding** maintained throughout all new features
 - **Mobile-responsive design** across all new components
 - **Framer Motion integration** for smooth animations and transitions
-- **Local asset management** for property images to improve reliability and loading performance
-- **Admin authentication flow** with protected routes and session management
 
-The application is designed to be deployment-ready on Replit with proper environment variable configuration for the database connection and complete admin functionality for property management.
+The application is designed to be deployment-ready on Replit with proper environment variable configuration for the database connection.
