@@ -2,36 +2,85 @@
 import cadenzaFacade01 from './cadenza-facade-01.webp';
 import cadenzaFacade02 from './cadenza-facade-02.webp';
 import cadenzaFacade03 from './cadenza-facade-03.webp';
-import luxuryVilla01 from './luxury-villa-01.jpeg';
-import luxuryVilla02 from './luxury-villa-02.jpeg';
+import property01 from './property-01.jpeg';
+import property02 from './property-02.jpeg';
+import property03 from './property-03.jpg';
+import property04 from './property-04.jpg';
+import property05 from './property-05.jpg';
+import property06 from './property-06.jpg';
+import property07 from './property-07.jpg';
+import property08 from './property-08.jpg';
 
 export const propertyImages = {
   cadenzaFacade01,
   cadenzaFacade02,
   cadenzaFacade03,
-  luxuryVilla01,
-  luxuryVilla02,
+  property01,
+  property02,
+  property03,
+  property04,
+  property05,
+  property06,
+  property07,
+  property08,
 };
 
 // Helper function to get local image or fallback to external
 export const getPropertyImage = (imageUrl: string): string => {
-  // Check if it's a local asset reference
-  if (imageUrl.includes('@assets/CAD_EXT-FACADE-CAM01') || imageUrl.includes('cadenza-facade-01')) {
+  // Local asset mappings
+  if (imageUrl.includes('/src/assets/properties/cadenza-facade-01.webp')) {
     return cadenzaFacade01;
   }
-  if (imageUrl.includes('@assets/CAD_EXT-FACADE-CAM02-N') || imageUrl.includes('cadenza-facade-03')) {
-    return cadenzaFacade03;
-  }
-  if (imageUrl.includes('@assets/CAD_EXT-FACADE-CAM02') || imageUrl.includes('cadenza-facade-02')) {
+  if (imageUrl.includes('/src/assets/properties/cadenza-facade-02.webp')) {
     return cadenzaFacade02;
   }
-  if (imageUrl.includes('luxury-villa-01')) {
-    return luxuryVilla01;
+  if (imageUrl.includes('/src/assets/properties/cadenza-facade-03.webp')) {
+    return cadenzaFacade03;
   }
-  if (imageUrl.includes('luxury-villa-02')) {
-    return luxuryVilla02;
+  if (imageUrl.includes('/src/assets/properties/property-01.jpeg')) {
+    return property01;
+  }
+  if (imageUrl.includes('/src/assets/properties/property-02.jpeg')) {
+    return property02;
+  }
+  if (imageUrl.includes('/src/assets/properties/property-03.jpg')) {
+    return property03;
+  }
+  if (imageUrl.includes('/src/assets/properties/property-04.jpg')) {
+    return property04;
+  }
+  if (imageUrl.includes('/src/assets/properties/property-05.jpg')) {
+    return property05;
+  }
+  if (imageUrl.includes('/src/assets/properties/property-06.jpg')) {
+    return property06;
+  }
+  if (imageUrl.includes('/src/assets/properties/property-07.jpg')) {
+    return property07;
+  }
+  if (imageUrl.includes('/src/assets/properties/property-08.jpg')) {
+    return property08;
   }
   
-  // Return original URL for external images
+  // Legacy mappings
+  if (imageUrl.includes('@assets/CAD_EXT-FACADE-CAM01')) {
+    return cadenzaFacade01;
+  }
+  if (imageUrl.includes('@assets/CAD_EXT-FACADE-CAM02-N')) {
+    return cadenzaFacade03;
+  }
+  if (imageUrl.includes('@assets/CAD_EXT-FACADE-CAM02')) {
+    return cadenzaFacade02;
+  }
+  
+  // For broken external images, use fallback based on property type
+  if (imageUrl.includes('shinebebright.com') || imageUrl.includes('hkproperties.com') || imageUrl.includes('rfdevelopers.ug')) {
+    // Cycle through available images for variety
+    const fallbackImages = [property01, property02, property03, property04, property05, property06, property07, property08];
+    const index = Math.abs(imageUrl.split('').reduce((a, b) => a + b.charCodeAt(0), 0)) % fallbackImages.length;
+    return fallbackImages[index];
+  }
+  
+  // Return original URL for working external images
   return imageUrl;
 };

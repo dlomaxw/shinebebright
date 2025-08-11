@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import type { Property } from "@shared/schema";
+import { getPropertyImage } from "@/assets/properties";
 
 const Properties = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -318,7 +319,7 @@ interface PropertyCardProps {
 
 const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
   const mainImage = Array.isArray(property.images) && property.images.length > 0 
-    ? property.images[0] 
+    ? getPropertyImage(property.images[0])
     : null;
 
 
@@ -459,7 +460,7 @@ interface PropertyDetailsDialogProps {
 const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = Array.isArray(property.images) && property.images.length > 0 
-    ? property.images 
+    ? property.images.map(img => getPropertyImage(img))
     : ['/api/placeholder/400/300'];
 
   const nextImage = () => {
