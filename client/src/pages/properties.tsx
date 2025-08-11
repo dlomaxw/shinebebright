@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,8 +21,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Home,
-  Building,
-  Eye
+  Building
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import type { Property } from "@shared/schema";
@@ -320,14 +318,9 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
-  const [, setLocation] = useLocation();
   const mainImage = Array.isArray(property.images) && property.images.length > 0 
     ? getPropertyImage(property.images[0])
     : null;
-
-  const handleViewDetails = () => {
-    setLocation(`/properties/${property.id}`);
-  };
 
 
 
@@ -447,14 +440,12 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
           </div>
         )}
 
-        <Button 
-          onClick={handleViewDetails}
-          className="w-full bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold"
-        >
-          <Eye className="w-4 h-4 mr-2" />
-          View Details
-          <ArrowRight className="w-4 h-4 ml-2" />
-        </Button>
+        <PropertyDetailsDialog property={property}>
+          <Button className="w-full bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
+            View Details
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
+        </PropertyDetailsDialog>
       </CardContent>
     </Card>
   );

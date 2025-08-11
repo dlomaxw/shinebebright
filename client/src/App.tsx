@@ -43,7 +43,6 @@ import Media from "@/pages/media";
 import Training from "@/pages/training";
 import Portfolio from "@/pages/portfolio";
 import Properties from "@/pages/properties";
-import PropertyDetails from "@/pages/property-details";
 import Contact from "@/pages/contact";
 import Admin from "@/pages/admin";
 import AdminLogin from "@/pages/admin-login";
@@ -76,7 +75,6 @@ function Router() {
               <Route path="/services/training" component={Training} />
               <Route path="/portfolio" component={Portfolio} />
               <Route path="/properties" component={Properties} />
-              <Route path="/properties/:id" component={PropertyDetails} />
               <Route path="/contact" component={Contact} />
               <Route path="/admin" component={Admin} />
               <Route path="/admin/login" component={AdminLogin} />
