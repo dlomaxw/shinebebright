@@ -108,6 +108,12 @@ Basic role-based access control with user roles (user, admin). The system includ
 - **Multi-source property integration** from properties.shinebebright.com, hk-properties.com, and rfdevelopers.ug
 - **Property filtering and search capabilities**
 - **HK properties configured** with proper featured flag requirements
+- **Cadenza Residence Integration** - Added comprehensive luxury apartment listings from vaal.co.ug/cadenza/ with:
+  - Main Cadenza Residence property with all amenities and 20+ high-quality images
+  - Individual BHK listings: Studio ($105,000 - Sold Out), 1-Bedroom ($144,000), 2-Bedroom ($267,000)
+  - Complete feature lists including Swimming Pool, Gym, Restaurant, BBQ Area, Kids Play Area, Running Track, Padel Court
+  - Prestigious Nakasero blue zone location details with embassy proximity
+  - All authentic images and pricing from the official VAAL Real Estate source
 
 ### Animation and User Experience Enhancements
 - **Smooth page transition effects** implemented between all sections using framer-motion
