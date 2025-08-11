@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { ServiceBookingForm } from "@/components/forms/service-booking-form";
+import { BookingConfirmation } from "@/components/booking-confirmation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Star, Users, Clock, Award } from "lucide-react";
+import { CheckCircle, Star, Users, Clock, Award, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const serviceFeatures: Record<string, string[]> = {
   "real-estate": [
