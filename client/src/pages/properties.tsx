@@ -362,16 +362,7 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
           )}
         </div>
 
-        <div className="absolute top-4 right-4">
-          <Button
-            size="sm"
-            variant="secondary"
-            className="bg-white/90 text-bright-black hover:bg-white"
-            onClick={() => property.originalUrl && window.open(property.originalUrl, '_blank')}
-          >
-            <ExternalLink className="w-4 h-4" />
-          </Button>
-        </div>
+
       </div>
 
       <CardContent className="p-6">
