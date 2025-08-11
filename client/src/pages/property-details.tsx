@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import type { Property } from "@shared/schema";
 import { cn } from "@/lib/utils";
+import { getPropertyImage } from "@/assets/properties";
 
 export default function PropertyDetails() {
   const { id } = useParams();
@@ -252,7 +253,7 @@ export default function PropertyDetails() {
                       <div className="flex justify-between">
                         <span className="text-bright-gray">Listed:</span>
                         <span className="text-bright-black">
-                          {new Date(property.createdAt).toLocaleDateString()}
+                          {property.createdAt ? new Date(property.createdAt).toLocaleDateString() : 'N/A'}
                         </span>
                       </div>
                       <div className="flex justify-between">
@@ -379,7 +380,7 @@ export default function PropertyDetails() {
                   <div className="flex justify-between text-sm">
                     <span className="text-bright-gray">Days on market:</span>
                     <span className="font-medium">
-                      {Math.floor((Date.now() - new Date(property.createdAt).getTime()) / (1000 * 60 * 60 * 24))}
+                      {property.createdAt ? Math.floor((Date.now() - new Date(property.createdAt).getTime()) / (1000 * 60 * 60 * 24)) : 'N/A'}
                     </span>
                   </div>
                 </div>
@@ -392,7 +393,7 @@ export default function PropertyDetails() {
         <div className="mt-12">
           <PropertyRecommendations
             currentPropertyId={property.id}
-            viewedProperties={viewedProperties}
+            viewedProperties={[property.id]}
           />
         </div>
       </div>
