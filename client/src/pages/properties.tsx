@@ -15,7 +15,6 @@ import {
   Search,
   Phone,
   Mail,
-  ExternalLink,
   Star,
   ArrowRight,
   X,
@@ -472,11 +471,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  const handleExternalLink = () => {
-    if (property.originalUrl) {
-      window.open(property.originalUrl, '_blank');
-    }
-  };
+
 
   return (
     <Dialog>
@@ -485,19 +480,8 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
       </DialogTrigger>
       <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto bg-white">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-bright-black flex items-center justify-between">
+          <DialogTitle className="text-2xl font-bold text-bright-black">
             {property.title}
-            {property.originalUrl && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleExternalLink}
-                className="ml-4"
-              >
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Original Listing
-              </Button>
-            )}
           </DialogTitle>
           <DialogDescription className="text-bright-gray">
             Detailed property information with virtual tour capabilities
