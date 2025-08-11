@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Facebook, Twitter, Linkedin, Instagram, MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import brightLogo from "@/assets/bright-logo.svg";
+import brightLogo from "@/assets/bright-logo-correct.png";
 
 const Footer = () => {
   const services = [
@@ -36,7 +36,7 @@ const Footer = () => {
               <img 
                 src={brightLogo} 
                 alt="Bright Properties" 
-                className="h-8 w-auto filter brightness-0 invert"
+                className="h-10 w-auto"
               />
             </div>
             <p className="text-gray-300 mb-6">
