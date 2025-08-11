@@ -229,8 +229,8 @@ const Properties = () => {
                   <Phone className="w-5 h-5 text-bright-yellow mt-1" />
                   <div>
                     <p className="font-semibold">Phone</p>
-                    <p className="text-gray-300">+250 750 421 224</p>
-                    <p className="text-gray-300">+250 785 189 100</p>
+                    <p className="text-gray-300">+256 750 421 224</p>
+                    <p className="text-gray-300">+256 785 189 100</p>
                     <p className="text-sm text-gray-400">Available 24/7 for consultations</p>
                   </div>
                 </div>
@@ -272,20 +272,20 @@ const Properties = () => {
             <p className="text-gray-300 mb-6">Ready to experience the future of real estate? Get in touch today!</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
-                <a href="tel:+250750421224">
+                <a href="tel:+256750421224">
                   <Phone className="w-5 h-5 mr-2" />
-                  Call +250 750 421 224
+                  Call +256 750 421 224
                 </a>
               </Button>
               <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
-                <a href="tel:+250785189100">
+                <a href="tel:+256785189100">
                   <Phone className="w-5 h-5 mr-2" />
-                  Call +250 785 189 100
+                  Call +256 785 189 100
                 </a>
               </Button>
               <Button asChild className="bg-green-600 hover:bg-green-700 text-white font-semibold">
                 <a 
-                  href="https://wa.me/250750421224?text=Hi! I'm interested in your real estate services. Can you provide more information?"
+                  href="https://wa.me/256750421224?text=Hi! I'm interested in your real estate services. Can you provide more information?"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -728,8 +728,8 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                   <div className="flex items-center text-gray-300">
                     <Phone className="w-4 h-4 mr-2" />
                     <div>
-                      <div>+250 750 421 224</div>
-                      <div>+250 785 189 100</div>
+                      <div>+256 750 421 224</div>
+                      <div>+256 785 189 100</div>
                     </div>
                   </div>
                   <div className="flex items-center text-gray-300">
@@ -754,20 +754,20 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               <p className="text-gray-300 mb-4">Interested in this property? Contact our expert team for more information and to schedule a virtual or physical viewing.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
-                  <a href="tel:+250750421224">
+                  <a href="tel:+256750421224">
                     <Phone className="w-4 h-4 mr-2" />
-                    Call +250 750 421 224
+                    Call +256 750 421 224
                   </a>
                 </Button>
                 <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
-                  <a href="tel:+250785189100">
+                  <a href="tel:+256785189100">
                     <Phone className="w-4 h-4 mr-2" />
-                    Call +250 785 189 100
+                    Call +256 785 189 100
                   </a>
                 </Button>
                 <Button asChild className="bg-green-600 hover:bg-green-700 text-white font-semibold">
                   <a 
-                    href={`https://wa.me/250750421224?text=Hi! I'm interested in ${encodeURIComponent(property.title)} property. Can you provide more information?`}
+                    href={`https://wa.me/256750421224?text=Hi! I'm interested in ${encodeURIComponent(property.title)} property. Can you provide more information?`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -801,7 +801,7 @@ const FloatingWhatsAppButton = () => {
         className="bg-green-600 hover:bg-green-700 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 animate-bounce"
       >
         <a
-          href="https://wa.me/250750421224?text=Hi! I'm interested in your properties. Can you provide more information?"
+          href="https://wa.me/256750421224?text=Hi! I'm interested in your properties. Can you provide more information?"
           target="_blank"
           rel="noopener noreferrer"
           title="Chat on WhatsApp"
