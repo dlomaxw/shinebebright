@@ -320,7 +320,7 @@ interface PropertyCardProps {
 const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
   const mainImage = Array.isArray(property.images) && property.images.length > 0 
     ? property.images[0] 
-    : '/api/placeholder/400/300';
+    : null;
 
 
 
@@ -330,14 +330,24 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
     }`}>
       <div className="relative">
         <div className="aspect-video overflow-hidden">
-          <img 
-            src={mainImage}
-            alt={property.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            onError={(e) => {
-              e.currentTarget.src = '/api/placeholder/400/300';
-            }}
-          />
+          {mainImage ? (
+            <img 
+              src={mainImage}
+              alt={property.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              onError={(e) => {
+                console.warn('Image failed to load:', mainImage);
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+          ) : (
+            <div className="w-full h-full bg-bright-light flex items-center justify-center">
+              <div className="text-center text-bright-gray">
+                <Home className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-sm">No Image Available</p>
+              </div>
+            </div>
+          )}
         </div>
         
         <div className="absolute top-4 left-4 flex gap-2">
