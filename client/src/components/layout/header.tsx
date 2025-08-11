@@ -47,7 +47,7 @@ const Header = () => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <AnimatedLogo size="md" autoPlay={false} />
+              <AnimatedLogo size="md" autoPlay={true} />
             </motion.div>
           </Link>
 
