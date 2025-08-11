@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import HeroCarousel from "@/components/hero-carousel";
 import ServiceCard from "@/components/service-card";
 import ProjectCard from "@/components/project-card";
@@ -61,28 +60,7 @@ const Home = () => {
     },
   ];
 
-  // Load ConversioBot script specifically for home page
-  useEffect(() => {
-    // Check if script is already loaded
-    if (document.getElementById('bot-widget-script-home')) {
-      return;
-    }
-    
-    // Create and inject the ConversioBot script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.id = 'bot-widget-script-home';
-    script.innerHTML = `(function(p,u,s,h){p.botId = "tduSLX";s=u.createElement('script');s.type='text/javascript';s.id="bot-widget-script";s.src='https://app.conversiobot.com/lib/js/gadget.js';s.setAttribute('bid',"tduSLX");h=u.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})(window,document);`;
-    document.head.appendChild(script);
 
-    // Cleanup function to remove script when component unmounts
-    return () => {
-      const existingScript = document.getElementById('bot-widget-script-home');
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
-  }, []);
 
   return (
     <div className="pt-16">
