@@ -1,32 +1,15 @@
+// Backup of working App.tsx structure
 import { Switch, Route, useLocation } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
-import ConversioBot from "@/components/ConversioBot";
-import ConversioBotFallback from "@/components/ConversioBotFallback";
-
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/components/animations/page-transition";
-
-// Conditional ConversioBot component that excludes admin pages
-function ConversionBotConditional() {
-  const [location] = useLocation();
-  
-  // Don't show ConversioBot on admin pages
-  if (location.startsWith('/admin')) {
-    return null;
-  }
-  
-  return (
-    <>
-      <ConversioBot />
-      <ConversioBotFallback />
-    </>
-  );
-}
 import { LogoRevealSequence } from "@/components/animations/animated-logo";
+import ConversioBot from "@/components/ConversioBot";
+import ConversioBotFallback from "@/components/ConversioBotFallback";
 
 // Layout components
 import Header from "@/components/layout/header";
@@ -54,6 +37,23 @@ import ClientPortal from "@/pages/client-portal";
 import VirtualTours from "@/pages/virtual-tours";
 import Analytics from "@/pages/analytics";
 
+// Conditional ConversioBot component that excludes admin pages
+function ConversionBotConditional() {
+  const [location] = useLocation();
+  
+  // Don't show ConversioBot on admin pages
+  if (location.startsWith('/admin')) {
+    return null;
+  }
+  
+  return (
+    <>
+      <ConversioBot />
+      <ConversioBotFallback />
+    </>
+  );
+}
+
 function Router() {
   const [location] = useLocation();
 
@@ -75,14 +75,14 @@ function Router() {
               <Route path="/portfolio" component={Portfolio} />
               <Route path="/properties" component={Properties} />
               <Route path="/contact" component={Contact} />
-              <Route path="/admin" component={Admin} />
-              <Route path="/admin/login" component={AdminLogin} />
               <Route path="/news" component={News} />
               <Route path="/comparison" component={Comparison} />
               <Route path="/book-service" component={BookService} />
               <Route path="/client-portal" component={ClientPortal} />
               <Route path="/virtual-tours" component={VirtualTours} />
               <Route path="/analytics" component={Analytics} />
+              <Route path="/admin/login" component={AdminLogin} />
+              <Route path="/admin" component={Admin} />
               <Route component={NotFound} />
             </Switch>
           </PageTransition>
@@ -94,26 +94,22 @@ function Router() {
 }
 
 function App() {
-  const [showLogoReveal, setShowLogoReveal] = useState(true);
-  const [isFirstVisit, setIsFirstVisit] = useState(true);
+  const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
-    // Check if user has visited before
-    const hasVisited = localStorage.getItem('bright-has-visited');
-    if (hasVisited) {
-      setShowLogoReveal(false);
-      setIsFirstVisit(false);
-    } else {
-      localStorage.setItem('bright-has-visited', 'true');
+    const hasSeenLogo = localStorage.getItem('hasSeenLogoReveal');
+    if (!hasSeenLogo) {
+      setShowLogo(true);
+      localStorage.setItem('hasSeenLogoReveal', 'true');
     }
   }, []);
 
-  const handleLogoRevealComplete = () => {
-    setShowLogoReveal(false);
-  };
-
-  if (showLogoReveal && isFirstVisit) {
-    return <LogoRevealSequence onComplete={handleLogoRevealComplete} />;
+  if (showLogo) {
+    return (
+      <LogoRevealSequence 
+        onComplete={() => setShowLogo(false)}
+      />
+    );
   }
 
   return (
