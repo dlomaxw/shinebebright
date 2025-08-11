@@ -388,16 +388,11 @@ export default function PropertyDetails() {
           </div>
         </div>
 
-        {/* Personalized Recommendations */}
+        {/* AI-Powered Property Recommendations */}
         <div className="mt-12">
           <PropertyRecommendations
-            currentProperty={property}
-            userPreferences={{
-              location: property.location,
-              propertyType: property.propertyType || undefined,
-              viewedProperties: [property.id],
-            }}
-            maxRecommendations={6}
+            currentPropertyId={property.id}
+            viewedProperties={viewedProperties}
           />
         </div>
       </div>

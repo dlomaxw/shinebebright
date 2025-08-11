@@ -10,8 +10,15 @@ import {
   insertBlogPostSchema,
   insertTeamMemberSchema,
   insertPropertySchema,
+  type Property,
 } from "@shared/schema";
 import { z } from "zod";
+import OpenAI from "openai";
+
+// Initialize OpenAI client
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Projects routes
@@ -266,16 +273,126 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/properties/:id", async (req, res) => {
+  // AI-powered property recommendations endpoint
+  app.post("/api/properties/recommendations", async (req, res) => {
     try {
-      const property = await storage.getProperty(req.params.id);
-      if (!property) {
-        return res.status(404).json({ message: "Property not found" });
+      const { preferences, viewedProperties } = req.body;
+      
+      // Get all properties
+      const allProperties = await storage.getProperties();
+      
+      if (allProperties.length === 0) {
+        return res.json({ recommendations: [], explanation: "No properties available for recommendations." });
       }
-      res.json(property);
+
+      // If no OpenAI API key, return basic recommendations
+      if (!process.env.OPENAI_API_KEY) {
+        const basicRecommendations = allProperties
+          .filter(p => !viewedProperties?.includes(p.id))
+          .slice(0, 3);
+        
+        return res.json({
+          recommendations: basicRecommendations,
+          explanation: "Basic recommendations based on available properties."
+        });
+      }
+
+      // Prepare property data for AI analysis
+      const propertyContext = allProperties.map(p => ({
+        id: p.id,
+        title: p.title,
+        location: p.location,
+        price: p.price,
+        type: p.type,
+        bedrooms: p.bedrooms,
+        bathrooms: p.bathrooms,
+        propertySize: p.propertySize,
+        features: Array.isArray(p.features) ? p.features : [],
+        description: p.description
+      }));
+
+      // Create AI prompt for property recommendations
+      const prompt = `You are a professional real estate AI assistant. Based on the user preferences and property data provided, recommend the 3 most suitable properties and explain why they match the preferences.
+
+User Preferences: ${JSON.stringify(preferences || {})}
+Previously Viewed Properties: ${JSON.stringify(viewedProperties || [])}
+
+Available Properties:
+${JSON.stringify(propertyContext, null, 2)}
+
+Please respond with a JSON object containing:
+1. "recommendedIds": array of 3 property IDs (strings) that best match the preferences
+2. "explanation": detailed explanation (150-200 words) of why these properties were selected
+
+Consider factors like:
+- Budget preferences vs property prices
+- Location preferences
+- Property type and size requirements
+- Amenities and features mentioned in preferences
+- Avoid recommending previously viewed properties
+- Focus on properties that offer the best value and match stated needs
+
+Respond only with valid JSON.`;
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+        messages: [
+          {
+            role: "system",
+            content: "You are a professional real estate recommendation engine. Respond only with valid JSON containing recommendedIds and explanation fields."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        response_format: { type: "json_object" },
+        max_tokens: 500,
+        temperature: 0.7
+      });
+
+      const aiResponse = JSON.parse(completion.choices[0].message.content || "{}");
+      
+      // Get the recommended properties
+      const recommendedProperties = allProperties.filter(p => 
+        aiResponse.recommendedIds?.includes(p.id)
+      );
+
+      // Fallback if AI didn't return valid recommendations
+      if (recommendedProperties.length === 0) {
+        const fallbackRecommendations = allProperties
+          .filter(p => !viewedProperties?.includes(p.id))
+          .slice(0, 3);
+        
+        return res.json({
+          recommendations: fallbackRecommendations,
+          explanation: "Here are some quality properties that might interest you based on our current listings."
+        });
+      }
+
+      res.json({
+        recommendations: recommendedProperties,
+        explanation: aiResponse.explanation || "These properties have been selected based on your preferences and our analysis of available options."
+      });
+
     } catch (error) {
-      console.error("Error fetching property:", error);
-      res.status(500).json({ message: "Failed to fetch property" });
+      console.error("Error generating property recommendations:", error);
+      
+      // Fallback to basic recommendations on error
+      try {
+        const allProperties = await storage.getProperties();
+        const basicRecommendations = allProperties
+          .filter(p => !req.body.viewedProperties?.includes(p.id))
+          .slice(0, 3);
+        
+        res.json({
+          recommendations: basicRecommendations,
+          explanation: "Here are some featured properties from our current listings."
+        });
+      } catch (fallbackError) {
+        console.error("Error in fallback recommendations:", fallbackError);
+        res.status(500).json({ message: "Failed to generate recommendations" });
+      }
     }
   });
 
@@ -421,7 +538,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           training: bookings.filter(b => b.serviceType === "training").length,
         },
         recentBookings: bookings
-          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+          .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
           .slice(0, 5)
       };
       
