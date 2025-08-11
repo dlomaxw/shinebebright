@@ -53,6 +53,7 @@ import NotFound from "@/pages/not-found";
 import ClientPortal from "@/pages/client-portal";
 import VirtualTours from "@/pages/virtual-tours";
 import Analytics from "@/pages/analytics";
+import WatchDemo from "@/pages/watch-demo";
 
 function Router() {
   const [location] = useLocation();
@@ -83,6 +84,7 @@ function Router() {
               <Route path="/client-portal" component={ClientPortal} />
               <Route path="/virtual-tours" component={VirtualTours} />
               <Route path="/analytics" component={Analytics} />
+              <Route path="/watch-demo" component={WatchDemo} />
               <Route component={NotFound} />
             </Switch>
           </PageTransition>
