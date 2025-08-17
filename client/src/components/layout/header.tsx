@@ -6,6 +6,8 @@ import { Menu, ChevronDown } from "lucide-react";
 import { AnimatedLogo } from "@/components/animations/animated-logo";
 import { motion } from "framer-motion";
 import brightLogo from "@/assets/bright-logo-correct.png";
+import { NavItemReveal } from "@/components/animations/navigation-effects";
+import { MagneticElement } from "@/components/animations/page-transition";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,18 +56,22 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`font-medium transition-colors ${
-                  isActive(item.href)
-                    ? "text-bright-yellow"
-                    : "text-gray-700 hover:text-bright-yellow"
-                }`}
-              >
-                {item.name}
-              </Link>
+            {navigation.map((item, index) => (
+              <NavItemReveal key={item.name} delay={index * 0.1}>
+                <MagneticElement strength={0.2}>
+                  <Link
+                    href={item.href}
+                    className={`font-medium transition-colors ${
+                      isActive(item.href)
+                        ? "text-bright-yellow"
+                        : "text-gray-700 hover:text-bright-yellow"
+                    }`}
+                    data-testid={`nav-link-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    {item.name}
+                  </Link>
+                </MagneticElement>
+              </NavItemReveal>
             ))}
 
             {/* Services Dropdown */}
@@ -107,11 +113,15 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
-            <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
-              <Link href="/book-service">
-                Book Service
-              </Link>
-            </Button>
+            <NavItemReveal delay={0.7}>
+              <MagneticElement strength={0.3}>
+                <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold terminal-glow">
+                  <Link href="/book-service" data-testid="button-book-service">
+                    Book Service
+                  </Link>
+                </Button>
+              </MagneticElement>
+            </NavItemReveal>
           </div>
 
           {/* Mobile Menu */}

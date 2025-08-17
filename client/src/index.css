@@ -120,3 +120,54 @@
   border: 1px solid #e5e7eb !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
 }
+
+/* Terminal Industries inspired animations */
+@keyframes terminal-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(255, 225, 0, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(255, 225, 0, 0.6), 0 0 30px rgba(255, 225, 0, 0.4);
+  }
+}
+
+.terminal-glow {
+  animation: terminal-glow 2s ease-in-out infinite;
+}
+
+/* Smooth scrolling for page navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(220, 13%, 95%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(51, 100%, 50%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(51, 100%, 45%);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: hsl(220, 13%, 15%);
+}
+
+/* Enhanced cursor styles for interactive elements */
+.cursor-magnetic {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.cursor-magnetic:hover {
+  transform: scale(1.05);
+}
