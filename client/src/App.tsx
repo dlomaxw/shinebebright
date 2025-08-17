@@ -8,7 +8,8 @@ import ConversioBot from "@/components/ConversioBot";
 import ConversioBotFallback from "@/components/ConversioBotFallback";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { PageTransition } from "@/components/animations/page-transition";
+import { TransitionWrapper } from "@/components/animations/transition-wrapper";
+import { ScrollProgress, MorphingGrid } from "@/components/animations/navigation-effects";
 
 // Conditional ConversioBot component that excludes admin pages
 function ConversionBotConditional() {
@@ -59,11 +60,13 @@ function Router() {
   const [location] = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative">
+      <ScrollProgress />
+      <MorphingGrid />
       <Header />
       <main className="flex-1">
         <AnimatePresence mode="wait">
-          <PageTransition key={location}>
+          <TransitionWrapper key={location}>
             <Switch>
               <Route path="/" component={Home} />
               <Route path="/about" component={About} />
@@ -87,7 +90,7 @@ function Router() {
               <Route path="/watch-demo" component={WatchDemo} />
               <Route component={NotFound} />
             </Switch>
-          </PageTransition>
+          </TransitionWrapper>
         </AnimatePresence>
       </main>
       <Footer />

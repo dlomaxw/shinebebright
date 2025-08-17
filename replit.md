@@ -116,7 +116,17 @@ Basic role-based access control with user roles (user, admin). The system includ
   - All authentic images and pricing from the official VAAL Real Estate source
 
 ### Animation and User Experience Enhancements
-- **Smooth page transition effects** implemented between all sections using framer-motion
+- **Advanced page transition system** inspired by Terminal Industries with multiple transition types:
+  - Slide reveal transitions for key pages (Services, Portfolio, Properties, Contact)
+  - Curtain transitions for premium pages (Admin sections, Service subpages)
+  - Geometric transitions for special pages (About, Watch Demo, Virtual Tours)
+  - Enhanced default transitions with sliding overlays and sophisticated timing
+- **Scroll progress indicator** at the top of the page showing reading progress
+- **Magnetic hover effects** on navigation elements and buttons for interactive feedback
+- **Morphing background grid** for visual depth and Terminal Industries-style aesthetics
+- **Professional glow effects** on interactive elements using CSS animations
+- **Smooth custom scrollbar** with yellow accent colors matching brand
+- **Navigation animations** with staggered reveals and magnetic interactions
 - **Animated logo reveal effect** for brand identity enhancement with fade-in, scale, and rotation animations
 - **Section-by-section animations** including slide-in-left, slide-in-right, fade-in-up, scale-in effects
 - **Staggered animations** for service cards, project cards, and stats with progressive delays
