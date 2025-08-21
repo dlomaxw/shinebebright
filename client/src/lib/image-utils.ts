@@ -17,18 +17,18 @@ export interface ImageConfig {
  * PROFESSIONAL APPROACH: Organizes images by developer to prevent mixing
  * @param filename - The image filename from database
  * @param config - Image configuration options including propertyTitle for developer detection
- * @returns Proper image URL or placeholder if needed
+ * @returns Proper image URL or developer-specific fallback
  */
 export function getPropertyImageUrl(filename: string, config: ImageConfig = { filename }): string {
   if (!filename) {
-    return '/api/placeholder/400/300';
+    return config.propertyTitle ? getDeveloperFallbackImage(config.propertyTitle) : '/api/placeholder/400/300';
   }
 
   // Clean the filename
   const cleanFilename = filename.replace(/['"]/g, '').trim();
   
   if (!cleanFilename) {
-    return '/api/placeholder/400/300';
+    return config.propertyTitle ? getDeveloperFallbackImage(config.propertyTitle) : '/api/placeholder/400/300';
   }
 
   // Get the correct developer folder to prevent image mixing
@@ -57,7 +57,7 @@ export function processPropertyImages(
   config: Partial<ImageConfig> = {}
 ): string[] {
   if (!images) {
-    return ['/api/placeholder/400/300'];
+    return [getDeveloperFallbackImage(propertyTitle)];
   }
 
   let imageArray: string[] = [];
@@ -76,13 +76,16 @@ export function processPropertyImages(
   }
 
   // Filter out empty strings and process each image with proper developer organization
-  return imageArray
+  const processedImages = imageArray
     .filter(img => img && img.trim())
     .map(filename => getPropertyImageUrl(filename, { 
       filename, 
       propertyTitle, 
       ...config 
     }));
+
+  // If no valid images, return developer-specific fallback
+  return processedImages.length > 0 ? processedImages : [getDeveloperFallbackImage(propertyTitle)];
 }
 
 /**
@@ -105,4 +108,29 @@ export async function validateImageUrl(imageUrl: string): Promise<string> {
  */
 export function getPlaceholderUrl(width: number = 400, height: number = 300): string {
   return `/api/placeholder/${width}/${height}`;
+}
+
+/**
+ * Gets developer-specific fallback image to prevent generic placeholders
+ * PROFESSIONAL APPROACH: Use developer-specific images instead of generic placeholders
+ * @param propertyTitle - Property title to determine developer
+ * @returns Developer-specific fallback image URL
+ */
+export function getDeveloperFallbackImage(propertyTitle: string): string {
+  const developerFolder = getPropertyDeveloperFolder(propertyTitle);
+  
+  // Developer-specific fallback images
+  const fallbackMap: Record<string, string> = {
+    'vaal': '/images/properties/vaal/the_futur_by_vaal.jpeg',
+    'saif-real-estate': '/images/properties/saif-real-estate/pearl_view_shell_unit.jpg',
+    'edifice-properties': '/images/properties/edifice-properties/elite_pallazo.jpg', 
+    'rf-developers': '/images/properties/rf-developers/skyrise_apartments.jpg',
+    'hk-properties': '/images/properties/vaal/the_futur_by_vaal.jpeg',
+    'novus-real-estate': '/images/properties/vaal/the_futur_by_vaal.jpeg',
+    'residential': '/images/properties/vaal/the_futur_by_vaal.jpeg',
+    'commercial': '/images/properties/vaal/the_futur_by_vaal.jpeg',
+    'general': '/images/properties/vaal/the_futur_by_vaal.jpeg'
+  };
+
+  return fallbackMap[developerFolder] || '/api/placeholder/400/300';
 }
