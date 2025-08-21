@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import type { Property } from "@shared/schema";
-import { getPropertyImage } from "../assets/properties";
+import { getFirstPropertyImage, getPropertyImage } from "../assets/properties/index";
 
 const Properties = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,27 +52,31 @@ const Properties = () => {
   const featuredProperties = allProperties.filter(p => p.featured);
 
   const nextImage = () => {
-    const images = Array.isArray(selectedProperty?.images) ? selectedProperty.images : [];
-    if (images.length > 1) {
-      setCurrentImageIndex((prev) => 
-        prev === images.length - 1 ? 0 : prev + 1
-      );
+    if (selectedProperty) {
+      const images = getPropertyImage(selectedProperty.title);
+      if (images.length > 1) {
+        setCurrentImageIndex((prev) => 
+          prev === images.length - 1 ? 0 : prev + 1
+        );
+      }
     }
   };
 
   const prevImage = () => {
-    const images = Array.isArray(selectedProperty?.images) ? selectedProperty.images : [];
-    if (images.length > 1) {
-      setCurrentImageIndex((prev) => 
-        prev === 0 ? images.length - 1 : prev - 1
-      );
+    if (selectedProperty) {
+      const images = getPropertyImage(selectedProperty.title);
+      if (images.length > 1) {
+        setCurrentImageIndex((prev) => 
+          prev === 0 ? images.length - 1 : prev - 1
+        );
+      }
     }
   };
 
   const PropertyCard = ({ property, isGrid = true }: { property: Property; isGrid?: boolean }) => {
     const images = Array.isArray(property.images) ? property.images : [];
     const hasImages = images.length > 0;
-    const mainImage = hasImages ? getPropertyImage(images[0]) : getPropertyImage('property-01.jpg');
+    const mainImage = getFirstPropertyImage(property.title);
 
     return (
       <Card className={`group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-0 shadow-lg ${isGrid ? 'h-full' : 'flex flex-col sm:flex-row'}`}>
@@ -83,8 +87,8 @@ const Properties = () => {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              // Fallback to a different property image if main fails
-              target.src = getPropertyImage('property-01.jpg');
+              // Fallback to first available property image if main fails
+              target.src = getFirstPropertyImage('Atlantic Heights');
               target.onerror = null; // Prevent infinite loop
             }}
             data-testid={`property-image-${property.id}`}
@@ -332,16 +336,16 @@ const Properties = () => {
 
               {/* Image Gallery */}
               {(() => {
-                const images = Array.isArray(selectedProperty.images) ? selectedProperty.images : [];
-                return images.length > 0 && (
+                const propertyImages = getPropertyImage(selectedProperty.title);
+                return propertyImages.length > 0 && (
                   <div className="relative mb-6">
                     <div className="relative h-96 rounded-lg overflow-hidden">
                       <img
-                        src={getPropertyImage(images[currentImageIndex])}
+                        src={propertyImages[currentImageIndex]}
                         alt={selectedProperty.title}
                         className="w-full h-full object-cover"
                       />
-                      {images.length > 1 && (
+                      {propertyImages.length > 1 && (
                         <>
                           <Button
                             variant="secondary"
@@ -362,9 +366,9 @@ const Properties = () => {
                         </>
                       )}
                     </div>
-                    {images.length > 1 && (
+                    {propertyImages.length > 1 && (
                       <div className="flex gap-2 mt-4 overflow-x-auto">
-                        {images.map((image: string, index: number) => (
+                        {propertyImages.map((image: string, index: number) => (
                           <button
                             key={index}
                             onClick={() => setCurrentImageIndex(index)}
@@ -373,7 +377,7 @@ const Properties = () => {
                             }`}
                           >
                             <img
-                              src={getPropertyImage(image)}
+                              src={image}
                               alt=""
                               className="w-full h-full object-cover"
                             />
