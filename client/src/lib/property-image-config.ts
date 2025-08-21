@@ -35,18 +35,6 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     folder: DEVELOPER_FOLDERS.GENERAL,
     images: []
   },
-  'Pearl View - 2 Bedroom Apartment': {
-    propertyTitle: 'Pearl View - 2 Bedroom Apartment',
-    developer: 'Saif Real Estate',
-    folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
-  },
-  'Pearl View - 3 Bedroom Apartment': {
-    propertyTitle: 'Pearl View - 3 Bedroom Apartment', 
-    developer: 'Saif Real Estate',
-    folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
-  },
   'Icon 180 Luxury Complex': {
     propertyTitle: 'Icon 180 Luxury Complex',
     developer: 'Novus Real Estate',
@@ -105,7 +93,7 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'The Bridge Kololo',
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['the_bridge_kololo_main.jpg', 'the_bridge_aerial.jpg']
+    images: ['bridge_kololo_night.webp', 'bridge_kololo_aerial.webp']
   },
   'Cadenza One Bedroom Nakasero': {
     propertyTitle: 'Cadenza One Bedroom Nakasero',
