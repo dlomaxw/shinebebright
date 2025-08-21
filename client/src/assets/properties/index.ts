@@ -27,7 +27,7 @@ export const propertyImages = {
 
 // Helper function to get local image or fallback to external
 export const getPropertyImage = (imageUrl: string): string => {
-  // Local asset mappings
+  // Local asset mappings for old paths
   if (imageUrl.includes('/src/assets/properties/cadenza-facade-01.webp')) {
     return cadenzaFacade01;
   }
@@ -60,6 +60,29 @@ export const getPropertyImage = (imageUrl: string): string => {
   }
   if (imageUrl.includes('/src/assets/properties/property-08.jpg')) {
     return property08;
+  }
+  
+  // Handle new folder structure /src/properties_images/ paths
+  if (imageUrl.includes('/src/properties_images/')) {
+    // Map specific known images to available assets, use smart fallbacks for unknown images
+    
+    // Cadenza images
+    if (imageUrl.includes('vaal/candenza') || imageUrl.includes('CAD_EXT-FACADE')) {
+      if (imageUrl.includes('CAD_EXT-FACADE-CAM01')) return cadenzaFacade01;
+      if (imageUrl.includes('CAD_EXT-FACADE-CAM02-N')) return cadenzaFacade03;
+      if (imageUrl.includes('CAD_EXT-FACADE-CAM02')) return cadenzaFacade02;
+      if (imageUrl.includes('CAD_EXT-ARIAL')) return cadenzaFacade01;
+      if (imageUrl.includes('WhatsApp-Image')) return cadenzaFacade02;
+      return cadenzaFacade01; // Default for Cadenza
+    }
+    
+    // Use smart fallback based on property type or folder
+    const fallbackImages = [property01, property02, property03, property04, property05, property06, property07, property08];
+    
+    // Create consistent but varied selection based on image path
+    const hash = imageUrl.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+    const index = Math.abs(hash) % fallbackImages.length;
+    return fallbackImages[index];
   }
   
   // Legacy mappings
