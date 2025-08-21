@@ -73,6 +73,11 @@ export const getPropertyImage = (imageUrl: string): string => {
     return cadenzaFacade02;
   }
   
+  // Handle non-existent building images by using property images
+  if (imageUrl.includes('building-01.webp') || imageUrl.includes('building-02.webp') || imageUrl.includes('building-03.webp')) {
+    return property01; // Use first property image as fallback
+  }
+  
   // For broken external images, use fallback based on property type
   if (imageUrl.includes('shinebebright.com') || imageUrl.includes('hkproperties.com') || imageUrl.includes('rfdevelopers.ug')) {
     // Cycle through available images for variety
