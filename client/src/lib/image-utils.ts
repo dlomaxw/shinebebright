@@ -135,7 +135,7 @@ export function getDeveloperFallbackImage(propertyTitle: string): string {
   
   // Developer-specific fallback images using building images instead of logos
   const fallbackMap: Record<string, string> = {
-    'vaal': '/images/properties/vaal/cadenza_living_modern.jpg',
+    'vaal': '/images/properties/vaal/cadenza_facade_1.jpg',
     'saif-real-estate': '/images/properties/saif-real-estate/pearl_view_building.jpg',
     'edifice-properties': '/images/properties/edifice-properties/elite_pallazo_1.webp', 
     'rf-developers': '/images/properties/rf-developers/skyrise_building.png',
