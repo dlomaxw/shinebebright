@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import type { Property } from "@shared/schema";
+import { processPropertyImages, getPlaceholderUrl, getPropertyImageUrl } from "@/lib/image-utils";
 
 const Properties = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -318,21 +319,13 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
-  // Handle different image storage formats
-  let images: string[] = [];
-  if (Array.isArray(property.images)) {
-    images = property.images;
-  } else if (typeof property.images === 'string') {
-    try {
-      images = JSON.parse(property.images);
-    } catch {
-      images = property.images ? [property.images] : [];
-    }
-  }
+  // Handle different image storage formats using utility functions
+  const processedImages = processPropertyImages(property.images, {
+    category: property.category as 'featured' | 'residential' | 'commercial' || 'residential',
+    useThumbnail: true
+  });
   
-  const mainImage = images.length > 0 
-    ? `/api/placeholder/400/300` // Using placeholder for now since we don't have actual image hosting
-    : '/api/placeholder/400/300';
+  const mainImage = processedImages[0] || getPlaceholderUrl(400, 300);
 
 
 
