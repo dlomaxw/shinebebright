@@ -4,29 +4,8 @@ import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
-import ConversioBot from "@/components/ConversioBot";
-import ConversioBotFallback from "@/components/ConversioBotFallback";
-
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { TransitionWrapper } from "@/components/animations/transition-wrapper";
-import { ScrollProgress, MorphingGrid } from "@/components/animations/navigation-effects";
-
-// Conditional ConversioBot component that excludes admin pages
-function ConversionBotConditional() {
-  const [location] = useLocation();
-  
-  // Don't show ConversioBot on admin pages
-  if (location.startsWith('/admin')) {
-    return null;
-  }
-  
-  return (
-    <>
-      <ConversioBot />
-      <ConversioBotFallback />
-    </>
-  );
-}
+import { PageTransition } from "@/components/animations/page-transition";
 import { LogoRevealSequence } from "@/components/animations/animated-logo";
 
 // Layout components
@@ -46,7 +25,6 @@ import Portfolio from "@/pages/portfolio";
 import Properties from "@/pages/properties";
 import Contact from "@/pages/contact";
 import Admin from "@/pages/admin";
-import AdminLogin from "@/pages/admin-login";
 import News from "@/pages/news";
 import Comparison from "@/pages/comparison";
 import BookService from "@/pages/book-service";
@@ -54,19 +32,16 @@ import NotFound from "@/pages/not-found";
 import ClientPortal from "@/pages/client-portal";
 import VirtualTours from "@/pages/virtual-tours";
 import Analytics from "@/pages/analytics";
-import WatchDemo from "@/pages/watch-demo";
 
 function Router() {
   const [location] = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col relative">
-      <ScrollProgress />
-      <MorphingGrid />
+    <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
         <AnimatePresence mode="wait">
-          <TransitionWrapper key={location}>
+          <PageTransition key={location}>
             <Switch>
               <Route path="/" component={Home} />
               <Route path="/about" component={About} />
@@ -80,17 +55,15 @@ function Router() {
               <Route path="/properties" component={Properties} />
               <Route path="/contact" component={Contact} />
               <Route path="/admin" component={Admin} />
-              <Route path="/admin/login" component={AdminLogin} />
               <Route path="/news" component={News} />
               <Route path="/comparison" component={Comparison} />
               <Route path="/book-service" component={BookService} />
               <Route path="/client-portal" component={ClientPortal} />
               <Route path="/virtual-tours" component={VirtualTours} />
               <Route path="/analytics" component={Analytics} />
-              <Route path="/watch-demo" component={WatchDemo} />
               <Route component={NotFound} />
             </Switch>
-          </TransitionWrapper>
+          </PageTransition>
         </AnimatePresence>
       </main>
       <Footer />
@@ -125,7 +98,6 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <ConversionBotConditional />
         <Router />
       </TooltipProvider>
     </QueryClientProvider>

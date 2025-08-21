@@ -28,10 +28,11 @@ args = "Start application"
 [[workflows.workflow]]
 name = "Start application"
 author = "agent"
-mode = "parallel"
 
 [[workflows.workflow.tasks]]
-task = "packager.installForAll"
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
 
 [[ports]]
 localPort = 5000

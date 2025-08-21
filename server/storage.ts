@@ -158,22 +158,16 @@ export class DatabaseStorage implements IStorage {
 
   // Project operations
   async getProjects(category?: string, featured?: boolean): Promise<Project[]> {
-    if (category && featured !== undefined) {
-      return await db.select().from(projects)
-        .where(and(eq(projects.category, category), eq(projects.featured, featured)))
-        .orderBy(desc(projects.createdAt));
+    let query = db.select().from(projects);
+    
+    const conditions = [];
+    if (category) conditions.push(eq(projects.category, category));
+    if (featured !== undefined) conditions.push(eq(projects.featured, featured));
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
     }
-    if (category) {
-      return await db.select().from(projects)
-        .where(eq(projects.category, category))
-        .orderBy(desc(projects.createdAt));
-    }
-    if (featured !== undefined) {
-      return await db.select().from(projects)
-        .where(eq(projects.featured, featured))
-        .orderBy(desc(projects.createdAt));
-    }
-    return await db.select().from(projects).orderBy(desc(projects.createdAt));
+    
+    return query.orderBy(desc(projects.createdAt));
   }
 
   async getProject(id: string): Promise<Project | undefined> {
@@ -247,12 +241,13 @@ export class DatabaseStorage implements IStorage {
 
   // Blog post operations
   async getBlogPosts(published?: boolean): Promise<BlogPost[]> {
+    let query = db.select().from(blogPosts);
+    
     if (published !== undefined) {
-      return await db.select().from(blogPosts)
-        .where(eq(blogPosts.published, published))
-        .orderBy(desc(blogPosts.createdAt));
+      query = query.where(eq(blogPosts.published, published));
     }
-    return await db.select().from(blogPosts).orderBy(desc(blogPosts.createdAt));
+    
+    return query.orderBy(desc(blogPosts.createdAt));
   }
 
   async getBlogPost(id: string): Promise<BlogPost | undefined> {
@@ -382,13 +377,11 @@ export class DatabaseStorage implements IStorage {
 
   // Property operations
   async getProperties(featured?: boolean): Promise<Property[]> {
+    let query = db.select().from(properties);
     if (featured !== undefined) {
-      return await db.select().from(properties)
-        .where(eq(properties.featured, featured))
-        .orderBy(desc(properties.createdAt));
+      query = query.where(eq(properties.featured, featured));
     }
-    return await db.select().from(properties)
-      .orderBy(desc(properties.createdAt));
+    return query.orderBy(desc(properties.createdAt));
   }
 
   async getProperty(id: string): Promise<Property | undefined> {
@@ -431,13 +424,11 @@ export class DatabaseStorage implements IStorage {
 
   // Client Project operations
   async getClientProjects(clientId?: string): Promise<ClientProject[]> {
+    let query = db.select().from(clientProjects);
     if (clientId) {
-      return await db.select().from(clientProjects)
-        .where(eq(clientProjects.clientId, clientId))
-        .orderBy(desc(clientProjects.createdAt));
+      query = query.where(eq(clientProjects.clientId, clientId));
     }
-    return await db.select().from(clientProjects)
-      .orderBy(desc(clientProjects.createdAt));
+    return query.orderBy(desc(clientProjects.createdAt));
   }
 
   async getClientProject(id: string): Promise<ClientProject | undefined> {
@@ -479,13 +470,11 @@ export class DatabaseStorage implements IStorage {
 
   // Virtual Tour operations
   async getVirtualTours(status?: string): Promise<VirtualTour[]> {
+    let query = db.select().from(virtualTours);
     if (status) {
-      return await db.select().from(virtualTours)
-        .where(eq(virtualTours.status, status))
-        .orderBy(desc(virtualTours.createdAt));
+      query = query.where(eq(virtualTours.status, status));
     }
-    return await db.select().from(virtualTours)
-      .orderBy(desc(virtualTours.createdAt));
+    return query.orderBy(desc(virtualTours.createdAt));
   }
 
   async getVirtualTour(id: string): Promise<VirtualTour | undefined> {
@@ -610,7 +599,6 @@ export class DatabaseStorage implements IStorage {
           page: "/", 
           views: Math.floor(Math.random() * 100) + 50 
         },
-        metadata: null,
         timestamp: date,
         ipAddress: "127.0.0.1",
         userAgent: "Browser",
@@ -627,7 +615,6 @@ export class DatabaseStorage implements IStorage {
           service_type: "real_estate",
           inquiry_count: Math.floor(Math.random() * 10) + 1
         },
-        metadata: null,
         timestamp: date,
         ipAddress: "127.0.0.1",
         userAgent: "Browser",
@@ -648,11 +635,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createAnalyticsEvent(eventData: InsertAnalyticsEvent): Promise<AnalyticsEvent> {
-    const safeEventData = {
-      ...eventData,
-      metadata: eventData.metadata || null
-    };
-    const [event] = await db.insert(analyticsEvents).values(safeEventData).returning();
+    const [event] = await db.insert(analyticsEvents).values(eventData).returning();
     return event;
   }
 
