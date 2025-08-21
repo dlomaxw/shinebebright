@@ -63,19 +63,19 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Cadenza Residence - One Bedroom',
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['elite_pallazo_1.webp']
+    images: ['cadenza_living_room.png', 'cadenza_bedroom.png']
   },
   'Cadenza Residence - Studio': {
     propertyTitle: 'Cadenza Residence - Studio',
     developer: 'VAAL', 
     folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['elite_pallazo_interior.webp']
+    images: ['cadenza_kitchen.png', 'cadenza_living_room.png']
   },
   'Cadenza Residence - Two Bedroom': {
     propertyTitle: 'Cadenza Residence - Two Bedroom',
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL, 
-    images: ['horizon_residency_exterior.webp']
+    images: ['cadenza_bedroom.png', 'cadenza_rooftop_real.png']
   },
   'Embassy Towers Residency': {
     propertyTitle: 'Embassy Towers Residency',
@@ -164,20 +164,20 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
   'Cadenza Studio Nakasero': {
     propertyTitle: 'Cadenza Studio Nakasero',
     developer: 'VAAL',
-    folder: DEVELOPER_FOLDERS.EDIFICE_PROPERTIES,
-    images: ['elite_pallazo_bedroom.webp']
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['cadenza_kitchen.png', 'cadenza_living_room.png']
   },
   'Cadenza One Bedroom Nakasero': {
     propertyTitle: 'Cadenza One Bedroom Nakasero',
     developer: 'VAAL',
-    folder: DEVELOPER_FOLDERS.EDIFICE_PROPERTIES,
-    images: ['horizon_residency_balcony.webp']
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['cadenza_bedroom.png', 'cadenza_living_room.png']
   },
   'Cadenza Two Bedroom Nakasero': {
     propertyTitle: 'Cadenza Two Bedroom Nakasero',
     developer: 'VAAL',
-    folder: DEVELOPER_FOLDERS.EDIFICE_PROPERTIES,
-    images: ['embassy_towers.webp']
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['cadenza_rooftop_real.png', 'cadenza_bedroom.png']
   }
 };
 
