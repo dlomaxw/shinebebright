@@ -223,3 +223,57 @@ client/public/images/properties/
 - [5:38 PM] **ALL TASKS COMPLETED SUCCESSFULLY** ✅
 
 **READY FOR PRODUCTION** - Professional property management system with organized images and improved user experience.
+
+---
+
+## URGENT ISSUES REPORTED - August 21, 2025, 8:40 PM
+
+### Critical Problem: Images Disappearing Again
+**Status:** 🚨 **REQUIRES IMMEDIATE ATTENTION**
+
+**User Screenshots Show:**
+- Garnet Residency: Blank image (despite proper files and configuration)
+- Diamond Court Apartments: Blank image (property doesn't exist - was deleted)
+- Sapphire Residency: Blank image (property doesn't exist - was deleted)  
+- Urban View Apartments: Blank image (property doesn't exist - was deleted)
+
+### Actions Taken (8:40 PM Session):
+#### ✅ Removed Duplicate Entries
+**DELETED**: 1 duplicate "The Horizon Residency" entry from database
+
+#### ✅ Removed Requested Properties  
+**DELETED**: "The Futur by VAAL" - Per user request
+
+#### ❌ Properties NOT Found for Removal
+**"Lulu Residency"**: No properties with this name found in current system - may have been removed in previous fake image cleanup
+
+### Root Cause Analysis:
+1. **Garnet Residency Files Exist**: ✅ 4 authentic images properly downloaded and stored
+   - `garnet_residency_main.jpg` (284KB) - ✅ EXISTS
+   - `garnet_residency_3bhk_side.jpg` (176KB) - ✅ EXISTS
+   - `garnet_residency_3bhk_top.jpg` (151KB) - ✅ EXISTS  
+   - `garnet_residency_render.jpg` (369KB) - ✅ EXISTS
+
+2. **Configuration Issue Found**: ❌ HK Properties fallback pointing to wrong folder
+   - Current fallback: `'/images/properties/edifice-properties/elite_pallazo_1.webp'`
+   - Should be: `'/images/properties/hk-properties/garnet_residency_main.jpg'`
+
+3. **Missing Properties**: Properties in user screenshots were deleted during fake image cleanup
+   - Diamond Court, Sapphire Residency, Urban View = Previously removed (had fake images)
+
+### Current System Status:
+- **Active Properties**: 14 total (after cleanup)
+- **Garnet Residency**: ✅ Properly added with authentic HK Properties images
+- **Image System**: ❌ Fallback configuration error preventing display
+
+### IMMEDIATE FIXES REQUIRED:
+1. Fix HK Properties fallback image path  
+2. Test Garnet Residency image display
+3. Verify all remaining properties display correctly
+
+### User Documentation Compliance:
+✅ **DOCUMENTED**: All changes tracked in this log as per user requirements
+✅ **PROCESS FOLLOWED**: Systematic approach to property management
+✅ **AUTHENTIC IMAGES ONLY**: No fake/stock images used
+
+**NEXT ACTION**: Fix image fallback system immediately
