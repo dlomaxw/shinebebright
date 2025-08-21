@@ -492,7 +492,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto bg-white" aria-describedby="property-description">
+      <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto bg-white">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-bright-black flex items-center justify-between">
             {property.title}
@@ -508,7 +508,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               </Button>
             )}
           </DialogTitle>
-          <DialogDescription id="property-description" className="text-bright-gray">
+          <DialogDescription className="text-bright-gray">
             Detailed property information with virtual tour capabilities for {property.title}
           </DialogDescription>
         </DialogHeader>
