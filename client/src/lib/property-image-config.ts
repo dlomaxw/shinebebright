@@ -29,12 +29,6 @@ export const DEVELOPER_FOLDERS = {
  * Property to developer mapping - CRITICAL: Do not mix images between developers
  */
 export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
-  'The Futur by VAAL': {
-    propertyTitle: 'The Futur by VAAL',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.GENERAL,
-    images: []
-  },
   'Icon 180 Luxury Complex': {
     propertyTitle: 'Icon 180 Luxury Complex',
     developer: 'Novus Real Estate',
