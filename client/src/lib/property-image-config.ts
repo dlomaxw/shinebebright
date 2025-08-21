@@ -77,17 +77,17 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     folder: DEVELOPER_FOLDERS.RF_DEVELOPERS,
     images: ['skyrise_authentic.jpg']
   },
-  'Pearl View Kisaasi - 2 Bedroom by Saif Real Estate': {
-    propertyTitle: 'Pearl View Kisaasi - 2 Bedroom by Saif Real Estate',
+  'Pearl View - 2 Bedroom Apartment': {
+    propertyTitle: 'Pearl View - 2 Bedroom Apartment',
     developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg']
+    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
   },
-  'Pearl View Kisaasi - 3 Bedroom by Saif Real Estate': {
-    propertyTitle: 'Pearl View Kisaasi - 3 Bedroom by Saif Real Estate',
+  'Pearl View - 3 Bedroom Apartment': {
+    propertyTitle: 'Pearl View - 3 Bedroom Apartment',
     developer: 'Saif Real Estate', 
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg']
+    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
   },
   'Elite Pallazo Naguru': {
     propertyTitle: 'Elite Pallazo Naguru',
