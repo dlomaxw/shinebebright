@@ -158,16 +158,22 @@ export class DatabaseStorage implements IStorage {
 
   // Project operations
   async getProjects(category?: string, featured?: boolean): Promise<Project[]> {
-    let query = db.select().from(projects);
-    
-    const conditions = [];
-    if (category) conditions.push(eq(projects.category, category));
-    if (featured !== undefined) conditions.push(eq(projects.featured, featured));
-    if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+    if (category && featured !== undefined) {
+      return await db.select().from(projects)
+        .where(and(eq(projects.category, category), eq(projects.featured, featured)))
+        .orderBy(desc(projects.createdAt));
     }
-    
-    return query.orderBy(desc(projects.createdAt));
+    if (category) {
+      return await db.select().from(projects)
+        .where(eq(projects.category, category))
+        .orderBy(desc(projects.createdAt));
+    }
+    if (featured !== undefined) {
+      return await db.select().from(projects)
+        .where(eq(projects.featured, featured))
+        .orderBy(desc(projects.createdAt));
+    }
+    return await db.select().from(projects).orderBy(desc(projects.createdAt));
   }
 
   async getProject(id: string): Promise<Project | undefined> {
@@ -241,13 +247,12 @@ export class DatabaseStorage implements IStorage {
 
   // Blog post operations
   async getBlogPosts(published?: boolean): Promise<BlogPost[]> {
-    let query = db.select().from(blogPosts);
-    
     if (published !== undefined) {
-      query = query.where(eq(blogPosts.published, published));
+      return await db.select().from(blogPosts)
+        .where(eq(blogPosts.published, published))
+        .orderBy(desc(blogPosts.createdAt));
     }
-    
-    return query.orderBy(desc(blogPosts.createdAt));
+    return await db.select().from(blogPosts).orderBy(desc(blogPosts.createdAt));
   }
 
   async getBlogPost(id: string): Promise<BlogPost | undefined> {
