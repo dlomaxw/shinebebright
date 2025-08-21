@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ChevronDown } from "lucide-react";
 import { AnimatedLogo } from "@/components/animations/animated-logo";
 import { motion } from "framer-motion";
-import brightLogo from "@/assets/bright-logo-correct.png";
+// Using AnimatedLogo component instead of direct import
 import {
   DropdownMenu,
   DropdownMenuContent,

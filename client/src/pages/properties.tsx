@@ -318,8 +318,20 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
-  const mainImage = Array.isArray(property.images) && property.images.length > 0 
-    ? property.images[0] 
+  // Handle different image storage formats
+  let images: string[] = [];
+  if (Array.isArray(property.images)) {
+    images = property.images;
+  } else if (typeof property.images === 'string') {
+    try {
+      images = JSON.parse(property.images);
+    } catch {
+      images = property.images ? [property.images] : [];
+    }
+  }
+  
+  const mainImage = images.length > 0 
+    ? `/api/placeholder/400/300` // Using placeholder for now since we don't have actual image hosting
     : '/api/placeholder/400/300';
 
 
@@ -458,16 +470,30 @@ interface PropertyDetailsDialogProps {
 
 const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = Array.isArray(property.images) && property.images.length > 0 
-    ? property.images 
+  
+  // Handle different image storage formats
+  let images: string[] = [];
+  if (Array.isArray(property.images)) {
+    images = property.images;
+  } else if (typeof property.images === 'string') {
+    try {
+      images = JSON.parse(property.images);
+    } catch {
+      images = property.images ? [property.images] : [];
+    }
+  }
+  
+  // Convert to proper URLs or use placeholder
+  const imageUrls = images.length > 0 
+    ? images.map(() => '/api/placeholder/400/300') // Using placeholder for now
     : ['/api/placeholder/400/300'];
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % imageUrls.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentImageIndex((prev) => (prev - 1 + imageUrls.length) % imageUrls.length);
   };
 
   const handleExternalLink = () => {
@@ -507,7 +533,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
           <div className="relative">
             <div className="aspect-video overflow-hidden rounded-lg">
               <img 
-                src={images[currentImageIndex]}
+                src={imageUrls[currentImageIndex]}
                 alt={`${property.title} - Image ${currentImageIndex + 1}`}
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -516,7 +542,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               />
             </div>
             
-            {images.length > 1 && (
+            {imageUrls.length > 1 && (
               <>
                 <Button
                   variant="outline"
@@ -536,16 +562,16 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                 </Button>
                 
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
-                  {currentImageIndex + 1} / {images.length}
+                  {currentImageIndex + 1} / {imageUrls.length}
                 </div>
               </>
             )}
           </div>
 
           {/* Image Thumbnails */}
-          {images.length > 1 && (
+          {imageUrls.length > 1 && (
             <div className="flex gap-2 overflow-x-auto pb-2">
-              {images.map((image, index) => (
+              {imageUrls.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
@@ -814,5 +840,6 @@ const FloatingWhatsAppButton = () => {
     </div>
   );
 };
+
 
 export default Properties;
