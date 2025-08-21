@@ -522,7 +522,8 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                 alt={`${property.title} - Image ${currentImageIndex + 1}`}
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  e.currentTarget.src = '/api/placeholder/400/300';
+                  const fallbackImage = processPropertyImages(null, property.title)[0];
+                  e.currentTarget.src = fallbackImage;
                 }}
               />
             </div>

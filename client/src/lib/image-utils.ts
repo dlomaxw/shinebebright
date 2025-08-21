@@ -122,9 +122,9 @@ export function getDeveloperFallbackImage(propertyTitle: string): string {
   // Developer-specific fallback images
   const fallbackMap: Record<string, string> = {
     'vaal': '/images/properties/vaal/the_futur_by_vaal.jpeg',
-    'saif-real-estate': '/images/properties/saif-real-estate/pearl_view_shell_unit.jpg',
-    'edifice-properties': '/images/properties/edifice-properties/elite_pallazo.jpg', 
-    'rf-developers': '/images/properties/rf-developers/skyrise_apartments.jpg',
+    'saif-real-estate': '/images/properties/saif-real-estate/pearl_view_shell_unit.jpeg',
+    'edifice-properties': '/images/properties/edifice-properties/elite_pallazo.jpeg', 
+    'rf-developers': '/images/properties/rf-developers/skyrise_apartments.jpeg',
     'hk-properties': '/images/properties/vaal/the_futur_by_vaal.jpeg',
     'novus-real-estate': '/images/properties/vaal/the_futur_by_vaal.jpeg',
     'residential': '/images/properties/vaal/the_futur_by_vaal.jpeg',
