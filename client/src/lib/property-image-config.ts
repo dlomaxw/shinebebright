@@ -129,13 +129,13 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Pearl View Kisaasi - 2 Bedroom Shell Unit',
     developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
+    images: ['pearl_view_building.jpg', 'pearl_view_shell_2bed.jpg']
   },
   'Pearl View Kisaasi - 3 Bedroom Shell Unit': {
     propertyTitle: 'Pearl View Kisaasi - 3 Bedroom Shell Unit',
     developer: 'Saif Real Estate', 
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
+    images: ['pearl_view_building.jpg', 'pearl_view_shell_3bed.jpg']
   },
   'Elite Pallazo Naguru': {
     propertyTitle: 'Elite Pallazo Naguru',
