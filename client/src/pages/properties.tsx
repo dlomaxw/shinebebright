@@ -82,13 +82,20 @@ const Properties = () => {
               src={mainImage}
               alt={property.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const placeholder = target.parentElement?.querySelector('.placeholder-div');
+                if (placeholder) {
+                  (placeholder as HTMLElement).style.display = 'flex';
+                }
+              }}
               data-testid={`property-image-${property.id}`}
             />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-bright-light to-bright-yellow/20 flex items-center justify-center">
-              <Building2 className="w-16 h-16 text-bright-gray/50" />
-            </div>
-          )}
+          ) : null}
+          <div className={`placeholder-div w-full h-full bg-gradient-to-br from-bright-light to-bright-yellow/20 flex items-center justify-center ${mainImage ? 'hidden' : 'flex'}`}>
+            <Building2 className="w-16 h-16 text-bright-gray/50" />
+          </div>
           
           {/* Status Badge */}
           {property.status && (

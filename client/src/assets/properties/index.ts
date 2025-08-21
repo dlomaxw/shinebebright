@@ -5,23 +5,22 @@
 
 // Helper function to get authentic property images from developer websites
 export const getPropertyImage = (imageUrl: string): string => {
+  if (!imageUrl) {
+    return '/placeholder-property.jpg';
+  }
   
-  // Return the authentic image URL directly from developer websites
-  // This ensures we display the correct images from each developer
-  
-  // If the image URL is already a full website URL, return it directly
+  // Return authentic image URLs directly from developer websites
   if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
     return imageUrl;
   }
   
   // Handle local path references (for backwards compatibility)
   if (imageUrl.startsWith('/src/') || imageUrl.startsWith('./')) {
-    // For local paths, we'll use a placeholder or fallback
     return '/placeholder-property.jpg';
   }
   
-  // Return original URL if it's already properly formatted
-  return imageUrl;
+  // Default fallback for any other case
+  return imageUrl || '/placeholder-property.jpg';
 };
 
 // ===== UTILITY FUNCTIONS =====
