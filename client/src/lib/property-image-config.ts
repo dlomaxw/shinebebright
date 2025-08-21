@@ -16,6 +16,8 @@ export interface PropertyImageConfig {
 export const DEVELOPER_FOLDERS = {
   VAAL: 'vaal',
   SAIF_REAL_ESTATE: 'saif-real-estate', 
+  EDIFICE_PROPERTIES: 'edifice-properties',
+  NOVUS_REAL_ESTATE: 'novus-real-estate',
   HK_PROPERTIES: 'hk-properties',
   RF_DEVELOPERS: 'rf-developers',
   GENERAL: 'general',
@@ -81,12 +83,6 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     folder: DEVELOPER_FOLDERS.RESIDENTIAL,
     images: ['embassy_towers.png']
   },
-  'The Bridge Kololo': {
-    propertyTitle: 'The Bridge Kololo',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['the_bridge_kololo.jpeg']
-  },
   'Skyrise Apartments': {
     propertyTitle: 'Skyrise Apartments',
     developer: 'General',
@@ -129,17 +125,59 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     folder: DEVELOPER_FOLDERS.RESIDENTIAL,
     images: ['sapphire_residency.jpg']
   },
-  'The Horizon Residency': {
-    propertyTitle: 'The Horizon Residency',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['horizon_residency.png']
-  },
   'Urban View Apartments': {
     propertyTitle: 'Urban View Apartments',
     developer: 'General',
     folder: DEVELOPER_FOLDERS.RESIDENTIAL,
     images: ['urban_view_apartments.png']
+  },
+  'Pearl View Kisaasi - 2 Bedroom Shell Unit': {
+    propertyTitle: 'Pearl View Kisaasi - 2 Bedroom Shell Unit',
+    developer: 'Saif Real Estate',
+    folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
+    images: ['pearl_view_2bed_shell.jpg', 'pearl_view_kitchen.jpg']
+  },
+  'Pearl View Kisaasi - 3 Bedroom Shell Unit': {
+    propertyTitle: 'Pearl View Kisaasi - 3 Bedroom Shell Unit',
+    developer: 'Saif Real Estate', 
+    folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
+    images: ['pearl_view_3bed_shell.jpg', 'pearl_view_living.jpg']
+  },
+  'Elite Pallazo Naguru': {
+    propertyTitle: 'Elite Pallazo Naguru',
+    developer: 'Edifice Properties',
+    folder: 'edifice-properties',
+    images: ['elite_pallazo_exterior.jpg', 'elite_pallazo_interior.jpg']
+  },
+  'The Horizon Residency': {
+    propertyTitle: 'The Horizon Residency',
+    developer: 'Edifice Properties',
+    folder: 'edifice-properties', 
+    images: ['horizon_residency_main.jpg', 'horizon_residency_interior.jpg']
+  },
+  'The Bridge Kololo Pre-Launch': {
+    propertyTitle: 'The Bridge Kololo',
+    developer: 'VAAL',
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['the_bridge_kololo_main.jpg', 'the_bridge_aerial.jpg']
+  },
+  'Cadenza Studio Nakasero': {
+    propertyTitle: 'Cadenza Studio Nakasero',
+    developer: 'VAAL',
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['cadenza_studio.jpg', 'cadenza_interior.jpg']
+  },
+  'Cadenza One Bedroom Nakasero': {
+    propertyTitle: 'Cadenza One Bedroom Nakasero',
+    developer: 'VAAL',
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['cadenza_one_bed.jpg', 'cadenza_living.jpg']
+  },
+  'Cadenza Two Bedroom Nakasero': {
+    propertyTitle: 'Cadenza Two Bedroom Nakasero',
+    developer: 'VAAL',
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['cadenza_two_bed.jpg', 'cadenza_balcony.jpg']
   }
 };
 
