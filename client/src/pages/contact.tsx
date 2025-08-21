@@ -31,7 +31,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-bright-black">Address</h4>
-                      <p className="text-bright-gray">1St Floor Shop 4, The Square, Plot 10 Third St, Kampala</p>
+                      <p className="text-bright-gray">8JC3+CPM Third Street, Kampala</p>
                     </div>
                   </div>
                   
@@ -113,8 +113,8 @@ const Contact = () => {
                 <MapPin className="w-5 h-5 text-bright-yellow" />
                 <div>
                   <p className="text-sm font-semibold text-gray-900">Bright Platform</p>
-                  <p className="text-xs text-gray-600">1St Floor Shop 4, The Square</p>
-                  <p className="text-xs text-gray-600">Plot 10 Third St, Kampala</p>
+                  <p className="text-xs text-gray-600">8JC3+CPM Third Street</p>
+                  <p className="text-xs text-gray-600">Kampala, Uganda</p>
                 </div>
               </div>
             </div>
