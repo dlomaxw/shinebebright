@@ -55,39 +55,39 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
   },
   'Icon 180 Luxury Complex': {
     propertyTitle: 'Icon 180 Luxury Complex',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['icon_180_luxury.png']
+    developer: 'Novus Real Estate',
+    folder: DEVELOPER_FOLDERS.NOVUS_REAL_ESTATE,
+    images: ['icon_180_living.jpg', 'icon_180_gym.jpg', 'icon_180_pool.jpg', 'icon_180_lake_view.jpg']
   },
   'Cadenza Residence - One Bedroom': {
     propertyTitle: 'Cadenza Residence - One Bedroom',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['cadenza_residence_01.jpg', 'cadenza_residence_02.jpg']
+    developer: 'VAAL',
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['vaal_logo.svg']
   },
   'Cadenza Residence - Studio': {
     propertyTitle: 'Cadenza Residence - Studio',
-    developer: 'General', 
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['cadenza_residence_01.jpg', 'cadenza_residence_02.jpg']
+    developer: 'VAAL', 
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['vaal_logo.svg']
   },
   'Cadenza Residence - Two Bedroom': {
     propertyTitle: 'Cadenza Residence - Two Bedroom',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL, 
-    images: ['cadenza_residence_01.jpg', 'cadenza_residence_02.jpg']
+    developer: 'VAAL',
+    folder: DEVELOPER_FOLDERS.VAAL, 
+    images: ['vaal_logo.svg']
   },
   'Embassy Towers Residency': {
     propertyTitle: 'Embassy Towers Residency',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['embassy_towers.png']
+    developer: 'Edifice Properties',
+    folder: DEVELOPER_FOLDERS.EDIFICE_PROPERTIES,
+    images: ['embassy_towers.webp']
   },
   'Skyrise Apartments': {
     propertyTitle: 'Skyrise Apartments',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['skyrise_apartments.png']
+    developer: 'RF Developers',
+    folder: DEVELOPER_FOLDERS.RF_DEVELOPERS,
+    images: ['skyrise_main.tif']
   },
   'Amber Residency': {
     propertyTitle: 'Amber Residency',
@@ -135,25 +135,25 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Pearl View Kisaasi - 2 Bedroom Shell Unit',
     developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_2bed_shell.jpg', 'pearl_view_kitchen.jpg']
+    images: ['saif_logo.png']
   },
   'Pearl View Kisaasi - 3 Bedroom Shell Unit': {
     propertyTitle: 'Pearl View Kisaasi - 3 Bedroom Shell Unit',
     developer: 'Saif Real Estate', 
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_3bed_shell.jpg', 'pearl_view_living.jpg']
+    images: ['saif_logo.png']
   },
   'Elite Pallazo Naguru': {
     propertyTitle: 'Elite Pallazo Naguru',
     developer: 'Edifice Properties',
     folder: 'edifice-properties',
-    images: ['elite_pallazo_exterior.jpg', 'elite_pallazo_interior.jpg']
+    images: ['elite_pallazo_1.webp', 'elite_pallazo_2.webp', 'elite_pallazo_3.webp', 'elite_pallazo.webp']
   },
   'The Horizon Residency': {
     propertyTitle: 'The Horizon Residency',
     developer: 'Edifice Properties',
     folder: 'edifice-properties', 
-    images: ['horizon_residency_main.jpg', 'horizon_residency_interior.jpg']
+    images: ['horizon_residency_1.webp', 'horizon_residency_2.webp', 'horizon_residency_3.webp']
   },
   'The Bridge Kololo Pre-Launch': {
     propertyTitle: 'The Bridge Kololo',
@@ -165,19 +165,19 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Cadenza Studio Nakasero',
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['cadenza_studio.jpg', 'cadenza_interior.jpg']
+    images: ['vaal_logo.svg']
   },
   'Cadenza One Bedroom Nakasero': {
     propertyTitle: 'Cadenza One Bedroom Nakasero',
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['cadenza_one_bed.jpg', 'cadenza_living.jpg']
+    images: ['vaal_logo.svg']
   },
   'Cadenza Two Bedroom Nakasero': {
     propertyTitle: 'Cadenza Two Bedroom Nakasero',
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['cadenza_two_bed.jpg', 'cadenza_balcony.jpg']
+    images: ['vaal_logo.svg']
   }
 };
 
