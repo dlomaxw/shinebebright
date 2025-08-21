@@ -124,4 +124,35 @@ Basic role-based access control with user roles (user, admin). The system includ
 - **Mobile-responsive design** across all new components
 - **Framer Motion integration** for smooth animations and transitions
 
+## Recent Changes (August 2025)
+
+### Property Management System Improvements
+- **Comprehensive image system overhaul** with developer-specific organization to prevent image mixing
+- **Authentic VAAL Cadenza images** downloaded directly from vaal.co.ug (May 2025 real interior photos and facade renders)
+- **Removed all sold-out properties** from the system (reduced from 27 to 24 active properties)
+- **Fixed image mixing issues** where Canaan Apartments and Prince Charles were incorrectly showing Elite Palazzo images
+- **Created residential properties folder** with authentic apartment building images for general properties
+- **Enhanced property name visibility** with larger white text, drop shadows, and better contrast
+- **Updated fallback image system** to use appropriate building images instead of logos or placeholders
+- **Fixed file extension mismatches** (.png → .jpg) across all property configurations
+- **Implemented developer-based image organization**:
+  - VAAL: Cadenza interiors and facades, Bridge Kololo, The Futur
+  - Saif Real Estate: Pearl View building and interior photos
+  - Edifice Properties: Elite Palazzo, Embassy Towers, Horizon Residency
+  - RF Developers: Skyrise buildings and apartments
+  - Novus Real Estate: Icon 180 complex images
+  - Residential: General apartment buildings for unaffiliated properties
+
+### Property Database Cleanup
+- **Deleted sold-out properties**: "Cadenza Studio Nakasero" and "Cadenza Residence - Studio"
+- **Corrected property-developer assignments** to prevent wrong image display
+- **24 active properties** now properly categorized and displayed
+- **All properties now have authentic images** with no placeholder or stock images
+
+### Image Configuration System
+- **Property-to-developer mapping** prevents image cross-contamination
+- **Fallback system** using authentic building images instead of generic placeholders
+- **Multiple images per property** for carousel functionality
+- **Proper file path management** with consistent naming conventions
+
 The application is designed to be deployment-ready on Replit with proper environment variable configuration for the database connection.
