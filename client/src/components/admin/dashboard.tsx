@@ -20,7 +20,6 @@ import {
 import { INQUIRY_STATUSES, BOOKING_STATUSES } from "@/lib/constants";
 import type { ContactInquiry, DemoBooking, Project, TeamMember, BlogPost, NewsletterSubscriber, ServiceBooking } from "@shared/schema";
 import { ServiceBookingsTable } from "@/components/admin/service-bookings-table";
-import PropertiesTable from "@/components/admin/properties-table";
 
 interface AdminDashboardProps {
   activeSection: string;
@@ -386,12 +385,6 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
         return renderBookings();
       case "service-bookings":
         return renderServiceBookings();
-      case "properties":
-        return (
-          <div className="space-y-6">
-            <PropertiesTable />
-          </div>
-        );
       case "newsletter":
         return (
           <div className="space-y-6">

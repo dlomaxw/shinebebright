@@ -6,8 +6,6 @@ import { Menu, ChevronDown } from "lucide-react";
 import { AnimatedLogo } from "@/components/animations/animated-logo";
 import { motion } from "framer-motion";
 import brightLogo from "@/assets/bright-logo-correct.png";
-import { NavItemReveal } from "@/components/animations/navigation-effects";
-import { MagneticElement } from "@/components/animations/page-transition";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,7 +22,6 @@ const Header = () => {
     { name: "About", href: "/about" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Properties", href: "/properties" },
-    { name: "Watch Demo", href: "/watch-demo" },
     { name: "News", href: "/news" },
     { name: "Contact", href: "/contact" },
   ];
@@ -50,28 +47,24 @@ const Header = () => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <AnimatedLogo size="md" autoPlay={true} />
+              <AnimatedLogo size="md" autoPlay={false} />
             </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item, index) => (
-              <NavItemReveal key={item.name} delay={index * 0.1}>
-                <MagneticElement strength={0.2}>
-                  <Link
-                    href={item.href}
-                    className={`font-medium transition-colors ${
-                      isActive(item.href)
-                        ? "text-bright-yellow"
-                        : "text-gray-700 hover:text-bright-yellow"
-                    }`}
-                    data-testid={`nav-link-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                  >
-                    {item.name}
-                  </Link>
-                </MagneticElement>
-              </NavItemReveal>
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`font-medium transition-colors ${
+                  isActive(item.href)
+                    ? "text-bright-yellow"
+                    : "text-gray-700 hover:text-bright-yellow"
+                }`}
+              >
+                {item.name}
+              </Link>
             ))}
 
             {/* Services Dropdown */}
@@ -113,15 +106,11 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
-            <NavItemReveal delay={0.7}>
-              <MagneticElement strength={0.3}>
-                <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold terminal-glow">
-                  <Link href="/book-service" data-testid="button-book-service">
-                    Book Service
-                  </Link>
-                </Button>
-              </MagneticElement>
-            </NavItemReveal>
+            <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
+              <Link href="/book-service">
+                Book Service
+              </Link>
+            </Button>
           </div>
 
           {/* Mobile Menu */}
@@ -131,7 +120,7 @@ const Header = () => {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80 bg-white">
+            <SheetContent side="right" className="w-80">
               <div className="flex flex-col space-y-4 mt-8">
                 {navigation.map((item) => (
                   <Link
@@ -141,21 +130,21 @@ const Header = () => {
                     className={`text-lg font-medium transition-colors ${
                       isActive(item.href)
                         ? "text-bright-yellow"
-                        : "text-bright-black hover:text-bright-yellow"
+                        : "text-gray-700 hover:text-bright-yellow"
                     }`}
                   >
                     {item.name}
                   </Link>
                 ))}
 
-                <div className="border-t border-gray-200 pt-4">
-                  <h3 className="text-sm font-semibold text-bright-black mb-3">Services</h3>
+                <div className="border-t pt-4">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Services</h3>
                   {services.map((service) => (
                     <Link
                       key={service.name}
                       href={service.href}
                       onClick={() => setIsOpen(false)}
-                      className="block text-bright-black hover:text-bright-yellow transition-colors py-1 font-medium"
+                      className="block text-gray-700 hover:text-bright-yellow transition-colors py-1"
                     >
                       {service.name}
                     </Link>
@@ -168,7 +157,7 @@ const Header = () => {
                   className={`text-lg font-medium transition-colors ${
                     isActive("/admin")
                       ? "text-bright-yellow"
-                      : "text-bright-black hover:text-bright-yellow"
+                      : "text-gray-700 hover:text-bright-yellow"
                   }`}
                 >
                   Admin
