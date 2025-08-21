@@ -36,6 +36,9 @@
   --bright-gray: hsl(0, 0%, 40%);
   --bright-light: hsl(0, 0%, 98%);
   
+  /* Ensure proper text visibility */
+  color-scheme: light;
+  
   --radius: 0.5rem;
 }
 
@@ -119,4 +122,45 @@
   background: white !important;
   border: 1px solid #e5e7eb !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  color: #111111 !important;
+}
+
+/* Fix navigation visibility */
+.nav-link {
+  color: #666666 !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #FFE100 !important;
+}
+
+/* Ensure all text is visible */
+body, * {
+  color: inherit;
+}
+
+/* Fix bright colors */
+.text-bright-black {
+  color: #111111 !important;
+}
+
+.text-bright-gray {
+  color: #666666 !important;
+}
+
+.text-bright-yellow {
+  color: #FFE100 !important;
+}
+
+.bg-bright-yellow {
+  background-color: #FFE100 !important;
+}
+
+.bg-bright-black {
+  background-color: #111111 !important;
+}
+
+.bg-bright-light {
+  background-color: #FAFAFA !important;
 }
