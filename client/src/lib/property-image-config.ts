@@ -81,7 +81,7 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Skyrise Apartments',
     developer: 'RF Developers',
     folder: DEVELOPER_FOLDERS.RF_DEVELOPERS,
-    images: ['skyrise_building.png', 'skyrise_main.tif']
+    images: ['skyrise_building.png', 'skyrise_apartments.jpeg']
   },
   'Amber Residency': {
     propertyTitle: 'Amber Residency',
@@ -93,7 +93,7 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Atlantic Heights',
     developer: 'General', 
     folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['atlantic_heights.png']
+    images: ['atlantic_heights.jpg']
   },
   'Canaan Apartments': {
     propertyTitle: 'Canaan Apartments',
@@ -111,7 +111,7 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Pearl View Kisaasi',
     developer: 'General',
     folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['pearl_view_kisaasi.png']
+    images: ['pearl_view_kisaasi.jpg']
   },
   'Sapphire Residency': {
     propertyTitle: 'Sapphire Residency',
@@ -123,7 +123,7 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Urban View Apartments',
     developer: 'General',
     folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['urban_view_apartments.png']
+    images: ['urban_view_apartments.jpg']
   },
   'Pearl View Kisaasi - 2 Bedroom Shell Unit': {
     propertyTitle: 'Pearl View Kisaasi - 2 Bedroom Shell Unit',

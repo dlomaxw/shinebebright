@@ -373,7 +373,7 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
 
       <CardContent className="p-6">
         <div className="mb-4">
-          <CardTitle className="text-xl font-bold text-bright-black mb-2 group-hover:text-bright-yellow transition-colors leading-tight">
+          <CardTitle className="text-2xl font-bold text-white mb-3 group-hover:text-bright-yellow transition-colors leading-tight drop-shadow-lg">
             {property.title}
           </CardTitle>
           
