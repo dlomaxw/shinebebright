@@ -86,10 +86,16 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
   'The Horizon Residency': {
     propertyTitle: 'The Horizon Residency',
     developer: 'Edifice Properties',
-    folder: 'edifice-properties', 
+    folder: DEVELOPER_FOLDERS.EDIFICE_PROPERTIES, 
     images: ['horizon_residency_exterior.webp', 'horizon_residency_1.webp', 'horizon_residency_balcony.webp', 'horizon_residency_2.webp']
   },
   'The Bridge Kololo Pre-Launch': {
+    propertyTitle: 'The Bridge Kololo',
+    developer: 'VAAL',
+    folder: DEVELOPER_FOLDERS.VAAL,
+    images: ['bridge_kololo_night.webp', 'bridge_kololo_aerial.webp']
+  },
+  'The Bridge Kololo': {
     propertyTitle: 'The Bridge Kololo',
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL,
