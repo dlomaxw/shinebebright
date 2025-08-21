@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import type { Property } from "@shared/schema";
-import { getPropertyImage } from "@/assets/properties";
+import { getPropertyImage } from "../assets/properties";
 
 const Properties = () => {
   const [searchQuery, setSearchQuery] = useState("");
