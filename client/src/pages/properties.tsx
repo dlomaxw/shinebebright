@@ -375,16 +375,6 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
           )}
         </div>
 
-        <div className="absolute top-4 right-4">
-          <Button
-            size="sm"
-            variant="secondary"
-            className="bg-white/90 text-bright-black hover:bg-white"
-            onClick={() => property.originalUrl && window.open(property.originalUrl, '_blank')}
-          >
-            <ExternalLink className="w-4 h-4" />
-          </Button>
-        </div>
       </div>
 
       <CardContent className="p-6">
@@ -507,11 +497,6 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
     setCurrentImageIndex((prev) => (prev - 1 + imageUrls.length) % imageUrls.length);
   };
 
-  const handleExternalLink = () => {
-    if (property.originalUrl) {
-      window.open(property.originalUrl, '_blank');
-    }
-  };
 
   return (
     <Dialog>
@@ -520,19 +505,8 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
       </DialogTrigger>
       <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto bg-white">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-bright-black flex items-center justify-between">
+          <DialogTitle className="text-2xl font-bold text-bright-black">
             {property.title}
-            {property.originalUrl && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleExternalLink}
-                className="ml-4"
-              >
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Original Listing
-              </Button>
-            )}
           </DialogTitle>
           <DialogDescription className="text-bright-gray">
             Detailed property information with virtual tour capabilities for {property.title}
