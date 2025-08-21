@@ -45,58 +45,81 @@ export const propertyImages = {
 
 // Helper function to get local image or fallback to external
 export const getPropertyImage = (imageUrl: string): string => {
-  // Handle new folder structure /src/properties_images/ paths with authentic mappings
+  // Handle folder-based paths (the new authentic image system)
+  
+  // Cadenza properties - use authentic Cadenza images
+  if (imageUrl.includes('vaal/candenza') || imageUrl.includes('CAD_EXT-FACADE') || imageUrl.includes('WhatsApp-Image')) {
+    if (imageUrl.includes('CAD_EXT-FACADE-CAM01') || imageUrl.includes('CAD_EXT-ARIAL')) return cadenzaReal01;
+    if (imageUrl.includes('CAD_EXT-FACADE-CAM02-N') || imageUrl.includes('CAD_EXT-FACADE-CAM02')) return cadenzaReal02;
+    if (imageUrl.includes('WhatsApp-Image')) return cadenzaReal02;
+    return cadenzaReal01; // Default for Cadenza
+  }
+  
+  // Prince Charles Canaan apartments - use authentic Prince Charles images
+  if (imageUrl.includes('Prince_Charles_Luxury_Apartments') || imageUrl.includes('canaan_residency')) {
+    return canaanPrince01;
+  }
+  
+  // Pearl View properties - use authentic Pearl View images
+  if (imageUrl.includes('Pearl_View')) {
+    return pearlView01;
+  }
+  
+  // Atlantic Heights - use authentic Atlantic images
+  if (imageUrl.includes('atlantic_heights') || imageUrl.includes('edifice/atlantic')) {
+    return atlantic01;
+  }
+  
+  // Embassy Towers - use authentic Embassy images
+  if (imageUrl.includes('embassy_towers') || imageUrl.includes('edifice/embassy')) {
+    return embassy01;
+  }
+  
+  // Horizon Residency - use Embassy image for now
+  if (imageUrl.includes('horizon_residency') || imageUrl.includes('edifice/horizon')) {
+    return embassy01;
+  }
+  
+  // The Bridge properties - use authentic Bridge images
+  if (imageUrl.includes('the_bridge') || imageUrl.includes('vaal/the_bridge')) {
+    return bridge01;
+  }
+  
+  // Aquamarine and other HK properties - use variety from authentic images
+  if (imageUrl.includes('aquamarine') || imageUrl.includes('hk_properties') || imageUrl.includes('Aquamarine Heights')) {
+    const hkImages = [atlantic01, embassy01, pearlView01];
+    const hash = imageUrl.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+    const index = Math.abs(hash) % hkImages.length;
+    return hkImages[index];
+  }
+  
+  // Marjan Residence - use Bridge image
+  if (imageUrl.includes('Marjan_Residence') || imageUrl.includes('Marjan Residence')) {
+    return bridge01;
+  }
+  
+  // Icon 180 properties - use variety of authentic images
+  if (imageUrl.includes('icon_180')) {
+    const iconImages = [atlantic01, embassy01, cadenzaReal01];
+    const hash = imageUrl.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+    const index = Math.abs(hash) % iconImages.length;
+    return iconImages[index];
+  }
+  
+  // The Future properties - use Cadenza images
+  if (imageUrl.includes('the_futur')) {
+    return cadenzaReal01;
+  }
+  
+  // Legacy folder path support
   if (imageUrl.includes('/src/properties_images/')) {
-    
-    // Cadenza properties - use authentic Cadenza images
-    if (imageUrl.includes('vaal/candenza') || imageUrl.includes('CAD_EXT-FACADE')) {
-      if (imageUrl.includes('CAD_EXT-FACADE-CAM01')) return cadenzaReal01;
-      if (imageUrl.includes('CAD_EXT-FACADE-CAM02-N')) return cadenzaReal02;
-      if (imageUrl.includes('CAD_EXT-FACADE-CAM02')) return cadenzaReal02;
-      if (imageUrl.includes('CAD_EXT-ARIAL')) return cadenzaReal01;
-      if (imageUrl.includes('WhatsApp-Image')) return cadenzaReal02;
-      return cadenzaReal01; // Default for Cadenza
-    }
-    
-    // Prince Charles Canaan apartments - use authentic Prince Charles images
-    if (imageUrl.includes('Prince_Charles_Luxury_Apartments') || imageUrl.includes('canaan_residency')) {
-      return canaanPrince01;
-    }
-    
-    // Pearl View properties - use authentic Pearl View images
-    if (imageUrl.includes('Pearl_View')) {
-      return pearlView01;
-    }
-    
-    // Atlantic Heights - use authentic Atlantic images
-    if (imageUrl.includes('atlantic_heights')) {
-      return atlantic01;
-    }
-    
-    // Embassy Towers - use authentic Embassy images
-    if (imageUrl.includes('embassy_towers')) {
-      return embassy01;
-    }
-    
-    // The Bridge properties - use authentic Bridge images
-    if (imageUrl.includes('the_bridge')) {
-      return bridge01;
-    }
-    
-    // Aquamarine and other HK properties - use variety from authentic images
-    if (imageUrl.includes('aquamarine') || imageUrl.includes('hk_properties')) {
-      const hkImages = [atlantic01, embassy01, pearlView01];
-      const hash = imageUrl.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
-      const index = Math.abs(hash) % hkImages.length;
-      return hkImages[index];
-    }
-    
-    // Marjan and other VAAL properties - use Bridge or Cadenza images
-    if (imageUrl.includes('Marjan_Residence')) {
-      return bridge01;
-    }
-    
-    // Default fallback for any other folder-based images
+    // Extract the relevant part and apply above logic
+    const pathPart = imageUrl.replace('/src/properties_images/', '');
+    return getPropertyImage(pathPart);
+  }
+  
+  // Default fallback for any other folder-based images
+  if (imageUrl.includes('/')) {
     const authenticImages = [cadenzaReal01, cadenzaReal02, canaanPrince01, pearlView01, atlantic01, embassy01, bridge01];
     const hash = imageUrl.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
     const index = Math.abs(hash) % authenticImages.length;
