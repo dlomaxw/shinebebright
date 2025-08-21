@@ -141,9 +141,9 @@ export function getDeveloperFallbackImage(propertyTitle: string): string {
     'rf-developers': '/images/properties/rf-developers/skyrise_building.png',
     'novus-real-estate': '/images/properties/novus-real-estate/icon_180_exterior.jpg',
     'hk-properties': '/images/properties/edifice-properties/elite_pallazo_1.webp',
-    'residential': '/images/properties/edifice-properties/elite_pallazo_1.webp',
+    'residential': '/images/properties/residential/canaan_apartments.jpg',
     'commercial': '/images/properties/edifice-properties/elite_pallazo_1.webp',
-    'general': '/images/properties/edifice-properties/elite_pallazo_1.webp'
+    'general': '/images/properties/residential/canaan_apartments.jpg'
   };
 
   return fallbackMap[developerFolder] || '/api/placeholder/400/300';
