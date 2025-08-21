@@ -31,9 +31,9 @@ export const DEVELOPER_FOLDERS = {
 export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
   'The Futur by VAAL': {
     propertyTitle: 'The Futur by VAAL',
-    developer: 'VAAL',
-    folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['the_futur_by_vaal.jpeg']
+    developer: 'General',
+    folder: DEVELOPER_FOLDERS.GENERAL,
+    images: []
   },
   'Saif Real Estate Shell Units - 2 Bedroom': {
     propertyTitle: 'Saif Real Estate Shell Units - 2 Bedroom',
@@ -46,12 +46,6 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
     images: ['saif_real_estate_3bed.png']
-  },
-  'Prince Charles Luxury Apartments': {
-    propertyTitle: 'Prince Charles Luxury Apartments',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['prince_charles_luxury.jpg']
   },
   'Icon 180 Luxury Complex': {
     propertyTitle: 'Icon 180 Luxury Complex',
@@ -81,61 +75,19 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Skyrise Apartments',
     developer: 'RF Developers',
     folder: DEVELOPER_FOLDERS.RF_DEVELOPERS,
-    images: ['skyrise_building.png', 'skyrise_apartments.jpeg']
+    images: ['skyrise_authentic.jpg']
   },
-  'Amber Residency': {
-    propertyTitle: 'Amber Residency',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['amber_residency.jpg']
-  },
-  'Atlantic Heights': {
-    propertyTitle: 'Atlantic Heights',
-    developer: 'General', 
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['atlantic_heights.jpg']
-  },
-  'Canaan Apartments': {
-    propertyTitle: 'Canaan Apartments',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['canaan_apartments.jpg']
-  },
-  'Canaan Residence Apartment': {
-    propertyTitle: 'Canaan Residence Apartment',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['canaan_residence.jpg']
-  },
-  'Pearl View Kisaasi': {
-    propertyTitle: 'Pearl View Kisaasi',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['pearl_view_kisaasi.jpg']
-  },
-  'Sapphire Residency': {
-    propertyTitle: 'Sapphire Residency',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['sapphire_residency.jpg']
-  },
-  'Urban View Apartments': {
-    propertyTitle: 'Urban View Apartments',
-    developer: 'General',
-    folder: DEVELOPER_FOLDERS.RESIDENTIAL,
-    images: ['urban_view_apartments.jpg']
-  },
-  'Pearl View Kisaasi - 2 Bedroom Shell Unit': {
-    propertyTitle: 'Pearl View Kisaasi - 2 Bedroom Shell Unit',
+  'Pearl View Kisaasi - 2 Bedroom by Saif Real Estate': {
+    propertyTitle: 'Pearl View Kisaasi - 2 Bedroom by Saif Real Estate',
     developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg', 'pearl_view_shell_2bed.jpg']
+    images: ['pearl_view_building.jpg']
   },
-  'Pearl View Kisaasi - 3 Bedroom Shell Unit': {
-    propertyTitle: 'Pearl View Kisaasi - 3 Bedroom Shell Unit',
+  'Pearl View Kisaasi - 3 Bedroom by Saif Real Estate': {
+    propertyTitle: 'Pearl View Kisaasi - 3 Bedroom by Saif Real Estate',
     developer: 'Saif Real Estate', 
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg', 'pearl_view_shell_3bed.jpg']
+    images: ['pearl_view_building.jpg']
   },
   'Elite Pallazo Naguru': {
     propertyTitle: 'Elite Pallazo Naguru',
