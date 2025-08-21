@@ -1,18 +1,22 @@
 /**
  * Property Image Utilities
  * Handles proper image path resolution and fallback logic
+ * CRITICAL: Prevents mixing images between different developers/buildings
  */
+
+import { getPropertyImageConfig, getPropertyDeveloperFolder } from './property-image-config';
 
 export interface ImageConfig {
   filename: string;
-  category?: 'featured' | 'residential' | 'commercial';
+  propertyTitle?: string;
   useThumbnail?: boolean;
 }
 
 /**
  * Generates the proper image URL for property images
+ * PROFESSIONAL APPROACH: Organizes images by developer to prevent mixing
  * @param filename - The image filename from database
- * @param config - Image configuration options
+ * @param config - Image configuration options including propertyTitle for developer detection
  * @returns Proper image URL or placeholder if needed
  */
 export function getPropertyImageUrl(filename: string, config: ImageConfig = { filename }): string {
@@ -27,9 +31,13 @@ export function getPropertyImageUrl(filename: string, config: ImageConfig = { fi
     return '/api/placeholder/400/300';
   }
 
-  // Build the path based on configuration
-  const category = config.category || 'residential';
-  const folder = config.useThumbnail ? 'thumbnails' : category;
+  // Get the correct developer folder to prevent image mixing
+  const developerFolder = config.propertyTitle 
+    ? getPropertyDeveloperFolder(config.propertyTitle)
+    : 'general';
+
+  // Build the path with proper developer organization
+  const folder = config.useThumbnail ? 'thumbnails' : developerFolder;
   const imagePath = `/images/properties/${folder}/${cleanFilename}`;
 
   return imagePath;
@@ -37,11 +45,17 @@ export function getPropertyImageUrl(filename: string, config: ImageConfig = { fi
 
 /**
  * Processes image arrays from database (JSON strings or arrays)
+ * PROFESSIONAL APPROACH: Uses developer-based organization to prevent image mixing
  * @param images - Images data from database
+ * @param propertyTitle - Property title for developer identification
  * @param config - Image configuration options
- * @returns Array of image URLs
+ * @returns Array of image URLs organized by developer
  */
-export function processPropertyImages(images: string | string[] | null, config: Partial<ImageConfig> = {}): string[] {
+export function processPropertyImages(
+  images: string | string[] | null, 
+  propertyTitle: string,
+  config: Partial<ImageConfig> = {}
+): string[] {
   if (!images) {
     return ['/api/placeholder/400/300'];
   }
@@ -61,10 +75,14 @@ export function processPropertyImages(images: string | string[] | null, config: 
     }
   }
 
-  // Filter out empty strings and process each image
+  // Filter out empty strings and process each image with proper developer organization
   return imageArray
     .filter(img => img && img.trim())
-    .map(filename => getPropertyImageUrl(filename, { filename, ...config }));
+    .map(filename => getPropertyImageUrl(filename, { 
+      filename, 
+      propertyTitle, 
+      ...config 
+    }));
 }
 
 /**
