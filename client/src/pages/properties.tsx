@@ -72,30 +72,26 @@ const Properties = () => {
   const PropertyCard = ({ property, isGrid = true }: { property: Property; isGrid?: boolean }) => {
     const images = Array.isArray(property.images) ? property.images : [];
     const hasImages = images.length > 0;
-    const mainImage = hasImages ? getPropertyImage(images[0]) : null;
+    const mainImage = hasImages ? getPropertyImage(images[0]) : getPropertyImage('property-01.jpg');
 
     return (
-      <Card className={`group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-0 shadow-lg ${isGrid ? 'h-full' : 'flex flex-row'}`}>
-        <div className={`relative overflow-hidden ${isGrid ? 'h-64' : 'w-80 h-48'}`}>
-          {mainImage ? (
-            <img
-              src={mainImage}
-              alt={property.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                const placeholder = target.parentElement?.querySelector('.placeholder-div');
-                if (placeholder) {
-                  (placeholder as HTMLElement).style.display = 'flex';
-                }
-              }}
-              data-testid={`property-image-${property.id}`}
-            />
-          ) : null}
-          <div className={`placeholder-div w-full h-full bg-gradient-to-br from-bright-light to-bright-yellow/20 flex items-center justify-center ${mainImage ? 'hidden' : 'flex'}`}>
-            <Building2 className="w-16 h-16 text-bright-gray/50" />
-          </div>
+      <Card className={`group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-0 shadow-lg ${isGrid ? 'h-full' : 'flex flex-col sm:flex-row'}`}>
+        <div className={`relative overflow-hidden ${isGrid ? 'h-48 sm:h-64' : 'w-full sm:w-80 h-48'}`}>
+          <img
+            src={mainImage}
+            alt={property.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              // Fallback to a different property image if main fails
+              target.src = getPropertyImage('property-01.jpg');
+              target.onerror = null; // Prevent infinite loop
+            }}
+            data-testid={`property-image-${property.id}`}
+          />
+          
+          {/* Gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
           
           {/* Status Badge */}
           {property.status && (
@@ -130,19 +126,19 @@ const Properties = () => {
           </div>
         </div>
 
-        <CardContent className={`p-6 ${isGrid ? '' : 'flex-1'}`}>
-          <div className="flex items-start justify-between mb-3">
-            <h3 className="text-xl font-bold text-bright-black group-hover:text-bright-yellow transition-colors" data-testid={`title-${property.id}`}>
+        <CardContent className={`p-4 sm:p-6 ${isGrid ? '' : 'flex-1'}`}>
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
+            <h3 className="text-lg sm:text-xl font-bold text-bright-black group-hover:text-bright-yellow transition-colors" data-testid={`title-${property.id}`}>
               {property.title}
             </h3>
-            <span className="text-2xl font-bold text-bright-yellow" data-testid={`price-${property.id}`}>
+            <span className="text-lg sm:text-2xl font-bold text-bright-yellow whitespace-nowrap" data-testid={`price-${property.id}`}>
               {property.price}
             </span>
           </div>
 
           <div className="flex items-center gap-1 mb-3 text-bright-gray">
-            <MapPin className="w-4 h-4" />
-            <span className="text-sm" data-testid={`location-${property.id}`}>{property.location}</span>
+            <MapPin className="w-4 h-4 flex-shrink-0" />
+            <span className="text-sm line-clamp-1" data-testid={`location-${property.id}`}>{property.location}</span>
           </div>
 
           <p className="text-bright-gray text-sm mb-4 line-clamp-2" data-testid={`description-${property.id}`}>
