@@ -119,17 +119,17 @@ export function getPlaceholderUrl(width: number = 400, height: number = 300): st
 export function getDeveloperFallbackImage(propertyTitle: string): string {
   const developerFolder = getPropertyDeveloperFolder(propertyTitle);
   
-  // Developer-specific fallback images
+  // Developer-specific fallback images using real downloaded images
   const fallbackMap: Record<string, string> = {
-    'vaal': '/images/properties/vaal/the_futur_by_vaal.jpeg',
-    'saif-real-estate': '/images/properties/saif-real-estate/pearl_view_shell_unit.jpeg',
-    'edifice-properties': '/images/properties/edifice-properties/elite_pallazo.jpeg', 
-    'rf-developers': '/images/properties/rf-developers/skyrise_apartments.jpeg',
-    'hk-properties': '/images/properties/vaal/the_futur_by_vaal.jpeg',
-    'novus-real-estate': '/images/properties/vaal/the_futur_by_vaal.jpeg',
-    'residential': '/images/properties/vaal/the_futur_by_vaal.jpeg',
-    'commercial': '/images/properties/vaal/the_futur_by_vaal.jpeg',
-    'general': '/images/properties/vaal/the_futur_by_vaal.jpeg'
+    'vaal': '/images/properties/vaal/vaal_logo.svg',
+    'saif-real-estate': '/images/properties/saif-real-estate/saif_logo.png',
+    'edifice-properties': '/images/properties/edifice-properties/elite_pallazo_1.webp', 
+    'rf-developers': '/images/properties/rf-developers/skyrise_main.tif',
+    'novus-real-estate': '/images/properties/novus-real-estate/icon_180_living.jpg',
+    'hk-properties': '/images/properties/edifice-properties/elite_pallazo_1.webp',
+    'residential': '/images/properties/edifice-properties/elite_pallazo_1.webp',
+    'commercial': '/images/properties/edifice-properties/elite_pallazo_1.webp',
+    'general': '/images/properties/edifice-properties/elite_pallazo_1.webp'
   };
 
   return fallbackMap[developerFolder] || '/api/placeholder/400/300';
