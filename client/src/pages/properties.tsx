@@ -22,9 +22,11 @@ import {
   ChevronLeft,
   ChevronRight,
   Home,
-  Building
+  Building,
+  Camera
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import ImageGallery from "@/components/ImageGallery";
 import type { Property } from "@shared/schema";
 import { processPropertyImages, getPlaceholderUrl, getPropertyImageUrl, getDeveloperFallbackImage } from "@/lib/image-utils";
 
@@ -319,6 +321,9 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+  
   // Handle different image storage formats using utility functions
   // PROFESSIONAL APPROACH: Pass property title to ensure proper developer-based organization
   const processedImages = processPropertyImages(
@@ -329,6 +334,11 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
   
   const mainImage = processedImages[0] || getPlaceholderUrl(400, 300);
 
+  const openGallery = (index: number = 0) => {
+    setGalleryIndex(index);
+    setGalleryOpen(true);
+  };
+
 
 
   return (
@@ -336,7 +346,7 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
       featured ? 'ring-2 ring-bright-yellow' : ''
     }`}>
       <div className="relative">
-        <div className="aspect-video overflow-hidden">
+        <div className="aspect-video overflow-hidden cursor-pointer" onClick={() => openGallery(0)}>
           <img 
             src={mainImage}
             alt={property.title}
@@ -345,6 +355,12 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
               e.currentTarget.src = getDeveloperFallbackImage(property.title);
             }}
           />
+          {processedImages.length > 1 && (
+            <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-sm flex items-center">
+              <Camera className="w-3 h-3 mr-1" />
+              {processedImages.length}
+            </div>
+          )}
         </div>
         
         <div className="absolute top-4 left-4 flex gap-2">
@@ -453,6 +469,15 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
           </Button>
         </PropertyDetailsDialog>
       </CardContent>
+      
+      {/* Image Gallery */}
+      <ImageGallery 
+        images={processedImages}
+        alt={property.title}
+        open={galleryOpen}
+        onOpenChange={setGalleryOpen}
+        initialIndex={galleryIndex}
+      />
     </Card>
   );
 };
@@ -465,6 +490,7 @@ interface PropertyDetailsDialogProps {
 
 const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [galleryOpen, setGalleryOpen] = useState(false);
   
   // PROFESSIONAL APPROACH: Use developer-organized images to prevent mixing
   const imageUrls = processPropertyImages(
@@ -514,18 +540,37 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* Image Gallery */}
+          {/* Interactive Image Gallery with Zoom */}
           <div className="relative">
-            <div className="aspect-video overflow-hidden rounded-lg">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-bright-black">Property Gallery</h3>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setGalleryOpen(true)}
+                className="flex items-center gap-2"
+              >
+                <Camera className="w-4 h-4" />
+                View in Fullscreen
+              </Button>
+            </div>
+            
+            <div className="aspect-video overflow-hidden rounded-lg cursor-pointer group" 
+                 onClick={() => setGalleryOpen(true)}>
               <img 
                 src={imageUrls[currentImageIndex]}
                 alt={`${property.title} - Image ${currentImageIndex + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 onError={(e) => {
                   const fallbackImage = processPropertyImages(null, property.title)[0];
                   e.currentTarget.src = fallbackImage;
                 }}
               />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3">
+                  <Camera className="w-6 h-6 text-bright-black" />
+                </div>
+              </div>
             </div>
             
             {imageUrls.length > 1 && (
@@ -579,6 +624,15 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               ))}
             </div>
           )}
+          
+          {/* Full-Screen Image Gallery */}
+          <ImageGallery 
+            images={imageUrls}
+            alt={property.title}
+            open={galleryOpen}
+            onOpenChange={setGalleryOpen}
+            initialIndex={currentImageIndex}
+          />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Column - Basic Info */}
