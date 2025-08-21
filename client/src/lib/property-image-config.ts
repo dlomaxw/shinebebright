@@ -35,17 +35,17 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     folder: DEVELOPER_FOLDERS.GENERAL,
     images: []
   },
-  'Saif Real Estate Shell Units - 2 Bedroom': {
-    propertyTitle: 'Saif Real Estate Shell Units - 2 Bedroom',
+  'Pearl View - 2 Bedroom Apartment': {
+    propertyTitle: 'Pearl View - 2 Bedroom Apartment',
     developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['saif_real_estate_2bed.png']
+    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
   },
-  'Saif Real Estate Shell Units - 3 Bedroom': {
-    propertyTitle: 'Saif Real Estate Shell Units - 3 Bedroom', 
+  'Pearl View - 3 Bedroom Apartment': {
+    propertyTitle: 'Pearl View - 3 Bedroom Apartment', 
     developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['saif_real_estate_3bed.png']
+    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
   },
   'Icon 180 Luxury Complex': {
     propertyTitle: 'Icon 180 Luxury Complex',
@@ -81,13 +81,13 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Pearl View - 2 Bedroom Apartment',
     developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
+    images: ['pearl_view_new.jpg', 'pearl_view_building.jpg']
   },
   'Pearl View - 3 Bedroom Apartment': {
     propertyTitle: 'Pearl View - 3 Bedroom Apartment',
-    developer: 'Saif Real Estate', 
+    developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
+    images: ['pearl_view_new.jpg', 'pearl_view_building.jpg']
   },
   'Elite Pallazo Naguru': {
     propertyTitle: 'Elite Pallazo Naguru',
