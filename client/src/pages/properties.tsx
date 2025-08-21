@@ -342,7 +342,7 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
 
 
   return (
-    <Card className={`overflow-hidden hover:shadow-xl transition-all duration-300 group ${
+    <Card className={`overflow-hidden hover:shadow-xl transition-all duration-300 group bg-white ${
       featured ? 'ring-2 ring-bright-yellow' : ''
     }`}>
       <div className="relative">
@@ -389,13 +389,13 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
 
       <CardContent className="p-6">
         <div className="mb-4">
-          <CardTitle className="text-2xl font-bold text-white mb-3 group-hover:text-bright-yellow transition-colors leading-tight drop-shadow-lg">
+          <CardTitle className="text-2xl font-bold text-bright-black mb-3 group-hover:text-bright-yellow transition-colors leading-tight">
             {property.title}
           </CardTitle>
           
-          <div className="flex items-center text-bright-gray mb-3">
-            <MapPin className="w-4 h-4 mr-2" />
-            <span className="text-sm">{property.location}</span>
+          <div className="flex items-center text-gray-700 mb-3">
+            <MapPin className="w-4 h-4 mr-2 text-bright-yellow" />
+            <span className="text-sm font-medium">{property.location}</span>
           </div>
 
           <div className="text-2xl font-bold text-bright-yellow mb-4">
@@ -406,33 +406,33 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
         {/* Property Details */}
         <div className="grid grid-cols-2 gap-4 mb-4">
           {property.bedrooms && (
-            <div className="flex items-center text-sm text-bright-gray">
-              <Bed className="w-4 h-4 mr-2" />
-              <span>{property.bedrooms} Bed</span>
+            <div className="flex items-center text-sm text-gray-700">
+              <Bed className="w-4 h-4 mr-2 text-bright-yellow" />
+              <span className="font-medium">{property.bedrooms} Bed</span>
             </div>
           )}
           {property.bathrooms && (
-            <div className="flex items-center text-sm text-bright-gray">
-              <Bath className="w-4 h-4 mr-2" />
-              <span>{property.bathrooms} Bath</span>
+            <div className="flex items-center text-sm text-gray-700">
+              <Bath className="w-4 h-4 mr-2 text-bright-yellow" />
+              <span className="font-medium">{property.bathrooms} Bath</span>
             </div>
           )}
           {property.garage && (
-            <div className="flex items-center text-sm text-bright-gray">
-              <Car className="w-4 h-4 mr-2" />
-              <span>{property.garage} Garage</span>
+            <div className="flex items-center text-sm text-gray-700">
+              <Car className="w-4 h-4 mr-2 text-bright-yellow" />
+              <span className="font-medium">{property.garage} Garage</span>
             </div>
           )}
           {property.propertySize && (
-            <div className="flex items-center text-sm text-bright-gray">
-              <Ruler className="w-4 h-4 mr-2" />
-              <span>{property.propertySize}</span>
+            <div className="flex items-center text-sm text-gray-700">
+              <Ruler className="w-4 h-4 mr-2 text-bright-yellow" />
+              <span className="font-medium">{property.propertySize}</span>
             </div>
           )}
           {property.yearBuilt && (
-            <div className="flex items-center text-sm text-bright-gray">
-              <Calendar className="w-4 h-4 mr-2" />
-              <span>{property.yearBuilt}</span>
+            <div className="flex items-center text-sm text-gray-700">
+              <Calendar className="w-4 h-4 mr-2 text-bright-yellow" />
+              <span className="font-medium">{property.yearBuilt}</span>
             </div>
           )}
         </div>
@@ -440,7 +440,7 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
         <Separator className="my-4" />
 
         {/* Description */}
-        <p className="text-sm text-bright-gray mb-4 line-clamp-2">
+        <p className="text-sm text-gray-700 mb-4 line-clamp-2 leading-relaxed">
           {property.description}
         </p>
 
