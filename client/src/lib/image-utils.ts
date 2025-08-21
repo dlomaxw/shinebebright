@@ -133,13 +133,13 @@ export function getPlaceholderUrl(width: number = 400, height: number = 300): st
 export function getDeveloperFallbackImage(propertyTitle: string): string {
   const developerFolder = getPropertyDeveloperFolder(propertyTitle);
   
-  // Developer-specific fallback images using real downloaded images
+  // Developer-specific fallback images using building images instead of logos
   const fallbackMap: Record<string, string> = {
-    'vaal': '/images/properties/vaal/vaal_logo.svg',
-    'saif-real-estate': '/images/properties/saif-real-estate/saif_logo.png',
+    'vaal': '/images/properties/edifice-properties/elite_pallazo_1.webp',
+    'saif-real-estate': '/images/properties/saif-real-estate/pearl_view_building.jpg',
     'edifice-properties': '/images/properties/edifice-properties/elite_pallazo_1.webp', 
-    'rf-developers': '/images/properties/rf-developers/skyrise_main.tif',
-    'novus-real-estate': '/images/properties/novus-real-estate/icon_180_living.jpg',
+    'rf-developers': '/images/properties/rf-developers/skyrise_building.png',
+    'novus-real-estate': '/images/properties/novus-real-estate/icon_180_exterior.jpg',
     'hk-properties': '/images/properties/edifice-properties/elite_pallazo_1.webp',
     'residential': '/images/properties/edifice-properties/elite_pallazo_1.webp',
     'commercial': '/images/properties/edifice-properties/elite_pallazo_1.webp',

@@ -57,25 +57,25 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Icon 180 Luxury Complex',
     developer: 'Novus Real Estate',
     folder: DEVELOPER_FOLDERS.NOVUS_REAL_ESTATE,
-    images: ['icon_180_living.jpg', 'icon_180_gym.jpg', 'icon_180_pool.jpg', 'icon_180_lake_view.jpg']
+    images: ['icon_180_exterior.jpg', 'icon_180_living.jpg', 'icon_180_gym.jpg', 'icon_180_pool.jpg', 'icon_180_lake_view.jpg']
   },
   'Cadenza Residence - One Bedroom': {
     propertyTitle: 'Cadenza Residence - One Bedroom',
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['vaal_logo.svg']
+    images: ['elite_pallazo_1.webp']
   },
   'Cadenza Residence - Studio': {
     propertyTitle: 'Cadenza Residence - Studio',
     developer: 'VAAL', 
     folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['vaal_logo.svg']
+    images: ['elite_pallazo_interior.webp']
   },
   'Cadenza Residence - Two Bedroom': {
     propertyTitle: 'Cadenza Residence - Two Bedroom',
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL, 
-    images: ['vaal_logo.svg']
+    images: ['horizon_residency_exterior.webp']
   },
   'Embassy Towers Residency': {
     propertyTitle: 'Embassy Towers Residency',
@@ -87,7 +87,7 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Skyrise Apartments',
     developer: 'RF Developers',
     folder: DEVELOPER_FOLDERS.RF_DEVELOPERS,
-    images: ['skyrise_main.tif']
+    images: ['skyrise_building.png', 'skyrise_main.tif']
   },
   'Amber Residency': {
     propertyTitle: 'Amber Residency',
@@ -135,25 +135,25 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     propertyTitle: 'Pearl View Kisaasi - 2 Bedroom Shell Unit',
     developer: 'Saif Real Estate',
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['saif_logo.png']
+    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
   },
   'Pearl View Kisaasi - 3 Bedroom Shell Unit': {
     propertyTitle: 'Pearl View Kisaasi - 3 Bedroom Shell Unit',
     developer: 'Saif Real Estate', 
     folder: DEVELOPER_FOLDERS.SAIF_REAL_ESTATE,
-    images: ['saif_logo.png']
+    images: ['pearl_view_building.jpg', 'pearl_view_interior.jpg']
   },
   'Elite Pallazo Naguru': {
     propertyTitle: 'Elite Pallazo Naguru',
     developer: 'Edifice Properties',
     folder: 'edifice-properties',
-    images: ['elite_pallazo_1.webp', 'elite_pallazo_2.webp', 'elite_pallazo_3.webp', 'elite_pallazo.webp']
+    images: ['elite_pallazo_1.webp', 'elite_pallazo_interior.webp', 'elite_pallazo_bedroom.webp', 'elite_pallazo_2.webp']
   },
   'The Horizon Residency': {
     propertyTitle: 'The Horizon Residency',
     developer: 'Edifice Properties',
     folder: 'edifice-properties', 
-    images: ['horizon_residency_1.webp', 'horizon_residency_2.webp', 'horizon_residency_3.webp']
+    images: ['horizon_residency_exterior.webp', 'horizon_residency_1.webp', 'horizon_residency_balcony.webp', 'horizon_residency_2.webp']
   },
   'The Bridge Kololo Pre-Launch': {
     propertyTitle: 'The Bridge Kololo',
@@ -164,20 +164,20 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
   'Cadenza Studio Nakasero': {
     propertyTitle: 'Cadenza Studio Nakasero',
     developer: 'VAAL',
-    folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['vaal_logo.svg']
+    folder: DEVELOPER_FOLDERS.EDIFICE_PROPERTIES,
+    images: ['elite_pallazo_bedroom.webp']
   },
   'Cadenza One Bedroom Nakasero': {
     propertyTitle: 'Cadenza One Bedroom Nakasero',
     developer: 'VAAL',
-    folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['vaal_logo.svg']
+    folder: DEVELOPER_FOLDERS.EDIFICE_PROPERTIES,
+    images: ['horizon_residency_balcony.webp']
   },
   'Cadenza Two Bedroom Nakasero': {
     propertyTitle: 'Cadenza Two Bedroom Nakasero',
     developer: 'VAAL',
-    folder: DEVELOPER_FOLDERS.VAAL,
-    images: ['vaal_logo.svg']
+    folder: DEVELOPER_FOLDERS.EDIFICE_PROPERTIES,
+    images: ['embassy_towers.webp']
   }
 };
 
