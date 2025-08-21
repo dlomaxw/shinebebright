@@ -56,6 +56,20 @@ export function processPropertyImages(
   propertyTitle: string,
   config: Partial<ImageConfig> = {}
 ): string[] {
+  // First check if we have configured images for this property
+  const propertyConfig = getPropertyImageConfig(propertyTitle);
+  
+  if (propertyConfig && propertyConfig.images.length > 0) {
+    // Use the configured images from the property configuration
+    return propertyConfig.images.map(filename => 
+      getPropertyImageUrl(filename, { 
+        filename, 
+        propertyTitle, 
+        ...config 
+      })
+    );
+  }
+
   if (!images) {
     return [getDeveloperFallbackImage(propertyTitle)];
   }

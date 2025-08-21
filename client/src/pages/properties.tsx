@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import type { Property } from "@shared/schema";
-import { processPropertyImages, getPlaceholderUrl, getPropertyImageUrl } from "@/lib/image-utils";
+import { processPropertyImages, getPlaceholderUrl, getPropertyImageUrl, getDeveloperFallbackImage } from "@/lib/image-utils";
 
 const Properties = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -324,7 +324,7 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
   const processedImages = processPropertyImages(
     property.images as string | string[] | null, 
     property.title,
-    { useThumbnail: true }
+    { useThumbnail: false }
   );
   
   const mainImage = processedImages[0] || getPlaceholderUrl(400, 300);
@@ -342,7 +342,7 @@ const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
             alt={property.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             onError={(e) => {
-              e.currentTarget.src = '/api/placeholder/400/300';
+              e.currentTarget.src = getDeveloperFallbackImage(property.title);
             }}
           />
         </div>
