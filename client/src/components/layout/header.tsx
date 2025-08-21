@@ -120,7 +120,7 @@ const Header = () => {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80">
+            <SheetContent side="right" className="w-80 bg-white border-l-2 border-bright-yellow">
               <div className="flex flex-col space-y-4 mt-8">
                 {navigation.map((item) => (
                   <Link
@@ -129,22 +129,22 @@ const Header = () => {
                     onClick={() => setIsOpen(false)}
                     className={`text-lg font-medium transition-colors ${
                       isActive(item.href)
-                        ? "text-bright-yellow"
-                        : "text-gray-700 hover:text-bright-yellow"
+                        ? "text-bright-yellow font-bold"
+                        : "text-gray-900 hover:text-bright-yellow"
                     }`}
                   >
                     {item.name}
                   </Link>
                 ))}
 
-                <div className="border-t pt-4">
+                <div className="border-t border-gray-300 pt-4">
                   <h3 className="text-sm font-semibold text-gray-900 mb-3">Services</h3>
                   {services.map((service) => (
                     <Link
                       key={service.name}
                       href={service.href}
                       onClick={() => setIsOpen(false)}
-                      className="block text-gray-700 hover:text-bright-yellow transition-colors py-1"
+                      className="block text-gray-900 hover:text-bright-yellow hover:font-medium transition-all py-2 px-2 rounded-md hover:bg-yellow-50"
                     >
                       {service.name}
                     </Link>

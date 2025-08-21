@@ -320,10 +320,12 @@ interface PropertyCardProps {
 
 const PropertyCard = ({ property, featured = false }: PropertyCardProps) => {
   // Handle different image storage formats using utility functions
-  const processedImages = processPropertyImages(property.images, {
-    category: property.category as 'featured' | 'residential' | 'commercial' || 'residential',
-    useThumbnail: true
-  });
+  // PROFESSIONAL APPROACH: Pass property title to ensure proper developer-based organization
+  const processedImages = processPropertyImages(
+    property.images as string | string[] | null, 
+    property.title,
+    { useThumbnail: true }
+  );
   
   const mainImage = processedImages[0] || getPlaceholderUrl(400, 300);
 
@@ -464,22 +466,12 @@ interface PropertyDetailsDialogProps {
 const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  // Handle different image storage formats
-  let images: string[] = [];
-  if (Array.isArray(property.images)) {
-    images = property.images;
-  } else if (typeof property.images === 'string') {
-    try {
-      images = JSON.parse(property.images);
-    } catch {
-      images = property.images ? [property.images] : [];
-    }
-  }
-  
-  // Convert to proper URLs or use placeholder
-  const imageUrls = images.length > 0 
-    ? images.map(() => '/api/placeholder/400/300') // Using placeholder for now
-    : ['/api/placeholder/400/300'];
+  // PROFESSIONAL APPROACH: Use developer-organized images to prevent mixing
+  const imageUrls = processPropertyImages(
+    property.images as string | string[] | null,
+    property.title,
+    { useThumbnail: false }
+  );
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % imageUrls.length);
@@ -500,7 +492,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto bg-white">
+      <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto bg-white" aria-describedby="property-description">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-bright-black flex items-center justify-between">
             {property.title}
@@ -516,8 +508,8 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               </Button>
             )}
           </DialogTitle>
-          <DialogDescription className="text-bright-gray">
-            Detailed property information with virtual tour capabilities
+          <DialogDescription id="property-description" className="text-bright-gray">
+            Detailed property information with virtual tour capabilities for {property.title}
           </DialogDescription>
         </DialogHeader>
 
