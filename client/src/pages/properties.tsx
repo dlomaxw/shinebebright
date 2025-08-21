@@ -182,7 +182,7 @@ const Properties = () => {
               Contact our expert team for personalized assistance and exclusive property viewings.
             </p>
             <p className="text-bright-yellow font-semibold">
-              Bright Platform - Leading VR/AR Real Estate Solutions in Rwanda
+              Bright Platform - Leading VR/AR Real Estate Solutions in Uganda
             </p>
           </div>
           
@@ -191,7 +191,7 @@ const Properties = () => {
             <div>
               <h3 className="text-xl font-bold text-bright-yellow mb-4">About Bright Platform</h3>
               <p className="text-gray-300 mb-6 leading-relaxed">
-                We are Rwanda's premier immersive technology company, revolutionizing the real estate industry 
+                We are Uganda's premier immersive technology company, revolutionizing the real estate industry 
                 with cutting-edge VR/AR solutions. Our innovative approach brings properties to life, allowing 
                 clients to experience spaces before they exist or visit remotely with unprecedented clarity.
               </p>
@@ -249,7 +249,7 @@ const Properties = () => {
                   <MapPin className="w-5 h-5 text-bright-yellow mt-1" />
                   <div>
                     <p className="font-semibold">Location</p>
-                    <p className="text-gray-300">Kigali, Rwanda</p>
+                    <p className="text-gray-300">Kampala, Uganda</p>
                     <p className="text-sm text-gray-400">Serving all of East Africa</p>
                   </div>
                 </div>
@@ -752,7 +752,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                 <div className="space-y-2">
                   <div className="flex items-center text-gray-300">
                     <MapPin className="w-4 h-4 mr-2" />
-                    <span>Kigali, Rwanda</span>
+                    <span>Kampala, Uganda</span>
                   </div>
                   <div className="text-gray-300">
                     Available 24/7 for consultations

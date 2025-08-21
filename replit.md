@@ -1,6 +1,6 @@
 # Overview
 
-This is a full-stack web application for "Bright," an immersive technology company that provides VR/AR solutions across multiple industries including real estate, architecture, interior design, media, and training. The application serves as both a company showcase website and a content management system with an admin panel for managing projects, team members, blog posts, customer inquiries, and service bookings. The platform includes comprehensive service booking functionality without payment processing, property management features, and complete administrative tools.
+This is a full-stack web application for "Bright," an immersive technology company based in Uganda that provides VR/AR solutions across multiple industries including real estate, architecture, interior design, media, and training. The application serves as both a company showcase website and a content management system with an admin panel for managing projects, team members, blog posts, customer inquiries, and service bookings. The platform includes comprehensive service booking functionality without payment processing, property management features, and complete administrative tools.
 
 # User Preferences
 
