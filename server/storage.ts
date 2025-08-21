@@ -426,11 +426,13 @@ export class DatabaseStorage implements IStorage {
 
   // Client Project operations
   async getClientProjects(clientId?: string): Promise<ClientProject[]> {
-    let query = db.select().from(clientProjects);
     if (clientId) {
-      query = query.where(eq(clientProjects.clientId, clientId));
+      return await db.select().from(clientProjects)
+        .where(eq(clientProjects.clientId, clientId))
+        .orderBy(desc(clientProjects.createdAt));
     }
-    return query.orderBy(desc(clientProjects.createdAt));
+    return await db.select().from(clientProjects)
+      .orderBy(desc(clientProjects.createdAt));
   }
 
   async getClientProject(id: string): Promise<ClientProject | undefined> {
@@ -472,11 +474,13 @@ export class DatabaseStorage implements IStorage {
 
   // Virtual Tour operations
   async getVirtualTours(status?: string): Promise<VirtualTour[]> {
-    let query = db.select().from(virtualTours);
     if (status) {
-      query = query.where(eq(virtualTours.status, status));
+      return await db.select().from(virtualTours)
+        .where(eq(virtualTours.status, status))
+        .orderBy(desc(virtualTours.createdAt));
     }
-    return query.orderBy(desc(virtualTours.createdAt));
+    return await db.select().from(virtualTours)
+      .orderBy(desc(virtualTours.createdAt));
   }
 
   async getVirtualTour(id: string): Promise<VirtualTour | undefined> {
@@ -601,6 +605,7 @@ export class DatabaseStorage implements IStorage {
           page: "/", 
           views: Math.floor(Math.random() * 100) + 50 
         },
+        metadata: null,
         timestamp: date,
         ipAddress: "127.0.0.1",
         userAgent: "Browser",
@@ -617,6 +622,7 @@ export class DatabaseStorage implements IStorage {
           service_type: "real_estate",
           inquiry_count: Math.floor(Math.random() * 10) + 1
         },
+        metadata: null,
         timestamp: date,
         ipAddress: "127.0.0.1",
         userAgent: "Browser",
@@ -637,7 +643,11 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createAnalyticsEvent(eventData: InsertAnalyticsEvent): Promise<AnalyticsEvent> {
-    const [event] = await db.insert(analyticsEvents).values(eventData).returning();
+    const safeEventData = {
+      ...eventData,
+      metadata: eventData.metadata || null
+    };
+    const [event] = await db.insert(analyticsEvents).values(safeEventData).returning();
     return event;
   }
 
