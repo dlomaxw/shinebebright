@@ -112,6 +112,12 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     developer: 'VAAL',
     folder: DEVELOPER_FOLDERS.VAAL,
     images: ['cadenza_facade_2.jpg', 'cadenza_interior_real_2.jpg']
+  },
+  'Garnet Residency - 3 Bedroom Apartments': {
+    propertyTitle: 'Garnet Residency - 3 Bedroom Apartments',
+    developer: 'HK Properties',
+    folder: DEVELOPER_FOLDERS.HK_PROPERTIES,
+    images: ['garnet_residency_main.jpg', 'garnet_residency_3bhk_side.jpg', 'garnet_residency_3bhk_top.jpg', 'garnet_residency_render.jpg']
   }
 };
 
