@@ -186,8 +186,8 @@ export default function PropertiesTable() {
                       {property.price}
                     </div>
                     <div className="flex gap-2">
-                      <Badge className={`text-xs ${getStatusColor(property.status)}`}>
-                        {property.status}
+                      <Badge className={`text-xs ${getStatusColor(property.status || 'for sale')}`}>
+                        {property.status || 'For Sale'}
                       </Badge>
                       {property.featured && (
                         <Badge className="bg-bright-yellow text-black text-xs">
@@ -281,8 +281,8 @@ export default function PropertiesTable() {
                         </div>
                       </TableCell>
                       <TableCell>
-                        <Badge className={getStatusColor(property.status)}>
-                          {property.status}
+                        <Badge className={getStatusColor(property.status || 'for sale')}>
+                          {property.status || 'For Sale'}
                         </Badge>
                       </TableCell>
                       <TableCell>
