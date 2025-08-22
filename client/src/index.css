@@ -125,6 +125,31 @@
   color: #111111 !important;
 }
 
+/* ConversioBot positioning at left bottom */
+#bot-widget-script,
+.conversiobot-widget,
+.bot-widget,
+#conversiobot-widget,
+iframe[src*="conversiobot"],
+iframe[src*="app.conversiobot.com"] {
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 20px !important;
+  right: auto !important;
+  z-index: 9999 !important;
+}
+
+/* ConversioBot container positioning */
+div[id*="conversio"],
+div[class*="conversio"],
+div[id*="bot-widget"],
+div[class*="bot-widget"] {
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 20px !important;
+  right: auto !important;
+}
+
 /* Fix navigation visibility */
 .nav-link {
   color: #666666 !important;
