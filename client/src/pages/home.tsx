@@ -196,7 +196,7 @@ const Home = () => {
         </section>
       </SectionTransition>
     </div>
-  );<script>(function(p,u,s,h){p.botId = "tduSLX";s=u.createElement('script');s.type='text/javascript';s.id="bot-widget-script";s.src='https://app.conversiobot.com/lib/js/gadget.js';s.setAttribute('bid',"tduSLX");h=u.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})(window,document);</script>
+  );
 };
 
 
