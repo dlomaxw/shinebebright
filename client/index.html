@@ -39,67 +39,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- Chat Widget -->
-    <div id="chat-widget" class="chat-widget">
-      <button class="chat-toggle" id="chat-toggle" onclick="toggleChat()" title="Chat with us">
-        💬
-      </button>
-      <div class="chat-window" id="chat-window" style="display: none;">
-        <div class="chat-header">
-          <h3>Chat with Bright Properties</h3>
-          <button class="chat-close" onclick="toggleChat()">×</button>
-        </div>
-        <div class="chat-messages" id="chat-messages">
-          <div class="message bot-message">
-            <strong>Bright Properties:</strong> Hello! How can we help you today? 👋
-          </div>
-        </div>
-        <div class="chat-input-area">
-          <input type="text" id="chat-input" placeholder="Type your message..." onkeypress="handleChatKeypress(event)">
-          <button onclick="sendMessage()">Send</button>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      function toggleChat() {
-        const chatWindow = document.getElementById('chat-window');
-        const isVisible = chatWindow.style.display !== 'none';
-        chatWindow.style.display = isVisible ? 'none' : 'block';
-      }
-
-      function handleChatKeypress(event) {
-        if (event.key === 'Enter') {
-          sendMessage();
-        }
-      }
-
-      function sendMessage() {
-        const input = document.getElementById('chat-input');
-        const messages = document.getElementById('chat-messages');
-        const message = input.value.trim();
-        
-        if (message) {
-          // Add user message
-          const userDiv = document.createElement('div');
-          userDiv.className = 'message user-message';
-          userDiv.innerHTML = `<strong>You:</strong> ${message}`;
-          messages.appendChild(userDiv);
-          
-          // Add bot response
-          setTimeout(() => {
-            const botDiv = document.createElement('div');
-            botDiv.className = 'message bot-message';
-            botDiv.innerHTML = `<strong>Bright Properties:</strong> Thank you for your message! We'll get back to you soon. For immediate assistance, please call us at +256 750 421 224 or email us at info@shinebebright.com 📞`;
-            messages.appendChild(botDiv);
-            messages.scrollTop = messages.scrollHeight;
-          }, 1000);
-          
-          input.value = '';
-          messages.scrollTop = messages.scrollHeight;
-        }
-      }
-    </script>
     <script type="module" src="/src/main.tsx"></script>
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
     <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
