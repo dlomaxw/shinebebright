@@ -8,10 +8,41 @@
     <title>Bright Properties - Immersive Technology Solutions</title>
     <!-- External scripts temporarily disabled to prevent runtime errors -->
     <!-- <script defer src="https://shown.io/metrics/rm9JjrMQ97" type="text/javascript"></script> -->
-    <script>(function(p,u,s,h){p.botId = "tduSLX";s=u.createElement('script');s.type='text/javascript';s.id="bot-widget-script";s.src='https://app.conversiobot.com/lib/js/gadget.js';s.setAttribute('bid',"tduSLX");h=u.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})(window,document);</script>
+    <script>
+      // ConversioBot Widget
+      (function(p,u,s,h){
+        p.botId = "tduSLX";
+        s = u.createElement('script');
+        s.type = 'text/javascript';
+        s.id = "bot-widget-script";
+        s.src = 'https://app.conversiobot.com/lib/js/gadget.js';
+        s.setAttribute('bid', "tduSLX");
+        s.onload = function() {
+          console.log('ConversioBot script loaded successfully');
+          // Force widget initialization after a short delay
+          setTimeout(function() {
+            if (window.ConversioBot) {
+              console.log('ConversioBot object found, initializing...');
+              window.ConversioBot.init();
+            } else {
+              console.log('ConversioBot object not found, widget should auto-initialize');
+            }
+          }, 2000);
+        };
+        s.onerror = function() {
+          console.error('Failed to load ConversioBot script');
+        };
+        h = u.getElementsByTagName('script')[0];
+        h.parentNode.insertBefore(s, h);
+      })(window, document);
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <!-- Temporary fallback chat button -->
+    <button class="fallback-chat-btn" id="fallback-chat" onclick="console.log('Chat button clicked - ConversioBot should appear here')" title="Chat with us">
+      💬
+    </button>
     <script type="module" src="/src/main.tsx"></script>
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
     <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
