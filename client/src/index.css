@@ -194,7 +194,7 @@ body, * {
 .fallback-chat-btn {
   position: fixed !important;
   bottom: 20px !important;
-  right: 20px !important;
+  left: 20px !important;
   width: 60px !important;
   height: 60px !important;
   background-color: #FFE100 !important;
