@@ -39,10 +39,70 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- ConversioBot Widget Container -->
-    <div id="conversio-chat" style="position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px; background-color: #FFE100; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000; font-size: 24px; transition: all 0.3s ease;" onclick="this.style.display='none';" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-      💬
+    <!-- Chat Widget -->
+    <div id="bright-chat-widget" style="position: fixed; bottom: 20px; left: 20px; z-index: 10000;">
+      <div id="chat-button" style="width: 60px; height: 60px; background-color: #FFE100; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-size: 24px; color: #111111; transition: all 0.3s ease;" onclick="toggleBrightChat()" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        💬
+      </div>
+      <div id="chat-window" style="display: none; position: absolute; bottom: 70px; left: 0; width: 320px; height: 400px; background: white; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 1px solid #e5e7eb; flex-direction: column;">
+        <div style="padding: 16px; background: #FFE100; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; font-size: 16px; font-weight: 600; color: #111111; font-family: Inter, sans-serif;">Chat with Bright Properties</h3>
+          <button onclick="toggleBrightChat()" style="background: none; border: none; font-size: 20px; color: #111111; cursor: pointer; padding: 0;">×</button>
+        </div>
+        <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; max-height: 280px; font-family: Inter, sans-serif;">
+          <div style="margin-bottom: 12px; padding: 8px 12px; border-radius: 8px; font-size: 14px; background-color: #f3f4f6; color: #111111;">
+            <strong>Bright Properties:</strong> Hello! Welcome to Bright Properties - your partner in immersive technology solutions! How can we help you today? 👋
+          </div>
+        </div>
+        <div style="padding: 12px 16px; border-top: 1px solid #e5e7eb; display: flex; gap: 8px;">
+          <input type="text" id="chat-input" placeholder="Type your message..." style="flex: 1; padding: 8px 12px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 14px; outline: none; font-family: Inter, sans-serif;" onkeypress="if(event.key==='Enter') sendBrightMessage()" onfocus="this.style.borderColor='#FFE100'" onblur="this.style.borderColor='#e5e7eb'">
+          <button onclick="sendBrightMessage()" style="background-color: #FFE100; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; color: #111111; cursor: pointer; font-family: Inter, sans-serif;" onmouseover="this.style.backgroundColor='#f5d000'" onmouseout="this.style.backgroundColor='#FFE100'">Send</button>
+        </div>
+      </div>
     </div>
+
+    <script>
+      function toggleBrightChat() {
+        const chatWindow = document.getElementById('chat-window');
+        const isVisible = chatWindow.style.display === 'flex';
+        chatWindow.style.display = isVisible ? 'none' : 'flex';
+      }
+
+      function sendBrightMessage() {
+        const input = document.getElementById('chat-input');
+        const messages = document.getElementById('chat-messages');
+        const message = input.value.trim();
+        
+        if (message) {
+          // Add user message
+          const userDiv = document.createElement('div');
+          userDiv.style.cssText = 'margin-bottom: 12px; padding: 8px 12px; border-radius: 8px; font-size: 14px; background-color: #FFE100; color: #111111; margin-left: 20px; text-align: right;';
+          userDiv.innerHTML = `<strong>You:</strong> ${message}`;
+          messages.appendChild(userDiv);
+          
+          // Add bot response with company info
+          setTimeout(() => {
+            const botDiv = document.createElement('div');
+            botDiv.style.cssText = 'margin-bottom: 12px; padding: 8px 12px; border-radius: 8px; font-size: 14px; background-color: #f3f4f6; color: #111111; margin-right: 20px;';
+            
+            const responses = [
+              `<strong>Bright Properties:</strong> Thank you for reaching out! We specialize in immersive VR/AR technology solutions for real estate, architecture, and interior design. How can we transform your business? 🏢`,
+              `<strong>Bright Properties:</strong> Great question! Our services include VR property tours, AR design visualization, and immersive training programs. For immediate assistance, call us at +256 750 421 224 📞`,
+              `<strong>Bright Properties:</strong> We'd love to help you! Bright Properties offers cutting-edge immersive technology solutions across Uganda and beyond. Let's schedule a consultation - contact us at info@shinebebright.com 📧`,
+              `<strong>Bright Properties:</strong> Thank you for your interest! Our expert team provides VR/AR solutions for real estate marketing, architectural visualization, and media production. Call +256 785 189 100 for instant support! 🚀`
+            ];
+            
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            botDiv.innerHTML = randomResponse;
+            messages.appendChild(botDiv);
+            messages.scrollTop = messages.scrollHeight;
+          }, 1000);
+          
+          input.value = '';
+          messages.scrollTop = messages.scrollHeight;
+        }
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
     <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
