@@ -189,3 +189,29 @@ body, * {
 .bg-bright-light {
   background-color: #FAFAFA !important;
 }
+
+/* Fallback chat button in case ConversioBot doesn't load */
+.fallback-chat-btn {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  width: 60px !important;
+  height: 60px !important;
+  background-color: #FFE100 !important;
+  border: none !important;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+  cursor: pointer !important;
+  z-index: 9998 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 24px !important;
+  color: #111111 !important;
+  transition: all 0.3s ease !important;
+}
+
+.fallback-chat-btn:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2) !important;
+}
