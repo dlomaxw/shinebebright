@@ -8,33 +8,42 @@
     <title>Bright Properties - Immersive Technology Solutions</title>
     <!-- External scripts temporarily disabled to prevent runtime errors -->
     <!-- <script defer src="https://shown.io/metrics/rm9JjrMQ97" type="text/javascript"></script> -->
+    <!-- ConversioBot Widget Script -->
     <script>
-      // ConversioBot Widget
       (function(p,u,s,h){
         p.botId = "tduSLX";
         s = u.createElement('script');
         s.type = 'text/javascript';
-        s.id = "bot-widget-script";
         s.src = 'https://app.conversiobot.com/lib/js/gadget.js';
         s.setAttribute('bid', "tduSLX");
-        s.onload = function() {
-          console.log('ConversioBot script loaded successfully');
-          // Force widget initialization after a short delay
-          setTimeout(function() {
-            if (window.ConversioBot) {
-              console.log('ConversioBot object found, initializing...');
-              window.ConversioBot.init();
-            } else {
-              console.log('ConversioBot object not found, widget should auto-initialize');
-            }
-          }, 2000);
-        };
-        s.onerror = function() {
-          console.error('Failed to load ConversioBot script');
-        };
+        s.async = true;
         h = u.getElementsByTagName('script')[0];
         h.parentNode.insertBefore(s, h);
       })(window, document);
+    </script>
+    
+    <!-- Alternative ConversioBot initialization -->
+    <script>
+      window.addEventListener('load', function() {
+        // Check for ConversioBot after page load
+        setTimeout(function() {
+          if (typeof window.ConversioBot !== 'undefined') {
+            console.log('ConversioBot loaded successfully');
+          } else {
+            console.log('ConversioBot not found - checking widget visibility');
+            // Force widget to appear if it exists in DOM
+            var widgets = document.querySelectorAll('[id*="conversio"], [class*="conversio"], iframe[src*="conversiobot"]');
+            if (widgets.length > 0) {
+              console.log('ConversioBot widgets found:', widgets.length);
+              widgets.forEach(function(widget) {
+                widget.style.display = 'block';
+                widget.style.visibility = 'visible';
+                widget.style.opacity = '1';
+              });
+            }
+          }
+        }, 3000);
+      });
     </script>
   </head>
   <body>
