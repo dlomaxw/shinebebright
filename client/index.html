@@ -8,7 +8,7 @@
     <title>Bright Properties - Immersive Technology Solutions</title>
     <!-- External scripts temporarily disabled to prevent runtime errors -->
     <!-- <script defer src="https://shown.io/metrics/rm9JjrMQ97" type="text/javascript"></script> -->
-    <!-- ConversioBot Widget Script -->
+    <!-- ConversioBot Widget Script - Method 1 -->
     <script>
       (function(p,u,s,h){
         p.botId = "tduSLX";
@@ -22,28 +22,60 @@
       })(window, document);
     </script>
     
-    <!-- Alternative ConversioBot initialization -->
+    <!-- ConversioBot Widget Script - Method 2 (Alternative) -->
+    <script type="text/javascript">
+      window.ConversioBotId = "tduSLX";
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://app.conversiobot.com/lib/js/gadget.js";
+        js.setAttribute('bid', 'tduSLX');
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'conversiobot-js'));
+    </script>
+    
+    <!-- Direct ConversioBot Embed - Method 3 -->
+    <script type="text/javascript">
+      window.botId = "tduSLX";
+    </script>
+    <script type="text/javascript" src="https://app.conversiobot.com/lib/js/gadget.js" async></script>
+    
+    <!-- ConversioBot Status Checker -->
     <script>
-      window.addEventListener('load', function() {
-        // Check for ConversioBot after page load
-        setTimeout(function() {
-          if (typeof window.ConversioBot !== 'undefined') {
-            console.log('ConversioBot loaded successfully');
-          } else {
-            console.log('ConversioBot not found - checking widget visibility');
-            // Force widget to appear if it exists in DOM
-            var widgets = document.querySelectorAll('[id*="conversio"], [class*="conversio"], iframe[src*="conversiobot"]');
-            if (widgets.length > 0) {
-              console.log('ConversioBot widgets found:', widgets.length);
-              widgets.forEach(function(widget) {
-                widget.style.display = 'block';
-                widget.style.visibility = 'visible';
-                widget.style.opacity = '1';
-              });
-            }
-          }
-        }, 3000);
-      });
+      var checkCount = 0;
+      var checkInterval = setInterval(function() {
+        checkCount++;
+        
+        // Check for ConversioBot elements in DOM
+        var widgets = document.querySelectorAll('[id*="conversio"], [class*="conversio"], iframe[src*="conversiobot"]');
+        var scripts = document.querySelectorAll('script[src*="conversiobot"], script[src*="gadget.js"]');
+        
+        console.log('ConversioBot check #' + checkCount + ':', {
+          widgets: widgets.length,
+          scripts: scripts.length,
+          botId: window.botId || window.ConversioBotId,
+          ConversioBot: typeof window.ConversioBot
+        });
+        
+        if (widgets.length > 0) {
+          console.log('ConversioBot widgets found! Making visible...');
+          widgets.forEach(function(widget) {
+            widget.style.position = 'fixed';
+            widget.style.bottom = '20px';
+            widget.style.left = '20px';
+            widget.style.zIndex = '10001';
+            widget.style.display = 'block';
+            widget.style.visibility = 'visible';
+            widget.style.opacity = '1';
+          });
+          clearInterval(checkInterval);
+        } else if (checkCount >= 10) {
+          console.log('ConversioBot widget not found after 10 attempts. Custom chat will remain active.');
+          clearInterval(checkInterval);
+        }
+      }, 2000);
     </script>
   </head>
   <body>
