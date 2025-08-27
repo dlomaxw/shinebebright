@@ -8,13 +8,14 @@
     <title>Bright Properties - Immersive Technology Solutions</title>
     <!-- External scripts temporarily disabled to prevent runtime errors -->
     <!-- <script defer src="https://shown.io/metrics/rm9JjrMQ97" type="text/javascript"></script> -->
-    <!-- ConversioBot Widget Script - Method 1 -->
+    <!-- ConversioBot Widget Script with Live Domain -->
     <script>
       (function(p,u,s,h){
         p.botId = "tduSLX";
+        p.conversioLiveServer = "https://live.conversiobot.com";
         s = u.createElement('script');
         s.type = 'text/javascript';
-        s.src = 'https://app.conversiobot.com/lib/js/gadget.js';
+        s.src = 'https://live.conversiobot.com/lib/js/gadget.js';
         s.setAttribute('bid', "tduSLX");
         s.async = true;
         h = u.getElementsByTagName('script')[0];
@@ -22,25 +23,12 @@
       })(window, document);
     </script>
     
-    <!-- ConversioBot Widget Script - Method 2 (Alternative) -->
-    <script type="text/javascript">
-      window.ConversioBotId = "tduSLX";
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://app.conversiobot.com/lib/js/gadget.js";
-        js.setAttribute('bid', 'tduSLX');
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'conversiobot-js'));
-    </script>
-    
-    <!-- Direct ConversioBot Embed - Method 3 -->
+    <!-- Fallback ConversioBot Script -->
     <script type="text/javascript">
       window.botId = "tduSLX";
+      window.conversioLiveServer = "https://live.conversiobot.com";
     </script>
-    <script type="text/javascript" src="https://app.conversiobot.com/lib/js/gadget.js" async></script>
+    <script type="text/javascript" src="https://live.conversiobot.com/lib/js/gadget.js" async></script>
     
     <!-- ConversioBot Status Checker -->
     <script>
