@@ -98,7 +98,7 @@ const sampleStats: AdminStats = {
 const sampleSettings: AdminSettings = {
   siteTitle: "Bright Platform",
   siteDescription: "Immersive technology solutions across industries",
-  contactEmail: "info@brightplatform.com",
+  contactEmail: "brightthoughtsservices@gmail.com",
   contactPhone: "+1 (123) 456-7890",
   contactAddress: "1St Floor Shop 4, The Square, Plot 10 Third St, Kampala",
   socialLinks: {
