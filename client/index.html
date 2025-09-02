@@ -8,27 +8,42 @@
     <title>Bright Properties - Immersive Technology Solutions</title>
     <!-- External scripts temporarily disabled to prevent runtime errors -->
     <!-- <script defer src="https://shown.io/metrics/rm9JjrMQ97" type="text/javascript"></script> -->
-    <!-- ConversioBot Widget Script with Live Domain -->
+    <!-- ConversioBot Widget Script -->
     <script>
       (function(p,u,s,h){
         p.botId = "tduSLX";
-        p.conversioLiveServer = "https://live.conversiobot.com";
         s = u.createElement('script');
         s.type = 'text/javascript';
-        s.src = 'https://live.conversiobot.com/lib/js/gadget.js';
+        s.src = 'https://app.conversiobot.com/lib/js/gadget.js';
         s.setAttribute('bid', "tduSLX");
         s.async = true;
+        s.onload = function() {
+          console.log('ConversioBot script loaded from app.conversiobot.com');
+        };
+        s.onerror = function() {
+          console.log('ConversioBot script failed to load, trying alternative...');
+          // Try alternative script source
+          var altScript = u.createElement('script');
+          altScript.src = 'https://conversiobot.com/lib/js/gadget.js';
+          altScript.setAttribute('bid', 'tduSLX');
+          altScript.async = true;
+          h.parentNode.insertBefore(altScript, h);
+        };
         h = u.getElementsByTagName('script')[0];
         h.parentNode.insertBefore(s, h);
       })(window, document);
     </script>
     
-    <!-- Fallback ConversioBot Script -->
+    <!-- ConversioBot Configuration -->
     <script type="text/javascript">
       window.botId = "tduSLX";
-      window.conversioLiveServer = "https://live.conversiobot.com";
+      window.ConversioBotConfig = {
+        botId: "tduSLX",
+        position: "left",
+        bottom: "20px",
+        left: "20px"
+      };
     </script>
-    <script type="text/javascript" src="https://live.conversiobot.com/lib/js/gadget.js" async></script>
     
     <!-- ConversioBot Status Checker -->
     <script>
