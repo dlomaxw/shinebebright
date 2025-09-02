@@ -99,7 +99,7 @@ Basic role-based access control with user roles (user, admin). The system includ
 - **Call-to-action integration** throughout site with "Book Service" buttons in header and services pages
 
 ### Contact Information Updates
-- **Phone numbers corrected** to +256 750 421 224 and +256 785 189 100 (Uganda country code) across contact page, footer, properties page, and WhatsApp links
+- **Phone numbers corrected** to +256 750 421 224 (Uganda country code) across contact page, footer, properties page, and WhatsApp links
 - **Interactive Google Maps integration** added to contact page for office location in Kampala
 - **Enhanced contact page layout** with proper service booking call-to-action
 - **ConversioBot chat widget** integrated for visitor engagement and customer support
@@ -188,7 +188,7 @@ Basic role-based access control with user roles (user, admin). The system includ
   - **Interactive chat window** with toggle functionality
   - **Professional welcome messages** specific to Bright Properties services
   - **Multiple response variations** covering VR/AR services, real estate solutions, and contact information
-  - **Company contact integration** including phone numbers (+256 750 421 224, +256 785 189 100) and email (info@shinebebright.com)
+  - **Company contact integration** including phone number (+256 750 421 224) and email (info@shinebebright.com)
   - **Hover effects and smooth animations** for enhanced user experience
   - **Mobile-responsive design** with proper positioning and sizing
 - **Dual chat system**: ConversioBot script remains active in background while custom chat widget provides immediate functionality
