@@ -241,7 +241,7 @@ const Properties = () => {
                   <Mail className="w-5 h-5 text-bright-yellow mt-1" />
                   <div>
                     <p className="font-semibold">Email</p>
-                    <p className="text-gray-300">info@brightplatform.com</p>
+                    <p className="text-gray-300">brightthoughtsservices@gmail.com</p>
                     <p className="text-sm text-gray-400">Quick response within 2 hours</p>
                   </div>
                 </div>
@@ -292,7 +292,7 @@ const Properties = () => {
                 </a>
               </Button>
               <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-bright-black">
-                <a href="mailto:info@brightplatform.com?subject=Property Inquiry">
+                <a href="mailto:brightthoughtsservices@gmail.com?subject=Property Inquiry">
                   <Mail className="w-5 h-5 mr-2" />
                   Email Us
                 </a>
@@ -766,7 +766,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                   </div>
                   <div className="flex items-center text-gray-300">
                     <Mail className="w-4 h-4 mr-2" />
-                    <span>info@brightplatform.com</span>
+                    <span>brightthoughtsservices@gmail.com</span>
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -804,7 +804,7 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                   </a>
                 </Button>
                 <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-bright-black">
-                  <a href="mailto:info@brightplatform.com?subject=Property Inquiry - {property.title}">
+                  <a href="mailto:brightthoughtsservices@gmail.com?subject=Property Inquiry - {property.title}">
                     <Mail className="w-4 h-4 mr-2" />
                     Email Us
                   </a>

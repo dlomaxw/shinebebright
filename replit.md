@@ -188,7 +188,7 @@ Basic role-based access control with user roles (user, admin). The system includ
   - **Interactive chat window** with toggle functionality
   - **Professional welcome messages** specific to Bright Properties services
   - **Multiple response variations** covering VR/AR services, real estate solutions, and contact information
-  - **Company contact integration** including phone number (+256 750 421 224) and email (info@shinebebright.com)
+  - **Company contact integration** including phone number (+256 750 421 224) and email (brightthoughtsservices@gmail.com)
   - **Hover effects and smooth animations** for enhanced user experience
   - **Mobile-responsive design** with proper positioning and sizing
 - **Dual chat system**: ConversioBot script remains active in background while custom chat widget provides immediate functionality
