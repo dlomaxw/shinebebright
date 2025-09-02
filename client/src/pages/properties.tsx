@@ -233,7 +233,6 @@ const Properties = () => {
                   <div>
                     <p className="font-semibold">Phone</p>
                     <p className="text-gray-300">+256 750 421 224</p>
-                    <p className="text-gray-300">+256 785 189 100</p>
                     <p className="text-sm text-gray-400">Available 24/7 for consultations</p>
                   </div>
                 </div>
@@ -278,12 +277,6 @@ const Properties = () => {
                 <a href="tel:+256750421224">
                   <Phone className="w-5 h-5 mr-2" />
                   Call +256 750 421 224
-                </a>
-              </Button>
-              <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
-                <a href="tel:+256785189100">
-                  <Phone className="w-5 h-5 mr-2" />
-                  Call +256 785 189 100
                 </a>
               </Button>
               <Button asChild className="bg-green-600 hover:bg-green-700 text-white font-semibold">
@@ -769,7 +762,6 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                     <Phone className="w-4 h-4 mr-2" />
                     <div>
                       <div>+256 750 421 224</div>
-                      <div>+256 785 189 100</div>
                     </div>
                   </div>
                   <div className="flex items-center text-gray-300">
@@ -797,12 +789,6 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                   <a href="tel:+256750421224">
                     <Phone className="w-4 h-4 mr-2" />
                     Call +256 750 421 224
-                  </a>
-                </Button>
-                <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold">
-                  <a href="tel:+256785189100">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call +256 785 189 100
                   </a>
                 </Button>
                 <Button asChild className="bg-green-600 hover:bg-green-700 text-white font-semibold">
