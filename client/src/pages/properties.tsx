@@ -29,6 +29,7 @@ import { Separator } from "@/components/ui/separator";
 import ImageGallery from "@/components/ImageGallery";
 import type { Property } from "@shared/schema";
 import { processPropertyImages, getPlaceholderUrl, getPropertyImageUrl, getDeveloperFallbackImage } from "@/lib/image-utils";
+import { getPropertyVideo } from "@/lib/property-video-mapping";
 
 const Properties = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -723,6 +724,54 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                   )}
                 </div>
               </div>
+
+              {/* Property Video Section */}
+              {(() => {
+                const propertyVideo = getPropertyVideo(property.title);
+                if (!propertyVideo) return null;
+                
+                return (
+                  <div className="bg-bright-light/30 rounded-lg p-4">
+                    <h3 className="font-semibold text-bright-black mb-3 flex items-center">
+                      <Camera className="w-5 h-5 mr-2" />
+                      Virtual Experience
+                    </h3>
+                    <div className="space-y-3">
+                      <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${propertyVideo.embedId}?autoplay=0&rel=0&modestbranding=1`}
+                          title={propertyVideo.title}
+                          className="w-full h-full"
+                          allowFullScreen
+                          loading="lazy"
+                          data-testid={`property-video-${property.id}`}
+                        />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-bright-black">{propertyVideo.title}</h4>
+                        <p className="text-sm text-bright-gray mb-2">{propertyVideo.description}</p>
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="text-bright-black border-bright-black hover:bg-bright-black hover:text-white"
+                        >
+                          <a 
+                            href={propertyVideo.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2"
+                            data-testid={`property-video-link-${property.id}`}
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Watch on YouTube
+                          </a>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </div>
 
