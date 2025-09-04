@@ -15,10 +15,10 @@ export const PROPERTY_VIDEO_MAPPING: Record<string, PropertyVideo> = {
     description: 'Experience luxury living through immersive VR technology'
   },
   'Elite Pallazo Naguru': {
-    embedId: 'eJVDb9imPSQ',
-    title: 'Immersive VR Experience', 
-    url: 'https://youtu.be/eJVDb9imPSQ?si=YFv3ARKpPXvZc8Y1',
-    description: 'Explore luxury apartments with cutting-edge VR tours'
+    embedId: 'DRgk7JthhOU',
+    title: 'Luxury Property Showcase',
+    url: 'https://youtu.be/DRgk7JthhOU?si=SEnLM6eHEkGN6Sr9',
+    description: 'Premium luxury apartment visualization and design'
   },
 
   // Modern apartments and visualization - AR Demo
@@ -29,10 +29,10 @@ export const PROPERTY_VIDEO_MAPPING: Record<string, PropertyVideo> = {
     description: 'See how AR technology brings residential design to life'
   },
   'The Horizon Residency': {
-    embedId: 'H0732NCswuk',
-    title: 'AR Visualization Demo',
-    url: 'https://youtu.be/H0732NCswuk?si=oH5I4iWaDHbE9-vh', 
-    description: 'Modern apartment visualization with AR technology'
+    embedId: 'Sd-Y8C3rLPE',
+    title: 'Modern Residential Experience',
+    url: 'https://youtu.be/Sd-Y8C3rLPE?si=k0qguIhFD_Ebk-_p', 
+    description: 'Modern apartment living with immersive technology'
   },
 
   // Property tours and residential viewing - Property Tour
@@ -43,16 +43,16 @@ export const PROPERTY_VIDEO_MAPPING: Record<string, PropertyVideo> = {
     description: 'Virtual property tour showcasing apartment features'
   },
   'Pearl View - 3 Bedroom Apartment': {
-    embedId: 'v-O3NOg6NQE',
-    title: 'Property Tour Experience',
-    url: 'https://youtu.be/v-O3NOg6NQE?si=nF6IJDKC-G59E6DE',
-    description: 'Comprehensive virtual tour of spacious living spaces'
+    embedId: 'IacrmhU2Zn0',
+    title: 'Spacious Living Experience',
+    url: 'https://youtu.be/IacrmhU2Zn0?si=gSCu8Vl_k7hszXnC',
+    description: 'Comprehensive tour of spacious three bedroom living'
   },
   'Garnet Residency - 3 Bedroom Apartments': {
-    embedId: 'v-O3NOg6NQE',
-    title: 'Property Tour Experience',
-    url: 'https://youtu.be/v-O3NOg6NQE?si=nF6IJDKC-G59E6DE',
-    description: 'Experience panoramic views and luxury finishes'
+    embedId: 'olz3JbY54AM',
+    title: 'Premium Views Experience',
+    url: 'https://youtu.be/olz3JbY54AM?si=ijOa3cmKeq62oUaF',
+    description: 'Experience panoramic city and lake views in luxury'
   },
 
   // Interactive design and customization - Interactive Design
@@ -63,10 +63,10 @@ export const PROPERTY_VIDEO_MAPPING: Record<string, PropertyVideo> = {
     description: 'Interactive design solutions for premium residences'
   },
   'Cadenza Residence - Two Bedroom': {
-    embedId: 'lVtxpXOFLws',
-    title: 'Interactive Design Solution',
-    url: 'https://youtu.be/lVtxpXOFLws?si=u1Y_YgVR_ibcnAea',
-    description: 'Customizable luxury apartment design experience'
+    embedId: 'gwnx16Cwjdo',
+    title: 'Advanced Design Technology',
+    url: 'https://youtu.be/gwnx16Cwjdo?si=SPOnWYcJv_zwg8My',
+    description: 'Advanced design and visualization technology for luxury living'
   },
   'Cadenza One Bedroom Nakasero': {
     embedId: 'lVtxpXOFLws',
@@ -75,9 +75,9 @@ export const PROPERTY_VIDEO_MAPPING: Record<string, PropertyVideo> = {
     description: 'Premium Nakasero location with interactive design'
   },
   'Cadenza Two Bedroom Nakasero': {
-    embedId: 'lVtxpXOFLws',
-    title: 'Interactive Design Solution', 
-    url: 'https://youtu.be/lVtxpXOFLws?si=u1Y_YgVR_ibcnAea',
+    embedId: 'gwnx16Cwjdo',
+    title: 'Advanced Design Technology', 
+    url: 'https://youtu.be/gwnx16Cwjdo?si=SPOnWYcJv_zwg8My',
     description: 'Luxury two bedroom with advanced design features'
   },
 
