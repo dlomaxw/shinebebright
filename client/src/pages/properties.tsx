@@ -867,13 +867,13 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
   );
 };
 
-// Floating WhatsApp Button Component
+// Floating WhatsApp Button Component - Positioned on left side
 const FloatingWhatsAppButton = () => {
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-24 left-6 z-40">
       <Button
         asChild
-        className="bg-green-600 hover:bg-green-700 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 animate-bounce"
+        className="bg-green-600 hover:bg-green-700 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 hover:animate-pulse"
       >
         <a
           href="https://wa.me/256750421224?text=Hi! I'm interested in your properties. Can you provide more information?"
