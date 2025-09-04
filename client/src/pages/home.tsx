@@ -4,6 +4,7 @@ import ServiceCard from "@/components/service-card";
 import ProjectCard from "@/components/project-card";
 import NewsCard from "@/components/news-card";
 import NewsletterForm from "@/components/forms/newsletter-form";
+import VideoCarousel from "@/components/video-carousel";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Eye, Users, Award, Clock } from "lucide-react";
 import { Link } from "wouter";
@@ -143,6 +144,26 @@ const Home = () => {
                 </StaggerChild>
               ))}
             </StaggerContainer>
+          </div>
+        </section>
+      </SectionTransition>
+
+      {/* Video Showcase */}
+      <SectionTransition>
+        <section className="py-20 bg-bright-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FadeInUp className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                See Our Work in <span className="text-bright-yellow">Action</span>
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Watch our immersive technology solutions transform real estate, architecture, and business experiences.
+              </p>
+            </FadeInUp>
+            
+            <SlideInLeft delay={0.3}>
+              <VideoCarousel />
+            </SlideInLeft>
           </div>
         </section>
       </SectionTransition>
