@@ -17,9 +17,48 @@
         s.src = 'https://app.conversiobot.com/lib/js/gadget.js';
         s.setAttribute('bid', "tduSLX");
         s.async = true;
+        s.onload = function() {
+          console.log('ConversioBot script loaded successfully');
+        };
+        s.onerror = function() {
+          console.log('ConversioBot script failed to load');
+        };
         h = u.getElementsByTagName('script')[0];
         h.parentNode.insertBefore(s, h);
       })(window, document);
+    </script>
+    
+    <!-- ConversioBot Status Monitor -->
+    <script>
+      var botCheckCount = 0;
+      var botCheckInterval = setInterval(function() {
+        botCheckCount++;
+        var widgets = document.querySelectorAll('[id*="conversio"], [class*="conversio"], iframe[src*="conversiobot"]');
+        
+        console.log('ConversioBot check #' + botCheckCount + ':', {
+          widgets: widgets.length,
+          botId: window.botId,
+          ConversioBot: typeof window.ConversioBot
+        });
+        
+        if (widgets.length > 0) {
+          console.log('ConversioBot widget found and loaded!');
+          // Position on right side
+          widgets.forEach(function(widget) {
+            widget.style.position = 'fixed';
+            widget.style.bottom = '20px';
+            widget.style.right = '20px';
+            widget.style.left = 'auto';
+            widget.style.zIndex = '10001';
+            widget.style.display = 'block';
+            widget.style.visibility = 'visible';
+          });
+          clearInterval(botCheckInterval);
+        } else if (botCheckCount >= 15) {
+          console.log('ConversioBot not detected after 15 attempts');
+          clearInterval(botCheckInterval);
+        }
+      }, 2000);
     </script>
   </head>
   <body>
