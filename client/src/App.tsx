@@ -25,6 +25,7 @@ import Portfolio from "@/pages/portfolio";
 import Properties from "@/pages/properties";
 import Contact from "@/pages/contact";
 import Admin from "@/pages/admin";
+import AdminProjects from "@/pages/admin-projects";
 import News from "@/pages/news";
 import Comparison from "@/pages/comparison";
 import BookService from "@/pages/book-service";
@@ -55,6 +56,7 @@ function Router() {
               <Route path="/properties" component={Properties} />
               <Route path="/contact" component={Contact} />
               <Route path="/admin" component={Admin} />
+              <Route path="/admin/projects" component={AdminProjects} />
               <Route path="/news" component={News} />
               <Route path="/comparison" component={Comparison} />
               <Route path="/book-service" component={BookService} />

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, ExternalLink, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import type { Project } from "@/../../shared/schema";
 
-// Portfolio projects - Currently empty as requested
-const portfolioProjects: any[] = [];
+// Portfolio projects - Fetched from database
 
 // Our property development partners with authentic logos
 const propertyDevelopers = [
@@ -75,13 +76,19 @@ const Portfolio = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const filteredProjects = portfolioProjects.filter(project => {
+  // Fetch projects from database
+  const { data: projects = [], isLoading: projectsLoading, error: projectsError } = useQuery<Project[]>({
+    queryKey: ['/api/projects'],
+  });
+
+  const filteredProjects = projects.filter(project => {
     const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
     const matchesSearch = searchQuery.length < 2 || 
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.category.toLowerCase().includes(searchQuery.toLowerCase());
+      project.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description?.toLowerCase().includes(searchQuery.toLowerCase());
     
-    return matchesCategory && matchesSearch;
+    return matchesCategory && matchesSearch && project.status === 'active';
   });
 
   // Auto-slide carousel every 4 seconds
@@ -143,13 +150,22 @@ const Portfolio = () => {
           </div>
           
           {/* Project Grid */}
-          {filteredProjects.length > 0 ? (
+          {projectsLoading ? (
+            <div className="text-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-bright-yellow mx-auto mb-4" />
+              <p className="text-bright-gray text-lg">Loading projects...</p>
+            </div>
+          ) : projectsError ? (
+            <div className="text-center py-12">
+              <p className="text-red-600 text-lg">Error loading projects. Please try again later.</p>
+            </div>
+          ) : filteredProjects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
-                <Card key={project.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <Card key={project.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden" data-testid={`project-card-${project.id}`}>
                   <div className="relative overflow-hidden">
                     <img
-                      src={project.image}
+                      src={project.imageUrl || `/api/placeholder/400/300?text=${encodeURIComponent(project.title)}`}
                       alt={project.title}
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                       onError={(e) => {
@@ -158,39 +174,52 @@ const Portfolio = () => {
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute top-4 right-4 p-2 bg-bright-yellow text-bright-black rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
+                    {project.videoUrl && (
+                      <a
+                        href={project.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute top-4 right-4 p-2 bg-bright-yellow text-bright-black rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+                        data-testid={`project-video-${project.id}`}
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
                   </div>
                   <CardContent className="p-6">
                     <div className="mb-3">
                       <Badge variant="secondary" className="bg-bright-yellow/10 text-bright-black font-medium">
                         {project.category}
                       </Badge>
-                      {project.subcategory && (
+                      {project.featured && (
                         <Badge variant="outline" className="ml-2 border-bright-yellow/30">
-                          {project.subcategory}
+                          Featured
                         </Badge>
                       )}
                     </div>
                     <h3 className="text-xl font-semibold text-bright-black mb-2 group-hover:text-bright-yellow transition-colors duration-300">
                       {project.title}
                     </h3>
+                    {project.description && (
+                      <p className="text-bright-gray text-sm mb-3 line-clamp-2">
+                        {project.description}
+                      </p>
+                    )}
                     <div className="flex items-center justify-between">
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-bright-yellow hover:text-bright-black transition-colors duration-300 font-medium flex items-center gap-2"
-                      >
-                        View Project
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
+                      {project.videoUrl ? (
+                        <a
+                          href={project.videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-bright-yellow hover:text-bright-black transition-colors duration-300 font-medium flex items-center gap-2"
+                          data-testid={`view-project-${project.id}`}
+                        >
+                          View Project
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      ) : (
+                        <span className="text-bright-gray text-sm">Project showcase</span>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -199,7 +228,7 @@ const Portfolio = () => {
           ) : (
             <div className="text-center py-12">
               <p className="text-bright-gray text-lg">
-                {searchQuery ? `No projects found for "${searchQuery}"` : "No projects found in this category"}
+                {searchQuery ? `No projects found for "${searchQuery}"` : projects.length === 0 ? "No client projects added yet. Add your Instagram projects to showcase your work!" : "No projects found in this category"}
               </p>
             </div>
           )}
