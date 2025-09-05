@@ -125,7 +125,7 @@
   color: #111111 !important;
 }
 
-/* ConversioBot Widget Styling - Left Side Positioning */
+/* ConversioBot Widget Styling - Right Side Positioning */
 #bot-widget-script,
 .conversiobot-widget,
 .bot-widget,
@@ -136,8 +136,8 @@ iframe[src*="app.conversiobot.com"],
 [class*="conversio"] {
   position: fixed !important;
   bottom: 20px !important;
-  left: 20px !important;
-  right: auto !important;
+  right: 20px !important;
+  left: auto !important;
   z-index: 10001 !important;
   display: block !important;
   visibility: visible !important;
@@ -153,16 +153,11 @@ div[class*="bot-widget"],
 .conversio-container {
   position: fixed !important;
   bottom: 20px !important;
-  left: 20px !important;
-  right: auto !important;
+  right: 20px !important;
+  left: auto !important;
   z-index: 10001 !important;
   display: block !important;
   visibility: visible !important;
-}
-
-/* Hide custom chat when ConversioBot loads */
-body:has([id*="conversio"]:not(#bright-chat-widget)) #bright-chat-widget {
-  display: none !important;
 }
 
 /* Ensure ConversioBot widgets are always visible */
