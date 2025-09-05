@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, ExternalLink } from "lucide-react";
+import { Search, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Portfolio projects - Currently empty as requested
-const portfolioProjects = [];
+const portfolioProjects: any[] = [];
 
 // Our property development partners with authentic logos
 const propertyDevelopers = [
@@ -73,6 +73,7 @@ const categories = [
 const Portfolio = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const filteredProjects = portfolioProjects.filter(project => {
     const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
@@ -82,6 +83,22 @@ const Portfolio = () => {
     
     return matchesCategory && matchesSearch;
   });
+
+  // Auto-slide carousel every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % Math.ceil(propertyDevelopers.length / 3));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % Math.ceil(propertyDevelopers.length / 3));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + Math.ceil(propertyDevelopers.length / 3)) % Math.ceil(propertyDevelopers.length / 3));
+  };
 
   return (
     <div className="pt-16">
@@ -189,49 +206,149 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Property Developer Partners Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-bright-black mb-4">Our Property Development Partners</h2>
-            <p className="text-xl text-bright-gray max-w-3xl mx-auto">
-              Working with Uganda's leading real estate developers to deliver authentic, high-quality property solutions.
+      {/* Property Developer Partners Section - Enhanced with Carousel */}
+      <section className="py-20 bg-gradient-to-br from-bright-light to-white relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3csvg width="100" height="100" xmlns="http://www.w3.org/2000/svg"%3e%3cdefs%3e%3cpattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"%3e%3ccircle cx="50" cy="50" r="1" fill="%23FFE100" opacity="0.1"/%3e%3c/pattern%3e%3c/defs%3e%3crect width="100%25" height="100%25" fill="url(%23grain)"/%3e%3c/svg%3e')] opacity-50"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16">
+            <div className="inline-block">
+              <h2 className="text-4xl md:text-5xl font-bold text-bright-black mb-6 relative">
+                Our Trusted Partners
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-bright-yellow rounded-full"></div>
+              </h2>
+            </div>
+            <p className="text-xl text-bright-gray max-w-4xl mx-auto leading-relaxed">
+              Collaborating with Uganda's premier real estate developers to deliver exceptional 
+              <span className="text-bright-yellow font-semibold"> immersive technology solutions</span> 
+              and authentic property experiences.
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
-            {propertyDevelopers.map((developer) => (
-              <div
-                key={developer.id}
-                className="flex flex-col items-center p-4 bg-bright-light rounded-lg hover:shadow-lg transition-all duration-300 group"
+          {/* Carousel Container */}
+          <div className="relative">
+            {/* Navigation Buttons */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-bright-black p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+              aria-label="Previous partners"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-bright-black p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+              aria-label="Next partners"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Carousel */}
+            <div className="overflow-hidden mx-12">
+              <div 
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
-                <div className="h-16 w-32 flex items-center justify-center mb-3 overflow-hidden">
-                  <img
-                    src={developer.logo}
-                    alt={`${developer.name} logo`}
-                    className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const parent = target.parentElement;
-                      if (parent) {
-                        parent.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-bright-yellow/10 rounded text-bright-black font-semibold text-sm text-center">${developer.name}</div>`;
-                      }
-                    }}
-                  />
-                </div>
-                <h3 className="text-sm font-semibold text-bright-black mb-1 text-center">{developer.name}</h3>
-                <p className="text-xs text-bright-gray text-center mb-2">{developer.speciality}</p>
-                <a
-                  href={developer.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-bright-yellow hover:text-bright-black transition-colors duration-300"
-                >
-                  Visit Website
-                </a>
+                {Array.from({ length: Math.ceil(propertyDevelopers.length / 3) }).map((_, slideIndex) => (
+                  <div key={slideIndex} className="w-full flex-shrink-0">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                      {propertyDevelopers
+                        .slice(slideIndex * 3, slideIndex * 3 + 3)
+                        .map((developer, index) => (
+                          <div
+                            key={developer.id}
+                            className="group relative"
+                            style={{
+                              animationDelay: `${index * 0.2}s`
+                            }}
+                          >
+                            <Card className="h-full bg-white/80 backdrop-blur-sm hover:bg-white hover:shadow-2xl transition-all duration-500 border-0 group-hover:scale-105 group-hover:-translate-y-2">
+                              <CardContent className="p-8 text-center h-full flex flex-col justify-between">
+                                {/* Logo Container */}
+                                <div className="mb-6">
+                                  <div className="h-20 w-full flex items-center justify-center mb-4 relative overflow-hidden rounded-lg bg-gradient-to-br from-bright-light to-white p-4">
+                                    <img
+                                      src={developer.logo}
+                                      alt={`${developer.name} logo`}
+                                      className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-500 filter group-hover:brightness-110"
+                                      onError={(e) => {
+                                        const target = e.target as HTMLImageElement;
+                                        target.style.display = 'none';
+                                        const parent = target.parentElement;
+                                        if (parent) {
+                                          parent.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-bright-yellow/20 to-bright-yellow/10 rounded-lg text-bright-black font-bold text-lg">${developer.name}</div>`;
+                                        }
+                                      }}
+                                    />
+                                    {/* Subtle glow effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-bright-yellow/0 via-bright-yellow/5 to-bright-yellow/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
+                                  </div>
+                                </div>
+                                
+                                {/* Content */}
+                                <div className="space-y-3 flex-grow">
+                                  <h3 className="text-xl font-bold text-bright-black group-hover:text-bright-yellow transition-colors duration-300">
+                                    {developer.name}
+                                  </h3>
+                                  <div className="inline-block">
+                                    <Badge className="bg-bright-yellow/10 text-bright-black border-bright-yellow/30 px-3 py-1">
+                                      {developer.speciality}
+                                    </Badge>
+                                  </div>
+                                  <p className="text-sm text-bright-gray leading-relaxed px-2">
+                                    {developer.description}
+                                  </p>
+                                </div>
+                                
+                                {/* CTA Button */}
+                                <div className="mt-6">
+                                  <a
+                                    href={developer.website}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 bg-bright-yellow hover:bg-yellow-400 text-bright-black font-semibold px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg group-hover:animate-pulse"
+                                  >
+                                    Visit Website
+                                    <ExternalLink className="w-4 h-4" />
+                                  </a>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            
+            {/* Slide Indicators */}
+            <div className="flex justify-center mt-8 space-x-3">
+              {Array.from({ length: Math.ceil(propertyDevelopers.length / 3) }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    currentSlide === index 
+                      ? 'bg-bright-yellow scale-125 shadow-lg' 
+                      : 'bg-bright-gray/40 hover:bg-bright-gray/60'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+          
+          {/* Call to Action */}
+          <div className="text-center mt-12">
+            <p className="text-lg text-bright-gray mb-6">
+              Ready to bring your property development to life with immersive technology?
+            </p>
+            <Button className="bg-bright-black text-white hover:bg-bright-yellow hover:text-bright-black px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+              Partner With Us
+            </Button>
           </div>
         </div>
       </section>
