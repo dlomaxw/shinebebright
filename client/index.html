@@ -39,7 +39,7 @@
       window.botId = "tduSLX";
       window.ConversioBotConfig = {
         botId: "tduSLX",
-        position: "right",
+        position: "bottom-right",
         bottom: "20px",
         right: "20px"
       };
@@ -76,7 +76,29 @@
           });
           clearInterval(checkInterval);
         } else if (checkCount >= 10) {
-          console.log('ConversioBot widget not found after 10 attempts. Custom chat will remain active.');
+          console.log('ConversioBot widget not found after 10 attempts. Trying to force load...');
+          
+          // Try to force create ConversioBot if it exists
+          if (typeof window.ConversioBot !== 'undefined') {
+            window.ConversioBot.load('tduSLX');
+          }
+          
+          // Add a simple fallback chat button on the right side
+          var fallbackChat = document.createElement('div');
+          fallbackChat.id = 'fallback-conversiobot';
+          fallbackChat.style.cssText = 'position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: #4A90E2; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-size: 24px; color: white; transition: all 0.3s ease; z-index: 10001;';
+          fallbackChat.innerHTML = '💬';
+          fallbackChat.onclick = function() {
+            window.open('mailto:brightthoughtsservices@gmail.com?subject=Chat Inquiry&body=Hello Bright Properties, I would like to chat about your immersive technology solutions.', '_blank');
+          };
+          fallbackChat.onmouseover = function() {
+            this.style.transform = 'scale(1.1)';
+          };
+          fallbackChat.onmouseout = function() {
+            this.style.transform = 'scale(1)';
+          };
+          document.body.appendChild(fallbackChat);
+          
           clearInterval(checkInterval);
         }
       }, 2000);
