@@ -209,7 +209,7 @@ const Portfolio = () => {
       {/* Property Developer Partners Section - Enhanced with Carousel */}
       <section className="py-20 bg-gradient-to-br from-bright-light to-white relative overflow-hidden">
         {/* Background decoration */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3csvg width="100" height="100" xmlns="http://www.w3.org/2000/svg"%3e%3cdefs%3e%3cpattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"%3e%3ccircle cx="50" cy="50" r="1" fill="%23FFE100" opacity="0.1"/%3e%3c/pattern%3e%3c/defs%3e%3crect width="100%25" height="100%25" fill="url(%23grain)"/%3e%3c/svg%3e')] opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-bright-yellow/5 to-transparent opacity-50"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-16">
