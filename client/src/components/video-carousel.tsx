@@ -55,6 +55,20 @@ const VideoCarousel = () => {
       url: "https://youtu.be/YjVWdQ4NdFM?si=5dxelP1dvI3MadZw",
       embedId: "YjVWdQ4NdFM",
       thumbnail: "https://img.youtube.com/vi/YjVWdQ4NdFM/maxresdefault.jpg"
+    },
+    {
+      id: "7",
+      title: "Advanced VR Technology",
+      url: "https://youtu.be/nrjRQ9cVDAc?si=CLfPQceD3tPbwJl_",
+      embedId: "nrjRQ9cVDAc",
+      thumbnail: "https://img.youtube.com/vi/nrjRQ9cVDAc/maxresdefault.jpg"
+    },
+    {
+      id: "8",
+      title: "Immersive AR Solutions",
+      url: "https://youtu.be/BXJuMAc3i0k?si=vgCixste9KHnITZi",
+      embedId: "BXJuMAc3i0k",
+      thumbnail: "https://img.youtube.com/vi/BXJuMAc3i0k/maxresdefault.jpg"
     }
   ];
 
@@ -131,7 +145,7 @@ const VideoCarousel = () => {
       </div>
 
       {/* Video Thumbnails */}
-      <div className="grid grid-cols-6 gap-4">
+      <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
         {videos.map((video, index) => (
           <div
             key={video.id}
