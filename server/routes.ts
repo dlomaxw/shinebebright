@@ -14,6 +14,27 @@ import {
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Add comprehensive no-cache headers for all API routes to prevent CDN/browser caching
+  app.use("/api/*", (req, res, next) => {
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0, s-maxage=0, proxy-revalidate, private");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+    res.setHeader("X-App-Version", process.env.GIT_SHA || process.env.REPL_ID || "dev");
+    next();
+  });
+
+  // Version endpoint to verify deployments
+  app.get("/__version", (req, res) => {
+    const version = {
+      version: process.env.GIT_SHA || process.env.REPL_ID || "unknown",
+      buildTime: new Date().toISOString(),
+      storage: "database",
+      nodeVersion: process.version,
+      timestamp: Date.now()
+    };
+    res.json(version);
+  });
+
   // Projects routes
   app.get("/api/projects", async (req, res) => {
     try {
