@@ -140,6 +140,12 @@ export interface IStorage {
 }
 
 export class DatabaseStorage implements IStorage {
+  constructor() {
+    console.log("🚀 [STORAGE] Using DatabaseStorage with production database");
+    console.log(`🚀 [STORAGE] Database URL configured: ${process.env.DATABASE_URL ? "✅ YES" : "❌ NO"}`);
+    console.log(`🚀 [STORAGE] Environment: ${process.env.NODE_ENV || "unknown"}`);
+  }
+
   // User operations
   async getUser(id: string): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
