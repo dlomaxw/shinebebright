@@ -377,11 +377,19 @@ export class DatabaseStorage implements IStorage {
 
   // Property operations
   async getProperties(featured?: boolean): Promise<Property[]> {
+    console.log(`[DEBUG] getProperties called with featured: ${featured}`);
+    
     let query = db.select().from(properties);
     if (featured !== undefined) {
+      console.log(`[DEBUG] Adding featured filter: ${featured}`);
       query = query.where(eq(properties.featured, featured));
     }
-    return query.orderBy(desc(properties.createdAt));
+    
+    const result = await query.orderBy(desc(properties.createdAt));
+    console.log(`[DEBUG] getProperties returned ${result.length} properties`);
+    console.log(`[DEBUG] Avenue Muyenga count: ${result.filter(p => p.title.includes('Avenue Muyenga')).length}`);
+    
+    return result;
   }
 
   async getProperty(id: string): Promise<Property | undefined> {
