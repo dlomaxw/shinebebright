@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { X, ZoomIn, ZoomOut, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -53,8 +53,12 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
         className="max-w-7xl w-[95vw] h-[95vh] p-0 bg-black border-none"
         onKeyDown={handleKeyDown}
         tabIndex={0}
+        aria-describedby="image-gallery-description"
       >
         <DialogTitle className="sr-only">Property Image Gallery</DialogTitle>
+        <DialogDescription id="image-gallery-description" className="sr-only">
+          Navigate through property images using arrow keys or click on thumbnails. Use zoom controls to get a closer look.
+        </DialogDescription>
         
         {/* Header with controls */}
         <div className="absolute top-4 left-4 right-4 z-50 flex items-center justify-between">
