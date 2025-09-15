@@ -20,6 +20,7 @@ export const DEVELOPER_FOLDERS = {
   NOVUS_REAL_ESTATE: 'novus-real-estate',
   HK_PROPERTIES: 'hk-properties',
   RF_DEVELOPERS: 'rf-developers',
+  MODERN_DEVELOPERS: 'modern-developers',
   GENERAL: 'general',
   RESIDENTIAL: 'residential',
   COMMERCIAL: 'commercial'
@@ -112,6 +113,24 @@ export const PROPERTY_IMAGE_MAPPING: Record<string, PropertyImageConfig> = {
     developer: 'HK Properties',
     folder: DEVELOPER_FOLDERS.HK_PROPERTIES,
     images: ['garnet_residency_main.jpg', 'garnet_residency_3bhk_side.jpg', 'garnet_residency_3bhk_top.jpg', 'garnet_residency_render.jpg']
+  },
+  'Avenue Muyenga - 1BHK Apartment': {
+    propertyTitle: 'Avenue Muyenga - 1BHK Apartment',
+    developer: 'Modern Developers',
+    folder: DEVELOPER_FOLDERS.MODERN_DEVELOPERS,
+    images: ['1bhk-3d_1757923575202.webp', 'front-view_1757923575207.webp', 'night-view_1757923575207.webp', 'side-view-02_1757923575208.webp']
+  },
+  'Avenue Muyenga - 2BHK Apartment': {
+    propertyTitle: 'Avenue Muyenga - 2BHK Apartment',
+    developer: 'Modern Developers',
+    folder: DEVELOPER_FOLDERS.MODERN_DEVELOPERS,
+    images: ['2bhk-plan_1757923575205.webp', 'front-view (1)_1757923575206.webp', 'night-viewr_1757923575208.webp', 'side-view-02_1757923575208.webp']
+  },
+  'Avenue Muyenga - 3BHK Apartment': {
+    propertyTitle: 'Avenue Muyenga - 3BHK Apartment',
+    developer: 'Modern Developers',
+    folder: DEVELOPER_FOLDERS.MODERN_DEVELOPERS,
+    images: ['3bhk-plan_1757923575206.webp', 'front-view_1757923575207.webp', 'night-view_1757923575207.webp', 'side-view-02_1757923575208.webp']
   }
 };
 

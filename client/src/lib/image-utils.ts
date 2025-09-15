@@ -141,6 +141,7 @@ export function getDeveloperFallbackImage(propertyTitle: string): string {
     'rf-developers': '/images/properties/rf-developers/skyrise_building.png',
     'novus-real-estate': '/images/properties/novus-real-estate/icon_180_exterior.jpg',
     'hk-properties': '/images/properties/hk-properties/garnet_residency_main.jpg',
+    'modern-developers': '/images/properties/modern-developers/front-view_1757923575207.webp',
     'residential': '/images/properties/residential/canaan_apartments.jpg',
     'commercial': '/images/properties/edifice-properties/elite_pallazo_1.webp',
     'general': '/images/properties/residential/canaan_apartments.jpg'
