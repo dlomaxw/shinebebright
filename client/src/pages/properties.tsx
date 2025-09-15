@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import ImageGallery from "@/components/ImageGallery";
+import BHKCarousel from "@/components/bhk-carousel";
 import type { Property } from "@shared/schema";
 import { processPropertyImages, getPlaceholderUrl, getPropertyImageUrl, getDeveloperFallbackImage } from "@/lib/image-utils";
 import { getPropertyVideo } from "@/lib/property-video-mapping";
@@ -473,13 +474,20 @@ interface PropertyDetailsDialogProps {
 }
 
 const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProps) => {
+  const [selectedProperty, setSelectedProperty] = useState<Property>(property);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
+
+  // Update selected property when prop changes
+  useEffect(() => {
+    setSelectedProperty(property);
+    setCurrentImageIndex(0); // Reset image index when property changes
+  }, [property.id]);
   
   // PROFESSIONAL APPROACH: Use developer-organized images to prevent mixing
   const imageUrls = processPropertyImages(
-    property.images as string | string[] | null,
-    property.title,
+    selectedProperty.images as string | string[] | null,
+    selectedProperty.title,
     { useThumbnail: false }
   );
 
@@ -500,10 +508,10 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
       <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto bg-white" aria-describedby="property-details-description">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-bright-black">
-            {property.title}
+            {selectedProperty.title}
           </DialogTitle>
           <DialogDescription id="property-details-description" className="text-bright-gray">
-            Detailed property information with virtual tour capabilities for {property.title}
+            Detailed property information with virtual tour capabilities for {selectedProperty.title}
           </DialogDescription>
         </DialogHeader>
 
@@ -527,10 +535,10 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                  onClick={() => setGalleryOpen(true)}>
               <img 
                 src={imageUrls[currentImageIndex]}
-                alt={`${property.title} - Image ${currentImageIndex + 1}`}
+                alt={`${selectedProperty.title} - Image ${currentImageIndex + 1}`}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 onError={(e) => {
-                  const fallbackImage = processPropertyImages(null, property.title)[0];
+                  const fallbackImage = processPropertyImages(null, selectedProperty.title)[0];
                   e.currentTarget.src = fallbackImage;
                 }}
               />
@@ -607,9 +615,9 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <Badge className="bg-bright-yellow text-bright-black font-semibold">
-                  {property.status}
+                  {selectedProperty.status}
                 </Badge>
-                {property.featured && (
+                {selectedProperty.featured && (
                   <Badge className="bg-bright-black text-white">
                     <Star className="w-3 h-3 mr-1" />
                     Featured
@@ -618,14 +626,14 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               </div>
 
               <div className="text-3xl font-bold text-bright-yellow">
-                {property.price}
+                {selectedProperty.price}
               </div>
 
               <div className="flex items-center text-bright-gray">
                 <MapPin className="w-5 h-5 mr-2" />
                 <div>
-                  <p className="font-medium">{property.location}</p>
-                  <p className="text-sm">{property.address}, {property.city}, {property.country}</p>
+                  <p className="font-medium">{selectedProperty.location}</p>
+                  <p className="text-sm">{selectedProperty.address}, {selectedProperty.city}, {selectedProperty.country}</p>
                 </div>
               </div>
 
@@ -636,51 +644,51 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
                   Property Details
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {property.bedrooms && (
+                  {selectedProperty.bedrooms && (
                     <div className="flex items-center">
                       <Bed className="w-4 h-4 mr-2 text-bright-gray" />
                       <span className="text-sm">
-                        <strong>{property.bedrooms}</strong> Bedrooms
+                        <strong>{selectedProperty.bedrooms}</strong> Bedrooms
                       </span>
                     </div>
                   )}
-                  {property.bathrooms && (
+                  {selectedProperty.bathrooms && (
                     <div className="flex items-center">
                       <Bath className="w-4 h-4 mr-2 text-bright-gray" />
                       <span className="text-sm">
-                        <strong>{property.bathrooms}</strong> Bathrooms
+                        <strong>{selectedProperty.bathrooms}</strong> Bathrooms
                       </span>
                     </div>
                   )}
-                  {property.garage && (
+                  {selectedProperty.garage && (
                     <div className="flex items-center">
                       <Car className="w-4 h-4 mr-2 text-bright-gray" />
                       <span className="text-sm">
-                        <strong>{property.garage}</strong> Garage Space
+                        <strong>{selectedProperty.garage}</strong> Garage Space
                       </span>
                     </div>
                   )}
-                  {property.propertySize && (
+                  {selectedProperty.propertySize && (
                     <div className="flex items-center">
                       <Ruler className="w-4 h-4 mr-2 text-bright-gray" />
                       <span className="text-sm">
-                        <strong>{property.propertySize}</strong>
+                        <strong>{selectedProperty.propertySize}</strong>
                       </span>
                     </div>
                   )}
-                  {property.yearBuilt && (
+                  {selectedProperty.yearBuilt && (
                     <div className="flex items-center">
                       <Calendar className="w-4 h-4 mr-2 text-bright-gray" />
                       <span className="text-sm">
-                        Built in <strong>{property.yearBuilt}</strong>
+                        Built in <strong>{selectedProperty.yearBuilt}</strong>
                       </span>
                     </div>
                   )}
-                  {property.propertyType && (
+                  {selectedProperty.propertyType && (
                     <div className="flex items-center">
                       <Building className="w-4 h-4 mr-2 text-bright-gray" />
                       <span className="text-sm">
-                        <strong>{property.propertyType}</strong>
+                        <strong>{selectedProperty.propertyType}</strong>
                       </span>
                     </div>
                   )}
@@ -693,16 +701,16 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               <div>
                 <h3 className="font-semibold text-bright-black mb-2">Description</h3>
                 <p className="text-bright-gray leading-relaxed">
-                  {property.description}
+                  {selectedProperty.description}
                 </p>
               </div>
 
               {/* Features & Amenities */}
-              {Array.isArray(property.features) && property.features.length > 0 && (
+              {Array.isArray(selectedProperty.features) && selectedProperty.features.length > 0 && (
                 <div>
                   <h3 className="font-semibold text-bright-black mb-3">Features & Amenities</h3>
                   <div className="grid grid-cols-2 gap-2">
-                    {property.features.map((feature, index) => (
+                    {selectedProperty.features.map((feature, index) => (
                       <div key={index} className="flex items-center text-sm">
                         <div className="w-2 h-2 bg-bright-yellow rounded-full mr-3"></div>
                         {feature}
@@ -716,18 +724,18 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               <div className="bg-bright-light/30 rounded-lg p-4">
                 <h3 className="font-semibold text-bright-black mb-3">Location Information</h3>
                 <div className="space-y-2">
-                  <p><strong>Area:</strong> {property.area}</p>
-                  <p><strong>City:</strong> {property.city}</p>
-                  <p><strong>Country:</strong> {property.country}</p>
-                  {property.address && (
-                    <p><strong>Address:</strong> {property.address}</p>
+                  <p><strong>Area:</strong> {selectedProperty.area}</p>
+                  <p><strong>City:</strong> {selectedProperty.city}</p>
+                  <p><strong>Country:</strong> {selectedProperty.country}</p>
+                  {selectedProperty.address && (
+                    <p><strong>Address:</strong> {selectedProperty.address}</p>
                   )}
                 </div>
               </div>
 
               {/* Property Video Section */}
               {(() => {
-                const propertyVideo = getPropertyVideo(property.title);
+                const propertyVideo = getPropertyVideo(selectedProperty.title);
                 if (!propertyVideo) return null;
                 
                 return (
@@ -774,6 +782,14 @@ const PropertyDetailsDialog = ({ property, children }: PropertyDetailsDialogProp
               })()}
             </div>
           </div>
+
+          {/* BHK Configuration Carousel - Show only for Avenue Muyenga properties */}
+          {selectedProperty.title.includes("Avenue Muyenga") && (
+            <BHKCarousel 
+              currentProperty={selectedProperty} 
+              onPropertySelect={setSelectedProperty}
+            />
+          )}
 
           {/* Client Information & Contact */}
           <div className="bg-bright-black text-white rounded-lg p-6">
