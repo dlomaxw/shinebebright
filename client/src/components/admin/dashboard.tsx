@@ -1,10 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 import ProjectForm from "@/components/admin/project-form";
 import TeamForm from "@/components/admin/team-form";
 import BlogForm from "@/components/admin/blog-form";
+import PropertyForm from "@/components/admin/property-form";
 import { 
   Eye, 
   Users, 
@@ -15,10 +18,13 @@ import {
   Calendar,
   Mail,
   RefreshCw,
-  Briefcase
+  Briefcase,
+  Building,
+  Trash2,
+  Pencil
 } from "lucide-react";
 import { INQUIRY_STATUSES, BOOKING_STATUSES } from "@/lib/constants";
-import type { ContactInquiry, DemoBooking, Project, TeamMember, BlogPost, NewsletterSubscriber, ServiceBooking } from "@shared/schema";
+import type { ContactInquiry, DemoBooking, Project, TeamMember, BlogPost, NewsletterSubscriber, ServiceBooking, Property } from "@shared/schema";
 import { ServiceBookingsTable } from "@/components/admin/service-bookings-table";
 
 interface AdminDashboardProps {
@@ -54,6 +60,49 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
     queryKey: ["/api/service-bookings"],
   });
 
+  const { data: properties = [] } = useQuery<Property[]>({
+    queryKey: ["/api/properties"],
+  });
+
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  const deleteProjectMutation = useMutation({
+    mutationFn: async (id: string) => apiRequest("DELETE", `/api/projects/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/projects"] });
+      toast({ title: "Project deleted successfully" });
+    },
+    onError: () => toast({ title: "Failed to delete project", variant: "destructive" }),
+  });
+
+  const deleteTeamMemberMutation = useMutation({
+    mutationFn: async (id: string) => apiRequest("DELETE", `/api/team/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/team"] });
+      toast({ title: "Team member deleted successfully" });
+    },
+    onError: () => toast({ title: "Failed to delete team member", variant: "destructive" }),
+  });
+
+  const deleteBlogMutation = useMutation({
+    mutationFn: async (id: string) => apiRequest("DELETE", `/api/blog/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
+      toast({ title: "Blog post deleted successfully" });
+    },
+    onError: () => toast({ title: "Failed to delete blog post", variant: "destructive" }),
+  });
+
+  const deleteInquiryMutation = useMutation({
+    mutationFn: async (id: string) => apiRequest("DELETE", `/api/admin/inquiries/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/inquiries"] });
+      toast({ title: "Inquiry deleted successfully" });
+    },
+    onError: () => toast({ title: "Failed to delete inquiry", variant: "destructive" }),
+  });
+
   const formatDate = (date: string | Date | null) => {
     if (!date) return 'N/A';
     return new Date(date).toLocaleDateString();
@@ -85,8 +134,15 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
         {[
+          {
+            title: "Properties",
+            value: properties.length,
+            change: "+18.4%",
+            trend: "up",
+            icon: <Building className="h-5 w-5" />,
+          },
           {
             title: "Total Projects",
             value: projects.length,
@@ -221,7 +277,22 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
       <ProjectForm />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
-          <Card key={project.id} className="border-bright-yellow/10 bg-bright-black/50">
+          <Card key={project.id} className="border-bright-yellow/10 bg-bright-black/50 group relative">
+            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+              <Button
+                size="icon"
+                variant="destructive"
+                className="h-8 w-8"
+                onClick={() => {
+                  if (confirm("Are you sure you want to delete this project?")) {
+                    deleteProjectMutation.mutate(project.id);
+                  }
+                }}
+                data-testid={`button-delete-project-${project.id}`}
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </div>
             <CardContent className="p-6">
               <h3 className="text-bright-white font-semibold mb-2">{project.title}</h3>
               <p className="text-bright-white/70 text-sm mb-4">{project.description}</p>
@@ -247,7 +318,22 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
       <TeamForm />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {teamMembers.map((member) => (
-          <Card key={member.id} className="border-bright-yellow/10 bg-bright-black/50">
+          <Card key={member.id} className="border-bright-yellow/10 bg-bright-black/50 group relative">
+            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+              <Button
+                size="icon"
+                variant="destructive"
+                className="h-8 w-8"
+                onClick={() => {
+                  if (confirm("Are you sure you want to delete this team member?")) {
+                    deleteTeamMemberMutation.mutate(member.id);
+                  }
+                }}
+                data-testid={`button-delete-team-${member.id}`}
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </div>
             <CardContent className="p-6 text-center">
               <img
                 src={member.imageUrl || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150"}
@@ -274,7 +360,7 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
       <BlogForm />
       <div className="space-y-4">
         {blogPosts.map((post) => (
-          <Card key={post.id} className="border-bright-yellow/10 bg-bright-black/50">
+          <Card key={post.id} className="border-bright-yellow/10 bg-bright-black/50 group relative">
             <CardContent className="p-6">
               <div className="flex justify-between items-start">
                 <div>
@@ -285,9 +371,24 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
                     <span className="text-bright-white/50 text-xs">{formatDate(post.createdAt)}</span>
                   </div>
                 </div>
-                <Badge variant={post.published ? "default" : "secondary"}>
-                  {post.published ? "Published" : "Draft"}
-                </Badge>
+                <div className="flex items-center gap-2">
+                  <Badge variant={post.published ? "default" : "secondary"}>
+                    {post.published ? "Published" : "Draft"}
+                  </Badge>
+                  <Button
+                    size="icon"
+                    variant="destructive"
+                    className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={() => {
+                      if (confirm("Are you sure you want to delete this blog post?")) {
+                        deleteBlogMutation.mutate(post.id);
+                      }
+                    }}
+                    data-testid={`button-delete-blog-${post.id}`}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -301,7 +402,7 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
       <h1 className="text-2xl font-bold text-bright-white">Contact Inquiries</h1>
       <div className="space-y-4">
         {inquiries.map((inquiry) => (
-          <Card key={inquiry.id} className="border-bright-yellow/10 bg-bright-black/50">
+          <Card key={inquiry.id} className="border-bright-yellow/10 bg-bright-black/50 group relative">
             <CardContent className="p-6">
               <div className="flex justify-between items-start">
                 <div>
@@ -314,9 +415,24 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
                   <span className="text-bright-white/50 text-xs">{formatDate(inquiry.createdAt)}</span>
                 </div>
                 <div className="flex flex-col items-end space-y-2">
-                  <Badge className={getStatusColor(inquiry.status, 'inquiry')}>
-                    {inquiry.status}
-                  </Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge className={getStatusColor(inquiry.status, 'inquiry')}>
+                      {inquiry.status}
+                    </Badge>
+                    <Button
+                      size="icon"
+                      variant="destructive"
+                      className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={() => {
+                        if (confirm("Are you sure you want to delete this inquiry?")) {
+                          deleteInquiryMutation.mutate(inquiry.id);
+                        }
+                      }}
+                      data-testid={`button-delete-inquiry-${inquiry.id}`}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                   {inquiry.service && <Badge variant="outline">{inquiry.service}</Badge>}
                 </div>
               </div>
@@ -369,10 +485,14 @@ const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
     </div>
   );
 
+  const renderProperties = () => <PropertyForm />;
+
   const renderSection = () => {
     switch (activeSection) {
       case "dashboard":
         return renderDashboard();
+      case "properties":
+        return renderProperties();
       case "projects":
         return renderProjects();
       case "team":
