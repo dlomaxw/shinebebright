@@ -1,9 +1,16 @@
 import { useState } from "react";
+import { AdminAuthProvider, useAdminAuth } from "@/contexts/admin-auth";
 import AdminSidebar from "@/components/admin/sidebar";
 import AdminDashboard from "@/components/admin/dashboard";
+import AdminLogin from "@/components/admin/login";
 
-const Admin = () => {
+const AdminContent = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
+  const { isAuthenticated } = useAdminAuth();
+
+  if (!isAuthenticated) {
+    return <AdminLogin />;
+  }
 
   return (
     <div className="pt-16 min-h-screen bg-bright-black">
@@ -17,6 +24,14 @@ const Admin = () => {
         </main>
       </div>
     </div>
+  );
+};
+
+const Admin = () => {
+  return (
+    <AdminAuthProvider>
+      <AdminContent />
+    </AdminAuthProvider>
   );
 };
 

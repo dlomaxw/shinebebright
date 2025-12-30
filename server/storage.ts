@@ -82,6 +82,7 @@ export interface IStorage {
   getContactInquiry(id: string): Promise<ContactInquiry | undefined>;
   createContactInquiry(inquiry: InsertContactInquiry): Promise<ContactInquiry>;
   updateContactInquiry(id: string, inquiry: Partial<InsertContactInquiry>): Promise<ContactInquiry>;
+  deleteContactInquiry(id: string): Promise<void>;
   
   // Newsletter operations
   getNewsletterSubscribers(): Promise<NewsletterSubscriber[]>;
@@ -306,6 +307,10 @@ export class DatabaseStorage implements IStorage {
       .where(eq(contactInquiries.id, id))
       .returning();
     return inquiry;
+  }
+
+  async deleteContactInquiry(id: string): Promise<void> {
+    await db.delete(contactInquiries).where(eq(contactInquiries.id, id));
   }
 
   // Newsletter operations

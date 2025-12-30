@@ -11,8 +11,11 @@ import {
   Briefcase,
   Settings,
   LogOut,
-  Zap
+  Zap,
+  Building,
+  Power
 } from "lucide-react";
+import { useAdminAuth } from "@/contexts/admin-auth";
 
 interface AdminSidebarProps {
   activeSection: string;
@@ -20,8 +23,11 @@ interface AdminSidebarProps {
 }
 
 const AdminSidebar = ({ activeSection, onSectionChange }: AdminSidebarProps) => {
+  const { logout } = useAdminAuth();
+
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { id: "properties", label: "Properties", icon: Building },
     { id: "projects", label: "Projects", icon: FolderOpen },
     { id: "team", label: "Team", icon: Users },
     { id: "blog", label: "Blog Posts", icon: FileText },
@@ -68,16 +74,25 @@ const AdminSidebar = ({ activeSection, onSectionChange }: AdminSidebarProps) => 
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-bright-yellow/20">
+        <div className="p-4 border-t border-bright-yellow/20 space-y-2">
           <Button
             variant="ghost"
-            className="w-full justify-start text-bright-white/70 hover:text-bright-white hover:bg-red-500/20"
+            className="w-full justify-start text-bright-white/70 hover:text-bright-white hover:bg-bright-yellow/10"
             asChild
           >
             <Link href="/">
               <LogOut className="w-4 h-4 mr-3" />
               Back to Site
             </Link>
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-bright-white/70 hover:text-bright-white hover:bg-red-500/20"
+            onClick={logout}
+            data-testid="button-logout"
+          >
+            <Power className="w-4 h-4 mr-3" />
+            Logout
           </Button>
         </div>
       </div>
