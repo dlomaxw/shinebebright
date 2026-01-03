@@ -16,10 +16,10 @@ const News = () => {
   const formatDate = (date: string | Date | null) => {
     if (!date) return '';
     const d = new Date(date);
-    return d.toLocaleDateString("en-US", { 
-      year: "numeric", 
-      month: "long", 
-      day: "numeric" 
+    return d.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
     });
   };
 

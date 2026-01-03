@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer, boolean, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, boolean, jsonb, serial } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -333,6 +333,27 @@ export const insertBusinessMetricSchema = createInsertSchema(businessMetrics).om
 
 
 
+
+// Pages table
+export const pages = pgTable("pages", {
+  id: serial("id").primaryKey(),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  content: text("content").notNull(), // Can be HTML or JSON
+  metaDescription: text("meta_description"),
+  published: boolean("published").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertPageSchema = createInsertSchema(pages).pick({
+  slug: true,
+  title: true,
+  content: true,
+  metaDescription: true,
+  published: true,
+});
+
 // Types
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -378,3 +399,6 @@ export type InsertAnalyticsEvent = z.infer<typeof insertAnalyticsEventSchema>;
 
 export type BusinessMetric = typeof businessMetrics.$inferSelect;
 export type InsertBusinessMetric = z.infer<typeof insertBusinessMetricSchema>;
+
+export type Page = typeof pages.$inferSelect;
+export type InsertPage = z.infer<typeof insertPageSchema>;

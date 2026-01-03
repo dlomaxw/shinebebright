@@ -1,4 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
+import { ThreeDCard } from "@/components/animations/3d-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Play, ExternalLink } from "lucide-react";
@@ -31,50 +32,52 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   const categoryLabel = categoryLabels[project.category as keyof typeof categoryLabels] || project.category;
 
   return (
-    <Card className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-      <div className="relative group">
-        <img
-          src={project.imageUrl || "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"}
-          alt={project.title}
-          className="w-full h-48 object-cover"
-        />
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          {project.videoUrl ? (
-            <Button className="bg-bright-yellow text-bright-black px-6 py-2 rounded-lg font-semibold flex items-center">
-              <Play className="w-4 h-4 mr-2" /> Watch Tour
-            </Button>
-          ) : (
-            <Button className="bg-bright-yellow text-bright-black px-6 py-2 rounded-lg font-semibold flex items-center">
-              <ExternalLink className="w-4 h-4 mr-2" /> View Details
-            </Button>
-          )}
-        </div>
-      </div>
-      <CardContent className="p-6">
-        <h3 className="text-xl font-bold text-bright-black mb-2">{project.title}</h3>
-        <p className="text-bright-gray mb-4 line-clamp-2">{project.description}</p>
-        {project.location && (
-          <p className="text-sm text-bright-gray mb-4">📍 {project.location}</p>
-        )}
-        <div className="flex items-center justify-between">
-          <Badge className={categoryColor}>
-            {categoryLabel}
-          </Badge>
-          {project.price && (
-            <span className="text-lg font-bold text-bright-black">
-              ${project.price.toLocaleString()}
-            </span>
-          )}
-        </div>
-        {(project.bedrooms || project.bathrooms || project.area) && (
-          <div className="flex justify-between text-sm text-bright-gray mt-3 pt-3 border-t">
-            {project.bedrooms && <span>{project.bedrooms} beds</span>}
-            {project.bathrooms && <span>{project.bathrooms} baths</span>}
-            {project.area && <span>{project.area} sq ft</span>}
+    <ThreeDCard className="min-h-[400px]">
+      <div className="flex flex-col h-full">
+        <div className="relative group shrink-0">
+          <img
+            src={project.imageUrl || "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"}
+            alt={project.title}
+            className="w-full h-48 object-cover rounded-t-xl"
+          />
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-t-xl">
+            {project.videoUrl ? (
+              <Button className="bg-bright-yellow text-bright-black px-6 py-2 rounded-lg font-semibold flex items-center">
+                <Play className="w-4 h-4 mr-2" /> Watch Tour
+              </Button>
+            ) : (
+              <Button className="bg-bright-yellow text-bright-black px-6 py-2 rounded-lg font-semibold flex items-center">
+                <ExternalLink className="w-4 h-4 mr-2" /> View Details
+              </Button>
+            )}
           </div>
-        )}
-      </CardContent>
-    </Card>
+        </div>
+        <CardContent className="p-6 flex flex-col flex-1">
+          <h3 className="text-xl font-bold text-bright-black mb-2">{project.title}</h3>
+          <p className="text-bright-gray mb-4 line-clamp-2 flex-1">{project.description}</p>
+          {project.location && (
+            <p className="text-sm text-bright-gray mb-4">📍 {project.location}</p>
+          )}
+          <div className="flex items-center justify-between mt-auto">
+            <Badge className={categoryColor}>
+              {categoryLabel}
+            </Badge>
+            {project.price && (
+              <span className="text-lg font-bold text-bright-black">
+                ${project.price.toLocaleString()}
+              </span>
+            )}
+          </div>
+          {(project.bedrooms || project.bathrooms || project.area) && (
+            <div className="flex justify-between text-sm text-bright-gray mt-3 pt-3 border-t">
+              {project.bedrooms && <span>{project.bedrooms} beds</span>}
+              {project.bathrooms && <span>{project.bathrooms} baths</span>}
+              {project.area && <span>{project.area} sq ft</span>}
+            </div>
+          )}
+        </CardContent>
+      </div>
+    </ThreeDCard>
   );
 };
 

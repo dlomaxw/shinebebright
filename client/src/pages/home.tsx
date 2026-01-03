@@ -9,11 +9,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Eye, Users, Award, Clock } from "lucide-react";
 import { Link } from "wouter";
 import { SERVICES } from "@/lib/constants";
-import { 
-  SectionTransition, 
-  SlideInLeft, 
-  SlideInRight, 
-  FadeInUp, 
+import {
+  SectionTransition,
+  SlideInLeft,
+  SlideInRight,
+  FadeInUp,
   ScaleIn,
   StaggerContainer,
   StaggerChild
@@ -64,7 +64,12 @@ const Home = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <HeroCarousel />
+      <div className="relative">
+        <HeroCarousel />
+        <div className="absolute top-1/2 right-10 lg:right-32 transform -translate-y-1/2 hidden lg:block z-20 pointer-events-none">
+          <FloatingLogo />
+        </div>
+      </div>
 
       {/* Services Section */}
       <SectionTransition>
@@ -78,7 +83,7 @@ const Home = () => {
                 Bright delivers cutting-edge immersive experiences and services tailored to your industry needs.
               </p>
             </FadeInUp>
-            
+
             <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {SERVICES.map((service, index) => (
                 <StaggerChild key={service.id}>
@@ -104,7 +109,7 @@ const Home = () => {
                 Explore our latest projects and see how we're transforming industries with immersive technology.
               </p>
             </SlideInLeft>
-            
+
             <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredProjects.slice(0, 6).map((project, index) => (
                 <StaggerChild key={project.id}>
@@ -114,7 +119,7 @@ const Home = () => {
                 </StaggerChild>
               ))}
             </StaggerContainer>
-            
+
             <ScaleIn className="text-center mt-12" delay={0.8}>
               <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold text-lg px-8 py-4">
                 <Link href="/portfolio">
@@ -160,7 +165,7 @@ const Home = () => {
                 Watch our immersive technology solutions transform real estate, architecture, and business experiences.
               </p>
             </FadeInUp>
-            
+
             <SlideInLeft delay={0.3}>
               <VideoCarousel />
             </SlideInLeft>
@@ -180,7 +185,7 @@ const Home = () => {
                 Stay updated with the latest developments in immersive technology and our company milestones.
               </p>
             </SlideInRight>
-            
+
             <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {recentNews.slice(0, 3).map((post, index) => (
                 <StaggerChild key={post.id}>
@@ -190,7 +195,7 @@ const Home = () => {
                 </StaggerChild>
               ))}
             </StaggerContainer>
-            
+
             <ScaleIn className="text-center mt-12" delay={0.6}>
               <Button asChild className="bg-bright-yellow text-bright-black hover:bg-yellow-400 font-semibold text-lg px-8 py-4">
                 <Link href="/news">

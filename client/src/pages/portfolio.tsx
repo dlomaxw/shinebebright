@@ -12,114 +12,159 @@ const portfolioProjects = [
     title: "Uhome",
     category: "Graphics Design and Animation",
     subcategory: "Social Media Handling",
-    image: "/images/portfolio/uhome.png",
+    image: "/images/portfolio/u-home logo.jpg",
     url: "https://shinebebright.com/portfolio/uhome/"
   },
   {
-    id: "2", 
+    id: "2",
     title: "Salama Springs",
     category: "Graphics Design and Animation",
-    image: "/images/portfolio/salama_springs.png",
+    image: "/images/portfolio/Salama Springs.jpg",
     url: "https://shinebebright.com/portfolio/salama-springs/"
   },
   {
     id: "3",
-    title: "The Looks Bespoke", 
+    title: "The Looks Bespoke",
     category: "Graphics Design and Animation",
-    image: "/images/portfolio/the_looks_bespoke.png",
+    image: "/images/portfolio/The Looks Bespoke.jpg",
     url: "https://shinebebright.com/portfolio/the-looks-bespoke/"
   },
   {
     id: "4",
     title: "Karveli Restaurant",
     category: "Branding",
-    image: "/images/portfolio/karveli_restaurant.png",
+    image: "/images/portfolio/Karveli Restaurant.png",
     url: "https://shinebebright.com/portfolio/karveli-restaurant/"
   },
   {
     id: "5",
     title: "Eighth Wonder",
-    category: "Branding", 
-    image: "/images/portfolio/eighth_wonder.png",
+    category: "Branding",
+    image: "/images/portfolio/Eighth Wonder.webp",
     url: "https://shinebebright.com/portfolio/eighth-wonder/"
   },
-  {
-    id: "6",
-    title: "Icon 180",
-    category: "Branding",
-    image: "/images/portfolio/icon_180.png",
-    url: "https://shinebebright.com/portfolio/icon-180/"
-  },
+
   {
     id: "7",
     title: "Gracefoam Textiles",
     category: "Content Marketing",
-    image: "/images/portfolio/gracefoam_textiles.png",
+    image: "/images/portfolio/Gracefoam Textiles.jpg",
     url: "https://shinebebright.com/portfolio/gracefoam-textiles/"
   },
   {
     id: "8",
     title: "Hotel Sojovalo",
     category: "Content Marketing",
-    image: "/images/portfolio/hotel_sojovalo.png",
+    image: "/images/portfolio/Hotel Sojovalo.jpg",
     url: "https://shinebebright.com/portfolio/hotel-sojovalo/"
   },
   {
     id: "9",
     title: "Banana Phones",
     category: "Social Media Handling",
-    image: "/images/portfolio/banana_phones.png",
+    image: "/images/portfolio/Banana Phones.jpg",
     url: "https://shinebebright.com/portfolio/banana-phones/"
   },
   {
     id: "10",
     title: "Unity Fitness",
     category: "Social Media Handling",
-    image: "/images/portfolio/unity_fitness.png",
+    image: "/images/portfolio/Unity Fitness.webp",
     url: "https://shinebebright.com/portfolio/unity-fitness/"
   },
   {
     id: "11",
     title: "Enclave Estates",
     category: "Social Media Handling",
-    image: "/images/portfolio/enclave_estates.png",
+    image: "/images/portfolio/Enclave Estates.jpg",
     url: "https://shinebebright.com/portfolio/enclave-estates/"
   },
-  {
-    id: "12",
-    title: "Ranchers Finest",
-    category: "Website Design and Development",
-    image: "/images/portfolio/ranchers_finest.png",
-    url: "https://shinebebright.com/portfolio/ranchers-finest/"
-  },
-  {
-    id: "13",
-    title: "Icon Heights",
-    category: "Website Design and Development",
-    subcategory: "Videography and Photography",
-    image: "/images/portfolio/icon_heights.png",
-    url: "https://shinebebright.com/portfolio/icon-heights/"
-  },
-  {
-    id: "14",
-    title: "Sky Residency",
-    category: "Website Design and Development",
-    image: "/images/portfolio/sky_residency.png",
-    url: "https://shinebebright.com/portfolio/sky-residency/"
-  },
+
+
+
   {
     id: "15",
     title: "Qwezi Beauty",
     category: "Videography and Photography",
-    image: "/images/portfolio/qwezi_beauty.png",
+    image: "/images/portfolio/Qwezi Beauty.avif",
     url: "https://shinebebright.com/portfolio/qwezi-beauty/"
   },
   {
     id: "16",
     title: "Billionaire Vodka",
     category: "Videography and Photography",
-    image: "/images/portfolio/billionaire_vodka.png",
+    image: "/images/portfolio/Billionaire Vodka.jpg",
     url: "https://shinebebright.com/portfolio/billionaire-vodka/"
+  },
+  {
+    id: "17",
+    title: "Acorns International School",
+    category: "Website Design and Development",
+    image: "/images/portfolio/Acorns International School.png",
+    url: "https://shinebebright.com/portfolio/acorns-international/"
+  },
+  {
+    id: "18",
+    title: "Kings Sports Bet",
+    category: "Website Design and Development",
+    image: "/images/portfolio/Kings Sports Bet.png",
+    url: "https://shinebebright.com/portfolio/kings-sports-bet/"
+  },
+  {
+    id: "19",
+    title: "Frozen Basket",
+    category: "Branding",
+    image: "/images/portfolio/Frozen Basket.png",
+    url: "https://shinebebright.com/portfolio/frozen-basket/"
+  },
+  {
+    id: "20",
+    title: "Pearl Marina",
+    category: "Branding",
+    image: "/images/portfolio/Pearl Marina.jpg",
+    url: "https://shinebebright.com/portfolio/pearl-marina/"
+  },
+  {
+    id: "21",
+    title: "Veeram Healthcare",
+    category: "Branding",
+    image: "/images/portfolio/veeram healthcare.png",
+    url: "https://shinebebright.com/portfolio/veeram-healthcare/"
+  },
+  {
+    id: "22",
+    title: "TMT Supermarket",
+    category: "Website Design and Development",
+    image: "/images/portfolio/tmt supermarket.jpg",
+    url: "https://shinebebright.com/portfolio/tmt-supermarket/"
+  },
+  {
+    id: "23",
+    title: "A&M Executive Cleaning",
+    category: "Branding",
+    image: "/images/portfolio/a&m executive cleaning services.png",
+    url: "https://shinebebright.com/portfolio/am-executive-cleaning/"
+  },
+  {
+    id: "24",
+    title: "Herman Padel Centre",
+    category: "Website Design and Development",
+    image: "/images/portfolio/herman padel centre.jpg",
+    url: "https://shinebebright.com/portfolio/herman-padel-centre/"
+  },
+  {
+    id: "25",
+    title: "Kakira Distillery",
+    category: "Branding",
+    image: "/images/portfolio/kakira distillery.png",
+    url: "https://shinebebright.com/portfolio/kakira-distillery/"
+  },
+  {
+    id: "26",
+    title: "Hima Cement",
+    category: "Branding",
+    image: "/images/portfolio/hima-cement.png",
+    url: "https://shinebebright.com/portfolio/hima-cement/"
   }
 ];
 
@@ -134,7 +179,7 @@ const propertyDevelopers = [
     description: "Africa's Gate to Real Estate - Premium developments in Kampala"
   },
   {
-    id: "2", 
+    id: "2",
     name: "HK Properties",
     logo: "/images/developers/hk_properties_logo.png",
     website: "https://hk-properties.com",
@@ -143,7 +188,7 @@ const propertyDevelopers = [
   },
   {
     id: "3",
-    name: "Edifice Properties", 
+    name: "Edifice Properties",
     logo: "/images/developers/edifice_properties_logo.png",
     website: "https://edificepropertiesug.com",
     speciality: "Modern Living",
@@ -153,7 +198,7 @@ const propertyDevelopers = [
     id: "4",
     name: "RF Developers",
     logo: "/images/developers/rf_developers_logo.png",
-    website: "https://rfdevelopers.ug", 
+    website: "https://rfdevelopers.ug",
     speciality: "Luxury Development",
     description: "Premium luxury real estate development in Uganda"
   },
@@ -162,7 +207,7 @@ const propertyDevelopers = [
     name: "Novus Real Estate",
     logo: "/images/developers/novus_real_estate_logo.jpg",
     website: "https://novusrel.com",
-    speciality: "High-End Residential", 
+    speciality: "High-End Residential",
     description: "Doing Well and Doing Good - Icon developments with panoramic views"
   },
   {
@@ -178,7 +223,7 @@ const propertyDevelopers = [
 const categories = [
   "All",
   "Graphics Design and Animation",
-  "Branding", 
+  "Branding",
   "Content Marketing",
   "Social Media Handling",
   "Website Design and Development",
@@ -191,10 +236,10 @@ const Portfolio = () => {
 
   const filteredProjects = portfolioProjects.filter(project => {
     const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
-    const matchesSearch = searchQuery.length < 2 || 
+    const matchesSearch = searchQuery.length < 2 ||
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.category.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     return matchesCategory && matchesSearch;
   });
 
@@ -223,7 +268,7 @@ const Portfolio = () => {
               />
             </div>
           </div>
-          
+
           {/* Filter Tabs */}
           <div className="flex justify-center mb-12">
             <div className="flex flex-wrap gap-4 bg-white p-2 rounded-lg shadow-sm">
@@ -239,7 +284,7 @@ const Portfolio = () => {
               ))}
             </div>
           </div>
-          
+
           {/* Project Grid */}
           {filteredProjects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -249,7 +294,7 @@ const Portfolio = () => {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-64 object-contain group-hover:scale-105 transition-transform duration-300 p-8 bg-gray-50"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.src = `/api/placeholder/400/300?text=${encodeURIComponent(project.title)}`;
@@ -313,7 +358,7 @@ const Portfolio = () => {
               Working with Uganda's leading real estate developers to deliver authentic, high-quality property solutions.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
             {propertyDevelopers.map((developer) => (
               <div

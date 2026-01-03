@@ -22,7 +22,7 @@ const VideoCarousel = () => {
       thumbnail: "https://img.youtube.com/vi/eJVDb9imPSQ/maxresdefault.jpg"
     },
     {
-      id: "2", 
+      id: "2",
       title: "AR Visualization Demo",
       url: "https://youtu.be/H0732NCswuk?si=oH5I4iWaDHbE9-vh",
       embedId: "H0732NCswuk",
@@ -39,7 +39,7 @@ const VideoCarousel = () => {
       id: "4",
       title: "Interactive Design Solution",
       url: "https://youtu.be/lVtxpXOFLws?si=u1Y_YgVR_ibcnAea",
-      embedId: "lVtxpXOFLws", 
+      embedId: "lVtxpXOFLws",
       thumbnail: "https://img.youtube.com/vi/lVtxpXOFLws/maxresdefault.jpg"
     },
     {
@@ -97,7 +97,7 @@ const VideoCarousel = () => {
             loading="lazy"
           />
         </div>
-        
+
         {/* Navigation Arrows */}
         <Button
           onClick={prevVideo}
@@ -108,7 +108,7 @@ const VideoCarousel = () => {
         >
           <ChevronLeft className="w-5 h-5" />
         </Button>
-        
+
         <Button
           onClick={nextVideo}
           variant="secondary"
@@ -119,29 +119,27 @@ const VideoCarousel = () => {
           <ChevronRight className="w-5 h-5" />
         </Button>
 
-        {/* Video Title Overlay */}
-        <div className="absolute bottom-4 left-4 right-4">
-          <div className="bg-black/70 backdrop-blur-sm rounded-lg p-4">
-            <h3 className="text-white font-semibold text-lg mb-2">{videos[currentVideo].title}</h3>
-            <Button
-              asChild
-              variant="ghost"
-              size="sm"
-              className="text-bright-yellow hover:text-yellow-400 hover:bg-white/10 p-0 h-auto"
-            >
-              <a 
-                href={videos[currentVideo].url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2"
-                data-testid={`video-link-${videos[currentVideo].id}`}
-              >
-                <ExternalLink className="w-4 h-4" />
-                Watch on YouTube
-              </a>
-            </Button>
-          </div>
-        </div>
+      </div>
+
+      {/* Video Info - Moved below player to prevent blocking */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 px-1">
+        <h3 className="text-bright-black font-semibold text-xl">{videos[currentVideo].title}</h3>
+        <Button
+          asChild
+          variant="outline"
+          size="sm"
+          className="text-bright-black border-bright-yellow hover:bg-bright-yellow hover:text-bright-black gap-2"
+        >
+          <a
+            href={videos[currentVideo].url}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid={`video-link-${videos[currentVideo].id}`}
+          >
+            <ExternalLink className="w-4 h-4" />
+            Watch on YouTube
+          </a>
+        </Button>
       </div>
 
       {/* Video Thumbnails */}
@@ -149,11 +147,10 @@ const VideoCarousel = () => {
         {videos.map((video, index) => (
           <div
             key={video.id}
-            className={`relative cursor-pointer transition-all duration-300 ${
-              index === currentVideo
+            className={`relative cursor-pointer transition-all duration-300 ${index === currentVideo
                 ? "ring-3 ring-bright-yellow ring-offset-2"
                 : "hover:ring-2 hover:ring-bright-yellow/50 hover:ring-offset-1"
-            }`}
+              }`}
             onClick={() => goToVideo(index)}
             data-testid={`video-thumbnail-${video.id}`}
           >
