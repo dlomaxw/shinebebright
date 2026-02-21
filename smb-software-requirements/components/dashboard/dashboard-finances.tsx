@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import { ChartContainer, ChartTooltip } from "@/components/ui/chart"
 import { ArrowUpRight, ArrowDownRight, Plus } from "lucide-react"
+import { NewInvoiceDialog } from "@/components/invoices/new-invoice-dialog"
 
 export function DashboardFinances() {
   const revenueData = [
@@ -75,10 +76,7 @@ export function DashboardFinances() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-medium">Financial Overview</h3>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create Invoice
-        </Button>
+        <NewInvoiceDialog />
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">

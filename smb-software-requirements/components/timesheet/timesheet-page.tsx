@@ -10,6 +10,8 @@ import { DatePickerWithRange } from "@/components/timesheet/date-range-picker"
 import { addDays } from "date-fns"
 import { DateRange } from "react-day-picker"
 import { toast } from "sonner"
+import { ExportTimeSheetButton } from "@/components/timesheet/export-time-sheet-button"
+import { NewTimeEntryDialog } from "@/components/timesheet/new-time-entry-dialog"
 
 export function TimesheetPage() {
   const [date, setDate] = useState<DateRange | undefined>({
@@ -23,14 +25,8 @@ export function TimesheetPage() {
         <h2 className="text-3xl font-bold tracking-tight">Timesheet</h2>
         <div className="flex gap-2">
           <DatePickerWithRange date={date} setDate={setDate} />
-          <Button variant="outline" onClick={() => toast.success("Export started", { description: "Your timesheet is being exported as CSV/PDF." })}>
-            <Download className="mr-2 h-4 w-4" />
-            Export
-          </Button>
-          <Button onClick={() => toast.success("Time entry creation launched", { description: "The dialog will be available in the next release." })}>
-            <Plus className="mr-2 h-4 w-4" />
-            Add Time Entry
-          </Button>
+          <ExportTimeSheetButton />
+          <NewTimeEntryDialog />
         </div>
       </div>
 

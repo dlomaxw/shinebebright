@@ -7,7 +7,7 @@ import { ProjectsList } from "@/components/projects/projects-list"
 import { ProjectDetails } from "@/components/projects/project-details"
 import { Plus, Filter } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { toast } from "sonner"
+import { NewProjectDialog } from "@/components/projects/new-project-dialog"
 
 export function ProjectsPage() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
@@ -31,10 +31,7 @@ export function ProjectsPage() {
               <DropdownMenuItem>On Hold</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button onClick={() => toast.success("Project creation launched", { description: "The dialog will be available in the next release." })}>
-            <Plus className="mr-2 h-4 w-4" />
-            New Project
-          </Button>
+          <NewProjectDialog />
         </div>
       </div>
 

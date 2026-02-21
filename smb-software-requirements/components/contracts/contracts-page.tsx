@@ -7,6 +7,7 @@ import { ContractsList } from "@/components/contracts/contracts-list"
 import { ContractDetails } from "@/components/contracts/contract-details"
 import { Plus, Filter } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { NewContractDialog } from "@/components/contracts/new-contract-dialog"
 
 export function ContractsPage() {
   const [selectedContractId, setSelectedContractId] = useState<string | null>(null)
@@ -31,10 +32,7 @@ export function ContractsPage() {
               <DropdownMenuItem>Draft</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button>
-            <Plus className="mr-2 h-4 w-4" />
-            New Contract
-          </Button>
+          <NewContractDialog />
         </div>
       </div>
 

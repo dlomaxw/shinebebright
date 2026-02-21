@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MessageSquare } from "lucide-react"
-import { toast } from "sonner"
+import { NewMessageDialog } from "@/components/dashboard/new-message-dialog"
 
 type Message = {
   id: string
@@ -120,10 +120,7 @@ export function DashboardMessages({ limit }: DashboardMessagesProps) {
       {!limit && (
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-medium">Team Messages</h3>
-          <Button onClick={() => toast.success("Message drafting launched", { description: "The dialog will be available in the next release." })}>
-            <MessageSquare className="mr-2 h-4 w-4" />
-            New Message
-          </Button>
+          <NewMessageDialog />
         </div>
       )}
 

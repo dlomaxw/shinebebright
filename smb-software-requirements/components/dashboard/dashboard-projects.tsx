@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Calendar, Plus, Filter } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useState } from "react"
-import { toast } from "sonner"
+import { NewProjectDialog } from "@/components/projects/new-project-dialog"
 
 type Project = {
   id: string
@@ -159,10 +159,7 @@ export function DashboardProjects() {
               <DropdownMenuItem onClick={() => setSelectedStatus("cancelled")}>Cancelled</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button onClick={() => toast.success("Project creation launched", { description: "The dialog will be available in the next release." })}>
-            <Plus className="mr-2 h-4 w-4" />
-            New Project
-          </Button>
+          <NewProjectDialog />
         </div>
       </div>
 

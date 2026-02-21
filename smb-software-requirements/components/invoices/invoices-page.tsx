@@ -8,7 +8,7 @@ import { InvoiceDetails } from "@/components/invoices/invoice-details"
 import { Plus, Filter, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { toast } from "sonner"
+import { NewInvoiceDialog } from "@/components/invoices/new-invoice-dialog"
 
 export function InvoicesPage() {
   const [selectedInvoiceId, setSelectedInvoiceId] = useState<string | null>(null)
@@ -43,10 +43,7 @@ export function InvoicesPage() {
               <DropdownMenuItem>Draft</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button onClick={() => toast.success("Invoice creation launched", { description: "The dialog will be available in the next release." })}>
-            <Plus className="mr-2 h-4 w-4" />
-            New Invoice
-          </Button>
+          <NewInvoiceDialog />
         </div>
       </div>
 

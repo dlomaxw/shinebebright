@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Plus, Filter } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { NewTaskDialog } from "@/components/tasks/new-task-dialog"
 
 type Task = {
   id: string
@@ -102,10 +103,7 @@ export function TaskList() {
               <DropdownMenuItem>Incomplete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button size="sm">
-            <Plus className="mr-2 h-4 w-4" />
-            Add Task
-          </Button>
+          <NewTaskDialog />
         </div>
       </CardHeader>
       <CardContent>

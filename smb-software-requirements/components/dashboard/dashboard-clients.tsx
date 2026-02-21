@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Pie, PieChart, ResponsiveContainer, Cell, Legend } from "recharts"
 import { ChartContainer } from "@/components/ui/chart"
 import { Plus } from "lucide-react"
-import { toast } from "sonner"
+import { NewClientDialog } from "@/components/clients/new-client-dialog"
 
 export function DashboardClients() {
   const recentClients = [
@@ -92,10 +92,7 @@ export function DashboardClients() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-medium">Client Overview</h3>
-        <Button onClick={() => toast.success("Client creation launched", { description: "The dialog will be available in the next release." })}>
-          <Plus className="mr-2 h-4 w-4" />
-          Add Client
-        </Button>
+        <NewClientDialog />
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">

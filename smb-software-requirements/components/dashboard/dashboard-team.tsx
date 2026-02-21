@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Plus, Users } from "lucide-react"
-import { toast } from "sonner"
+import { NewTeamMemberDialog } from "@/components/dashboard/new-team-member-dialog"
 
 export function DashboardTeam() {
   const teamMembers = [
@@ -171,10 +171,7 @@ export function DashboardTeam() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-medium">Team Dashboard</h3>
-        <Button onClick={() => toast.success("Team member creation launched", { description: "The dialog will be available in the next release." })}>
-          <Plus className="mr-2 h-4 w-4" />
-          Add Team Member
-        </Button>
+        <NewTeamMemberDialog />
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">

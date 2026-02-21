@@ -8,6 +8,7 @@ import { ClientDetails } from "@/components/clients/client-details"
 import { Plus, Filter, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { NewClientDialog } from "@/components/clients/new-client-dialog"
 
 export function ClientsPage() {
   const [selectedClientId, setSelectedClientId] = useState<string | null>(null)
@@ -41,10 +42,7 @@ export function ClientsPage() {
               <DropdownMenuItem>Prospects</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button>
-            <Plus className="mr-2 h-4 w-4" />
-            Add Client
-          </Button>
+          <NewClientDialog />
         </div>
       </div>
 

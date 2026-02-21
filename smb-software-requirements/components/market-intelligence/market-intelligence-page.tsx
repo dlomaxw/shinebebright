@@ -8,6 +8,7 @@ import { CompetitorAnalysis } from "./competitor-analysis"
 import { MarketOpportunities } from "./market-opportunities"
 import { MarketTrendsDashboard } from "./market-trends-dashboard"
 import { AIMarketInsights } from "@/components/ai/ai-market-insights"
+import { LiveMarketInsights } from "./live-market-insights"
 
 export function MarketIntelligencePage() {
   return (
@@ -20,8 +21,9 @@ export function MarketIntelligencePage() {
       </div>
 
       <Tabs defaultValue="ai-insights" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-7">
+        <TabsList className="grid w-full grid-cols-8">
           <TabsTrigger value="ai-insights">Grok AI</TabsTrigger>
+          <TabsTrigger value="live">Live Data</TabsTrigger>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="trends">Trends</TabsTrigger>
           <TabsTrigger value="import-export">Trade</TabsTrigger>
@@ -32,6 +34,10 @@ export function MarketIntelligencePage() {
 
         <TabsContent value="ai-insights" className="space-y-4">
           <AIMarketInsights />
+        </TabsContent>
+
+        <TabsContent value="live" className="space-y-4">
+          <LiveMarketInsights />
         </TabsContent>
 
         <TabsContent value="overview" className="space-y-4">

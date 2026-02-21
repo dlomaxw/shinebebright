@@ -5,8 +5,9 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Plus, Filter } from "lucide-react"
+import { Filter } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { NewTaskDialog } from "@/components/tasks/new-task-dialog"
 
 type Task = {
   id: string
@@ -215,10 +216,7 @@ export function DashboardTasks({ limit }: DashboardTasksProps) {
                 <DropdownMenuItem onClick={() => setFilter("done")}>Done</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Button>
-              <Plus className="mr-2 h-4 w-4" />
-              Add Task
-            </Button>
+            <NewTaskDialog />
           </div>
         </div>
       )}

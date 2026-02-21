@@ -7,7 +7,7 @@ import { TaskBoard } from "@/components/tasks/task-board"
 import { TaskList } from "@/components/tasks/task-list"
 import { Plus, Filter, LayoutGrid, List } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { toast } from "sonner"
+import { NewTaskDialog } from "@/components/tasks/new-task-dialog"
 
 export function TasksPage() {
   const [view, setView] = useState<"board" | "list">("board")
@@ -49,10 +49,7 @@ export function TasksPage() {
               <DropdownMenuItem>Due This Week</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button onClick={() => toast.success("Task creation launched", { description: "The dialog will be available in the next release." })}>
-            <Plus className="mr-2 h-4 w-4" />
-            New Task
-          </Button>
+          <NewTaskDialog />
         </div>
       </div>
 
