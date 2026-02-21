@@ -1,0 +1,39 @@
+﻿components/admin/credit-management.tsx(20,26): error TS2307: Cannot find module '@/lib/supabase/client' or its corresponding type declarations.
+components/admin/user-management.tsx(20,26): error TS2307: Cannot find module '@/lib/supabase/client' or its corresponding type declarations.
+components/ai/ai-market-insights.tsx(58,11): error TS2322: Type '{ summary: string; trend: "bullish" | "bearish" | "neutral"; confidence: number; keyFactors: string[]; recommendations: { action: string; priority: "high" | "medium" | "low"; timeframe: string; reasoning: string; }[]; riskFactors: string[]; opportunities: string[]; } | undefined' is not assignable to type 'MarketInsight'.
+  Type 'undefined' is not assignable to type 'MarketInsight'.
+components/ai/ai-market-insights.tsx(67,36): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'SetStateAction<string>'.
+  Type 'undefined' is not assignable to type 'SetStateAction<string>'.
+components/analytics/client-profitability.tsx(145,12): error TS2741: Property 'config' is missing in type '{ children: Element; }' but required in type '{ config: ChartConfig; children: ReactNode; }'.
+components/analytics/profitability-overview.tsx(115,14): error TS2741: Property 'config' is missing in type '{ children: Element; }' but required in type '{ config: ChartConfig; children: ReactNode; }'.
+components/analytics/profitability-overview.tsx(138,14): error TS2741: Property 'config' is missing in type '{ children: Element; }' but required in type '{ config: ChartConfig; children: ReactNode; }'.
+components/charts/ai-enhanced-chart.tsx(29,23): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'SetStateAction<string>'.
+  Type 'undefined' is not assignable to type 'SetStateAction<string>'.
+components/charts/coffee-prices-chart.tsx(151,17): error TS2322: Type '(value: any, name: string) => [string, "Arabica" | "Robusta"]' is not assignable to type 'Formatter<any, string> & ((value: any, name: string, item: Payload<any, string>, index: number, payload: Payload<any, string>[]) => ReactNode | [...])'.
+  Type '(value: any, name: string) => [string, "Arabica" | "Robusta"]' is not assignable to type 'Formatter<any, string>'.
+    Types of parameters 'name' and 'name' are incompatible.
+      Type 'string | undefined' is not assignable to type 'string'.
+        Type 'undefined' is not assignable to type 'string'.
+components/charts/gdp-trends-chart.tsx(133,17): error TS2322: Type '(value: any, name: string) => [string, "GDP" | "Growth Rate"]' is not assignable to type 'Formatter<any, string> & ((value: any, name: string, item: Payload<any, string>, index: number, payload: Payload<any, string>[]) => ReactNode | [...])'.
+  Type '(value: any, name: string) => [string, "GDP" | "Growth Rate"]' is not assignable to type 'Formatter<any, string>'.
+    Types of parameters 'name' and 'name' are incompatible.
+      Type 'string | undefined' is not assignable to type 'string'.
+        Type 'undefined' is not assignable to type 'string'.
+components/charts/trade-balance-chart.tsx(154,17): error TS2322: Type '(value: any, name: string) => [string, string]' is not assignable to type 'Formatter<any, string> & ((value: any, name: string, item: Payload<any, string>, index: number, payload: Payload<any, string>[]) => ReactNode | [...])'.
+  Type '(value: any, name: string) => [string, string]' is not assignable to type 'Formatter<any, string>'.
+    Types of parameters 'name' and 'name' are incompatible.
+      Type 'string | undefined' is not assignable to type 'string'.
+        Type 'undefined' is not assignable to type 'string'.
+components/dashboard/dashboard-clients.tsx(185,14): error TS2741: Property 'config' is missing in type '{ children: Element; }' but required in type '{ config: ChartConfig; children: ReactNode; }'.
+components/dashboard/dashboard-clients.tsx(197,63): error TS18048: 'percent' is possibly 'undefined'.
+components/dashboard/dashboard-finances.tsx(132,12): error TS2741: Property 'config' is missing in type '{ children: Element; }' but required in type '{ config: ChartConfig; children: ReactNode; }'.
+components/dashboard/dashboard-profitability.tsx(177,12): error TS2741: Property 'config' is missing in type '{ children: Element; }' but required in type '{ config: ChartConfig; children: ReactNode; }'.
+components/dashboard/dashboard-profitability.tsx(286,12): error TS2741: Property 'config' is missing in type '{ children: Element; }' but required in type '{ config: ChartConfig; children: ReactNode; }'.
+components/dashboard/dashboard-time-tracking.tsx(158,12): error TS2741: Property 'config' is missing in type '{ children: Element; }' but required in type '{ config: ChartConfig; children: ReactNode; }'.
+components/market-intelligence/uganda-market-overview.tsx(153,27): error TS7006: Parameter 'sector' implicitly has an 'any' type.
+components/market-intelligence/uganda-market-overview.tsx(153,35): error TS7006: Parameter 'index' implicitly has an 'any' type.
+components/timesheet/timesheet-page.tsx(26,44): error TS2322: Type 'Dispatch<SetStateAction<{ from: Date; to: Date | undefined; }>>' is not assignable to type 'Dispatch<SetStateAction<DateRange | undefined>>'.
+  Type 'SetStateAction<DateRange | undefined>' is not assignable to type 'SetStateAction<{ from: Date; to: Date | undefined; }>'.
+    Type 'undefined' is not assignable to type 'SetStateAction<{ from: Date; to: Date | undefined; }>'.
+tailwind.config.ts(73,19): error TS2322: Type 'number' is not assignable to type 'string'.
+tailwind.config.ts(78,17): error TS2322: Type 'number' is not assignable to type 'string'.

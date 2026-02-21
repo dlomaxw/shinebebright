@@ -1,0 +1,6 @@
+@echo off
+echo Installing dependencies using pnpm...
+call npx pnpm install
+if %errorlevel% neq 0 exit /b %errorlevel%
+echo Starting local development server...
+call npx pnpm run dev
