@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Truck, Clock, MapPin } from "lucide-react"
+import { toast } from "sonner"
 
 const exports = [
   {
@@ -40,7 +41,7 @@ export function ExportTracker() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Export Shipments</h3>
-        <Button>Add New Export</Button>
+        <Button onClick={() => toast.success("New Export", { description: "Opening new export dialogue..." })}>Add New Export</Button>
       </div>
 
       <div className="grid gap-4">

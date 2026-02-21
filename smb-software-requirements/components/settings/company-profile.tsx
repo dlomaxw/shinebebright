@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Upload } from "lucide-react"
 import { useState } from "react"
+import { toast } from "sonner"
 
 export function CompanyProfile() {
   const [companyProfile, setCompanyProfile] = useState({
@@ -48,7 +49,7 @@ export function CompanyProfile() {
                 <AvatarImage src={companyProfile.logo || "/placeholder.svg"} alt="Company Logo" />
                 <AvatarFallback>AC</AvatarFallback>
               </Avatar>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={() => toast.success("Upload dialog opened", { description: "You can now upload a new company logo." })}>
                 <Upload className="mr-2 h-4 w-4" />
                 Upload Logo
               </Button>

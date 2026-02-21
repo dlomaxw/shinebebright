@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Eye, Mail, Phone, MoreHorizontal } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { toast } from "sonner"
 
 type Client = {
   id: string
@@ -231,10 +232,10 @@ export function ClientsList({ status, searchQuery = "", onSelectClient }: Client
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Add Contract</DropdownMenuItem>
-                        <DropdownMenuItem>Create Invoice</DropdownMenuItem>
-                        <DropdownMenuItem>View Projects</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => toast.success("Edit Client Dialog", { description: "Opening edit dialog..." })}>Edit</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => toast.success("Add Contract Dialog", { description: "Opening contract creation dialog..." })}>Add Contract</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => toast.success("Create Invoice Dialog", { description: "Opening invoice creation dialog..." })}>Create Invoice</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => toast.success("Loading Projects...", { description: "Redirecting to client projects..." })}>View Projects</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>

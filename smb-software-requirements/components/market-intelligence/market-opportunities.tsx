@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Lightbulb, TrendingUp, Users, MapPin, Clock } from "lucide-react"
+import { toast } from "sonner"
 
 const opportunities = [
   {
@@ -98,7 +99,7 @@ export function MarketOpportunities() {
                   <div className="font-semibold">{opportunity.confidence}%</div>
                 </div>
                 <div className="space-y-1">
-                  <Button size="sm" className="w-full">
+                  <Button size="sm" className="w-full" onClick={() => toast.success("Opportunity Explored", { description: "You are actively exploring " + opportunity.title })}>
                     Explore Opportunity
                   </Button>
                 </div>
