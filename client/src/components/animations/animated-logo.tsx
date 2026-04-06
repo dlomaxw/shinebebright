@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import logoPath from "@assets/bright-logo-correct.png";
+import logoPath from "../../../assets/bright-logo-correct.png";
 
 interface AnimatedLogoProps {
   className?: string;
